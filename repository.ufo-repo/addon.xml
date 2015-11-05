@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+	<extension point="xbmc.addon.repository" name="U">
+<addon id="repository.ufo-repo" name="ufo" version="1.0" provider-name="KrAz">
+		<info compressed="false">https://raw.githubusercontent.com/krazinabox/UFO-IPTV/master/addons.xml</info>
+		<checksum>https://raw.githubusercontent.com/krazinabox/UFO-IPTV/master/addons.xml.md5</checksum>
+		<datadir zip="true">https://raw.githubusercontent.com/krazinabox/UFO-IPTV/master/zips</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Install My Addons</summary>
+		<description>Download and install addons from KrAz!</description>
+		<platform>all</platform>
+	</extension>
+</addon>
