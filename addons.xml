@@ -36,7 +36,7 @@ All Credit to WebCoder for new build.
 </addon>
 <addon id="plugin.video.ufo"
        name="UFO"
-       version="1.0.0"
+       version="1.0.1"
        provider-name="krAz">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
