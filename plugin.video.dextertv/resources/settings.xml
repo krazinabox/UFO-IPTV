@@ -1,0 +1,10 @@
+﻿<settings>
+<category label="Settings">
+     <setting id="site" type="hidden" label="Website" default="http://50.7.136.90"/>
+     <setting id="usern" type="text" label="Email" default=""/>
+     <setting id="passw" label="Password" type="text" option="hidden"  enable="!eq(-1,)" default="" />
+     <setting id="port" type="hidden" label="Port" default="81"/>
+     <setting id="type" type="select" label="Type" values="m3u8" default="m3u8"/>
+     <setting id="active" label="Active Account" type='text' default=""/>
+</category>
+</settings>
