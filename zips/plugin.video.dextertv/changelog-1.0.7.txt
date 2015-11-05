@@ -1,2 +1,0 @@
-[b]1.0.7[/b]
-Security and channel structure.
