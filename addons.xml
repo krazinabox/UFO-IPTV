@@ -20,6 +20,7 @@ This is my first attempt at an iptv stalker clone.... cross your fingers guys
 </addon>
 
 <addon id="repository.ufo-repo" name="ufo" version="1.0" provider-name="KrAz">
+<extension point="xbmc.addon.repository" name="UFO">
 		<info compressed="false">https://raw.githubusercontent.com/krazinabox/UFO-IPTV/master/addons.xml</info>
 		<checksum>https://raw.githubusercontent.com/krazinabox/UFO-IPTV/master/addons.xml.md5</checksum>
 		<datadir zip="true">https://raw.githubusercontent.com/krazinabox/UFO-IPTV/master/zips</datadir>
