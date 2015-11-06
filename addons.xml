@@ -13,7 +13,7 @@
   <extension point="xbmc.addon.metadata">
     <summary>UFO</summary>
     <description>
-This is my first attempt at an iptv stalker clone.... cross your fingers guys
+This is my first attempt at an iptv stalker clone. I will try my best to keep it up and running.
     </description>
     <platform>all</platform>
   </extension>
