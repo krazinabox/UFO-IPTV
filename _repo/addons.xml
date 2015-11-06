@@ -19,16 +19,20 @@ This is my first attempt at an iptv stalker clone.... cross your fingers guys
   </extension>
 </addon>
 
-<addon id="repository.ufo-repo" name="ufo" version="1.0" provider-name="KrAz">
-<extension point="xbmc.addon.repository" name="UFO">
-		<info compressed="false">https://raw.githubusercontent.com/krazinabox/UFO-IPTV/master/addons.xml</info>
-		<checksum>https://raw.githubusercontent.com/krazinabox/UFO-IPTV/master/addons.xml.md5</checksum>
-		<datadir zip="true">https://raw.githubusercontent.com/krazinabox/UFO-IPTV/master/zips</datadir>
-	</extension>
-	<extension point="xbmc.addon.metadata">
-		<summary>Install My Addons</summary>
-		<description>Download and install addons from KrAz!</description>
-		<platform>all</platform>
-	</extension>
+    <addon id="repository.ufo-repo" name="Your Addons Name" version="0.1.0" provider-name="Your Name">
+        <requires>
+            <import addon="xbmc.addon" version="12.0.0"/>
+        </requires>
+        <extension point="xbmc.addon.repository" name="Your Addons Name">
+            <info compressed="false">https://raw.githubusercontent.com/krazinabox/UFO-IPTV/master/_repo/addons.xml</info>
+            <checksum>https://raw.githubusercontent.com/krazinabox/UFO-IPTV/master/_repo/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githubusercontent.com/krazinabox/UFO-IPTV/master/_repo/</datadir>
+            <hashes>false</hashes>
+        </extension>
+        <extension point="xbmc.addon.metadata">
+            <summary>A short summary of this addon</summary>
+            <description>The description can be longer. Using [CR] you can create a newline. The use of other markup is not advised.</description>
+            <platform>all</platform>
+    </extension>
 </addon>
 </addons>
