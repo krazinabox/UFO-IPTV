@@ -2,7 +2,7 @@
 <addons>
 <addon id="plugin.video.StalkerTv"
        name="StalkerTv"
-       version="6.0"
+       version="7.0"
        provider-name="KodiLover and KrAz">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
