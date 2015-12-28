@@ -4,10 +4,10 @@
     <category label="33001">
 		<setting id="portal_name_1" type="text" label="30000" default="NFPS" />
    	 	<setting id="portal_url_1" type="text" label="30001" default="http://portal.iptvprivateserver.tv" />
-   	 	<setting label="30008" type="bool" id="custom_mac_1" default="false"/>
-   	 	<setting id="portal_mac_1" type="text" label="30002" default="" visible="eq(-1,true)" />
+   	 	<setting label="30008" type="bool" id="custom_mac_1" default="true"/>
+   	 	<setting id="portal_mac_1" type="text" label="30002" default="00:1A:79:55:55:56" visible="eq(-1,true)" />
    	 	
-   	 	<setting label="30009" type="bool" id="send_serial_1" default="false"/>
+   	 	<setting label="30009" type="bool" id="send_serial_1" default="true"/>
    	 	<setting label="30014" type="bool" id="custom_serial_1" default="false" visible="eq(-1,true)"/>
    	 	<setting type="sep"/>
    	 	<setting label="30010" type="text" id="serial_number_1" default="" visible="eq(-2,true) + eq(-3,true)"/>
@@ -54,7 +54,7 @@
     </category>
     
     <category label="33004">
-    	<setting label="30015" type="bool" id="server_enable" default="true"/>
+    	<setting label="30015" type="bool" id="server_enable" default="false"/>
     	<setting label="30017" type="number" id="server_port" default="8899" visible="eq(-1,true)"/>
     	<setting type="sep"/>
     	<setting label="30016" type="action" visible="eq(-3,true)" action="XBMC.RunPlugin(plugin://plugin.video.stalker/?mode=server&action=start)"/>
