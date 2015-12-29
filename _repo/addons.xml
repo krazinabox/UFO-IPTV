@@ -1,25 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <addons>
-<addon id="plugin.video.i4atv" name="[COLOR red]I4ATV[/COLOR]" version="12.0.0" provider-name="Inside 4ndroid">
-  <requires>
-    <import addon="script.module.simplejson" version="3.3.0"/>
-    <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.t0mm0.common" version="2.0.0"/>
-    <import addon="plugin.video.youtube" version="3.0.0"/>
-    <import addon="script.module.urlresolver"  version="2.1.2"/>
-    <import addon="script.common.plugin.cache" version="2.5.2"/>
-    <import addon="script.module.metahandler" version="2.5.1"/>
-  </requires>
-  <extension point="xbmc.python.pluginsource" library="default.py">
-        <provides>video</provides>
-  </extension>
-  <extension point="xbmc.addon.metadata">
-    <summary lang="en">I4ATV With Guide Integration + More</summary>
-    <description lang="en">Welcome to I4ATV. if a i4atv goes down for a short period there is a backup option i4atv extra :) All donations no matter how small make a huge difference so please feel free to make a small donation to help keep I4ATV alive. Donations can be made @ http://paypal.me/inside4ndroid Enjoy</description>
-    <platform>all</platform>
-  </extension>
-</addon>
-
 <addon id="plugin.video.mykodibuildwizard" name="Kodi King build wizard" version="99" provider-name="The King">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -33,26 +13,6 @@
 ##Credit To Husham for his support and friendship##</description>
     <platform>all</platform>
   </extension>
-</addon>
-
-<addon id="plugin.video.stalker" name="[COLOR darkorange]IPTV KING[/COLOR]" version="6969" provider-name="Elvis">
-    <requires>
-		<import addon="xbmc.python" version="2.14.0"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="addon.py">
-		<provides>video</provides>
-	</extension>
-	<extension point="xbmc.service" library="server.py" start="startup" />
-	<extension point="xbmc.addon.metadata">
-		<platform>all</platform>
-		<summary lang="en">IPTV mod</summary>
-		<description lang="en">IPTV mod</description>
-		<license>GNU General Public License, v2</license>
-		<language></language>
-		<forum>Graceland</forum>
-
-
-	</extension>
 </addon>
 
 <addon id="plugin.video.StalkerTv"
@@ -76,7 +36,7 @@ This is my third attempt to make a iptv stalker clone and this is KrAz's second 
 
 <addon id="plugin.video.ufo"
        name="[COLOR green]UFO[/COLOR]"
-       version="1.1.5"
+       version="1.1.6"
        provider-name="krAz">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -91,24 +51,6 @@ This is my first attempt at an iptv stalker clone.... cross your fingers guys
     </description>
     <platform>all</platform>
   </extension>
-</addon>
-
-<addon id="plugin.video.Wild TV-Stalker" name="Wild TV Stalker" version="1.0.0" provider-name="xxxx">
-    <requires>
-		<import addon="xbmc.python" version="2.14.0"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="addon.py">
-		<provides>video</provides>
-	</extension>
-	<extension point="xbmc.service" library="server.py" start="startup" />
-	<extension point="xbmc.addon.metadata">
-		<platform>all</platform>
-		<summary lang="en">xxxx</summary>
-		<description lang="en">Wild TV Stalker addon </description>
-		<license>GNU General Public License, v2</license>
-		<language></language>
-
-	</extension>
 </addon>
 
     <addon id="repository.ufo-repo" name="UFO" version="0.1.3" provider-name="krAZ">
