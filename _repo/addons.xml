@@ -36,7 +36,7 @@ This is my third attempt to make a iptv stalker clone and this is KrAz's second 
 
 <addon id="plugin.video.ufo"
        name="[COLOR lightgreen]UFO[/COLOR]"
-       version="1.2.0"
+       version="1.2.1"
        provider-name="krAz">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
