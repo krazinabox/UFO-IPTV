@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
-    <addon id="repository.ufo-repo" name="[COLOR lightgreen]UFO[/COLOR]" version="0.1.6" provider-name="krAZ">
+    <addon id="repository.ufo-repo" name="UFO" version="0.1.3" provider-name="krAZ">
         <requires>
             <import addon="xbmc.addon" version="12.0.0"/>
         </requires>
-        <extension point="xbmc.addon.repository" name="[COLOR lightgreen]UFO[/COLOR]
+        <extension point="xbmc.addon.repository" name="UFO">
             <info compressed="false">https://raw.github.com/krazinabox/UFO-IPTV/master/_repo/addons.xml</info>
             <checksum>https://raw.github.com/krazinabox/UFO-IPTV/master/_repo/addons.xml.md5</checksum>
             <datadir zip="true">https://raw.github.com/krazinabox/UFO-IPTV/master/_repo/</datadir>
