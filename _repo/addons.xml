@@ -46,9 +46,7 @@ This is my third attempt to make a iptv stalker clone and this is KrAz's second 
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary>[COLOR lightgreen]UFO[/COLOR]</summary>
-    <description>
-Thank you to HUSHAM & The King For Helping!
-    </description>
+    <description>Thank you to HUSHAM & The King For Helping!</description>
     <platform>all</platform>
   </extension>
 </addon>
