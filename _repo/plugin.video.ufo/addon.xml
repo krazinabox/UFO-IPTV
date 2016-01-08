@@ -10,9 +10,9 @@
     <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary>[COLOR lightgreen]UFO[/COLOR]</summary>
+    <summary>UFO</summary>
     <description>
-Thank you to HUSHAM & The King For Helping!
+This is with special thanks to husham and the king.... cross your fingers guys
     </description>
     <platform>all</platform>
   </extension>
