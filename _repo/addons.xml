@@ -53,7 +53,7 @@ Thank you to HUSHAM & The King For Helping!
   </extension>
 </addon>
 
-    <addon id="repository.ufo-repo" name="[COLOR lightgreen]UFO[/COLOR]" version="0.1.5" provider-name="krAZ">
+    <addon id="repository.ufo-repo" name="[COLOR lightgreen]UFO[/COLOR]" version="0.1.6" provider-name="krAZ">
         <requires>
             <import addon="xbmc.addon" version="12.0.0"/>
         </requires>
