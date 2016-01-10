@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.stealthfree" name="IPTV Stealth Free" version="2.0.0" provider-name="iptvstealth.com">
+    <requires>
+		<import addon="xbmc.python" version="2.14.0"/>
+		
+</requires>
+	<extension point="xbmc.python.pluginsource" library="addon.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.service" library="server.py" start="startup" />
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary lang="en">IPTV Stealth Plus</summary>
+		<description lang="en">TO HELP SUPPORT THIS ADDON PLEASE MAKE A DONATION AT WWW.IPTVSTEALTH.COM[CR][CR]This Addon Contains a mixture of codes credits for these codes go to[CR][CR]Esxbr, MetalKettle and Kodimaster[CR][CR]To Support Kodi visit www.kodi.tv</description>
+		    <website>http://www.iptvstealth.com/</website>
+		<license>GNU General Public License, v2</license>
+		<language></language>
+		
+	</extension>
+</addon>
