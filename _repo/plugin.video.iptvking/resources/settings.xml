@@ -13,8 +13,8 @@
     	<setting label="30015" type="bool" id="server_enable" default="false" />
     	<setting label="30017" type="number" id="server_port" default="8899"  />
     	<setting type="sep"/>
-    	<setting label="30016" type="action" visible="eq(-3,true)" action="XBMC.RunPlugin(plugin://plugin.video.stalker/?mode=server&action=start)"/>
-    	<setting label="30018" type="action" visible="eq(-4,true)" action="XBMC.RunPlugin(plugin://plugin.video.stalker/?mode=server&action=stop)"/>
+    	<setting label="30016" type="action" visible="eq(-3,true)" action="XBMC.RunPlugin(plugin://plugin.video.iptvking/?mode=server&action=start)"/>
+    	<setting label="30018" type="action" visible="eq(-4,true)" action="XBMC.RunPlugin(plugin://plugin.video.iptvking/?mode=server&action=stop)"/>
     </category>
 
     <category label="32002">

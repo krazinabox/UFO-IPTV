@@ -108,7 +108,7 @@ class MyHandler(BaseHTTPRequestHandler):
 						logo 		= i["logo"];
 
 						if logo != '':
-							logo = portal['url'] + '/stalker_portal/misc/logos/320/' + logo;
+							logo = portal['url'] + '/iptvking_portal/misc/logos/320/' + logo;
 				
 					
 						parameters = urllib.urlencode( { 'channel' : cmd, 'tmp' : tmp, 'portal' : numportal } );

@@ -101,7 +101,7 @@ def getProfile(url):
 def retrieveData(url, values ):
 	global key, mac;
 		
-	url += '/stalker_portal'
+	url += '/iptvking_portal'
 	load = '/server/load.php'
 	refer = '/c/'
 	timezone = 'America%2FChicago';
@@ -509,7 +509,7 @@ def getEPG(portal_mac, url, serial, path):
 		
 			if channel != None and channel['logo'] != '':
 				i_entry = doc.createElement('icon');
-				i_entry.setAttribute("src", url + '/stalker_portal/misc/logos/320/' + channel['logo']);
+				i_entry.setAttribute("src", url + '/iptvking_portal/misc/logos/320/' + channel['logo']);
 				i_entry.appendChild(i_entry_content);
 				pg_entry.appendChild(i_entry);
 
@@ -590,7 +590,7 @@ def retrieve_matrixUrl(url, channel):
 	channel = channel.split('/');
 	channel = channel[len(channel) -1];
 	
-	url += '/stalker_portal/server/api/matrix.php?channel=' + channel + '&mac=' + mac;
+	url += '/iptvking_portal/server/api/matrix.php?channel=' + channel + '&mac=' + mac;
 	
 	# RETRIEVE THE 1 EXTM3U
 	request = urllib2.Request(url)
