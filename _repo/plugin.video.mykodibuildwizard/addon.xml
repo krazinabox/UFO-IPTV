@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.mykodibuildwizard" name="Kodi King build wizard" version="99" provider-name="The King">
+<addon id="plugin.video.mykodibuildwizard" name="[COLOR darkorange]Kodi King build wizard[/COLOR]" version="99" provider-name="The King">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
