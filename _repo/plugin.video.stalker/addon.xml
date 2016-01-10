@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.stalker" name="[COLOR darkorange]IPTV KING[/COLOR]" version="6969" provider-name="Elvis">
+<addon id="plugin.video.stalker" name="[COLOR darkorange]IPTV KING[/COLOR]" version="6970" provider-name="Elvis">
     <requires>
 		<import addon="xbmc.python" version="2.14.0"/>
 	</requires>
@@ -9,8 +9,8 @@
 	<extension point="xbmc.service" library="server.py" start="startup" />
 	<extension point="xbmc.addon.metadata">
 		<platform>all</platform>
-		<summary lang="en">IPTV mod</summary>
-		<description lang="en">IPTV mod</description>
+		<summary lang="en">IPTV King</summary>
+		<description lang="en">IPTV Stlaker Clone of a Clone</description>
 		<license>GNU General Public License, v2</license>
 		<language></language>
 		<forum>Graceland</forum>

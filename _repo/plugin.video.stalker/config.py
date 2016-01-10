@@ -10,17 +10,14 @@ import xbmcplugin
 import load_channels
 import hashlib
 import re
-import random
-import base64
-import urllib2
+
 import server
 
+fanart = 'special://home/addons/plugin.video.stalker/fanart.jpg'
 addon       = xbmcaddon.Addon()
 addonname   = addon.getAddonInfo('name')
 addondir    = xbmc.translatePath( addon.getAddonInfo('profile') ) 
-addonset	= ['4d4441364d5545364e7a6b364f5445364d4441364d44413d'.decode('hex').decode('base64'), 'MzAzMDNhMzE0MTNhMzczODNhMzEzMDNhMzAzMDNhMzAzMw=='.decode('base64').decode('hex'), '4d4441364d5545364e7a67364d5441364d4441364d44593d'.decode('hex').decode('base64'), 'MzAzMDNhMzE0MTNhMzczODNhMzEzMDNhMzAzMDNhMzUzOA=='.decode('base64').decode('hex'), '4d4441364d5545364e7a67364d5441364d4441364e7a413d'.decode('hex').decode('base64'), 'MzAzMDNhMzE0MTNhMzczODNhMzEzMDNhMzAzMDNhMzczMw=='.decode('base64').decode('hex'), '4d4441364d5545364e7a67364d5441364d4441364f44633d'.decode('hex').decode('base64'), 'MzAzMDNhMzE0MTNhMzczODNhMzEzMjNhMzMzNDNhMzczOQ=='.decode('base64').decode('hex'), '4d4441364d5545364e7a67364d4467364d4467364d44673d'.decode('hex').decode('base64'), 'MzAzMDNhMzE0MTNhMzczODNhMzEzMDNhMzAzMDNhMzIzMA=='.decode('base64').decode('hex'), '4d4441364d5545364e7a67364d5463364d5463364d54633d'.decode('hex').decode('base64'), 'MzAzMDNhMzE0MTNhMzczODNhMzkzODNhMzczNjNhMzUzNA=='.decode('base64').decode('hex'), '4d4441364d5545364e7a67364d4445364d5445364d6a493d'.decode('hex').decode('base64'), 'MzAzMDNhMzE0MTNhMzczOTNhMzIzMzNhMzIzMzNhMzIzMw=='.decode('base64').decode('hex'), '4d4441364d5545364e7a67364d5449364d7a51364f546b3d'.decode('hex').decode('base64'), 'MzAzMDNhMzE0MTNhMzczODNhMzIzMzNhMzIzMzNhMzIzMw=='.decode('base64').decode('hex'), '4d4441364d5545364e7a67364d6a51364e7a6b364e44493d'.decode('hex').decode('base64'), 'MzAzMDNhMzE0MTNhMzczODNhMzYzNjNhMzYzNjNhMzUzMg=='.decode('base64').decode('hex'), '4d4441364d5545364e7a6b364d4441364d5441364e54413d'.decode('hex').decode('base64'), 'MzAzMDNhMzE0MTNhMzczOTNhMzEzMjNhMzMzNDNhMzkzOQ=='.decode('base64').decode('hex'), '4d4441364d5545364e7a67364d5445364d6a49364e6a4d3d'.decode('hex').decode('base64'), 'MzAzMDNhMzE0MTNhMzczODNhMzEzMjNhMzMzNDNhMzYzOA=='.decode('base64').decode('hex'), '4d4441364d5545364e7a67364d5449364d7a51364e7a413d'.decode('hex').decode('base64'), 'MzAzMDNhMzE0MTNhMzczODNhMzEzMjNhMzMzNDNhMzYzMg=='.decode('base64').decode('hex'), '4d4441364d5545364e7a67364d5449364d7a51364e6a513d'.decode('hex').decode('base64'), 'MzAzMDNhMzE0MTNhMzczODNhMzEzMjNhMzMzNDNhMzYzNw=='.decode('base64').decode('hex')]
-eternal		= (random.choice(addonset))
-current     = os.getcwd()
+
 
 def portalConfig(number):
 
@@ -39,15 +36,14 @@ def portalConfig(number):
 
 def configMac(number):
 	global go;
-	import urllib2
-
-	custom_mac = ('Y3VzdG9tX21hY18x'.decode('base64'));
-	portal_mac = ('cG9ydGFsX21hY18x'.decode('base64'));
+	
+	custom_mac = addon.getSetting('custom_mac_' + number);
+	portal_mac = addon.getSetting('portal_mac_' + number);
 	
 	if custom_mac != 'true':
-		portal_mac = (eternal);
+		portal_mac = '';
 		
-	elif not (custom_mac == 'true' and re.match("WzAtOWEtZl17Mn0oWy06XSlbMC05YS1mXXsyfShcXDFbMC05YS1mXXsyfSl7NH0k".decode('base64'), portal_mac.lower()) != None):
+	elif not (custom_mac == 'true' and re.match("[0-9a-f]{2}([-:])[0-9a-f]{2}(\\1[0-9a-f]{2}){4}$", portal_mac.lower()) != None):
 		xbmcgui.Dialog().notification(addonname, 'Custom Mac ' + number + ' is Invalid.', xbmcgui.NOTIFICATION_ERROR );
 		portal_mac = '';
 		go=False;

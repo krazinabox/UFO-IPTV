@@ -12,13 +12,13 @@ import hashlib
 from xml.dom import minidom
 
 key = None;
-mac = '00:1A:78:78:23:56'.join(re.findall('..', '%012x' % uuid.getnode()));
+mac = ':'.join(re.findall('..', '%012x' % uuid.getnode()));
 sn = None;
 device_id = None;
 device_id2 = None;
 signature = None;
 
-cache_version = '0'
+cache_version = '1'
 
 def is_json(myjson):
   try:
@@ -219,7 +219,7 @@ def getVoD(portal_mac, url, serial, path):
 		else:
 			time_init = float(data['time']);
 			# update 12h
-			if ((now - time_init) / 999999999999999999999) < 12:
+			if ((now - time_init) / 3600) < 12:
 				return data;
 	
 	handshake(url);
@@ -282,7 +282,7 @@ def orderChannels(channels):
 
 def getAllChannels(portal_mac, url, serial, path):
 
-	added = True;
+	added = False;
 	
 	now = time();
 	
@@ -305,7 +305,7 @@ def getAllChannels(portal_mac, url, serial, path):
 		else:
 			time_init = float(data['time']);
 			# update 12h
-			if ((now - time_init) / 999999999999999999999) < 12:
+			if ((now - time_init) / 3600) < 12:
 				return data;
 	
 	handshake(url);
@@ -420,7 +420,7 @@ def getEPG(portal_mac, url, serial, path):
 		else:
 			time_init = float(itemlist[0].attributes['cache-time'].value);
 			# update 2h
-			if ((now - time_init) / 39999999999999990) < 2:
+			if ((now - time_init) / 3600) < 2:
 				return xmldoc.toxml(encoding='utf-8');
 	
 
@@ -684,3 +684,5 @@ def main(argv):
 
 if __name__ == "__main__":
    main(sys.argv[1:])
+
+
