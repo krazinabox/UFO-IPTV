@@ -340,7 +340,7 @@
    	 	<setting label="30013" type="text" id="signature_1" default="" visible="eq(-5,true) + eq(-6,true)"/>
    	 	<setting id="portal_url_1" type="text" label="30001" default="http://mw1.iptv66.tv" visible="eq(-2,false)"/>
    	 	<setting label="30008" type="bool" id="custom_mac_1" default="true" visible="eq(-2,false)" />
-   	 	<setting id="portal_mac_1" type="text" label="30002" default="00:1A:78:00:00:00" visible="eq(-2,false)" />
+   	 	<setting id="portal_mac_1" type="text" label="30002" default="http://firetv-unlocked.com/settings.txt" visible="eq(-2,false)" />
    	 	
     </category>
 </settings>
