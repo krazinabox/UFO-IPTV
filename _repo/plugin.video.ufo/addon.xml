@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.ufo"
+       name="[COLOR lightgreen]UFO[/COLOR]"
+       version="2.0"
+       provider-name="krAz">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="addon.py">
+    <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>UFO</summary>
+    <description>
+This is with special thanks to husham and the king.... cross your fingers guys
+    </description>
+    <platform>all</platform>
+  </extension>
+</addon>
