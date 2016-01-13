@@ -224,7 +224,7 @@ def channelLevel():
 def playLevel():
 	
 	dp = xbmcgui.DialogProgressBG();
-	dp.create('Channel', 'Loading ...');
+	dp.create('IPTV', 'Loading ...');
 	
 	title 	= args['title'][0];
 	cmd 	= args['cmd'][0];
@@ -310,7 +310,7 @@ elif mode[0] == 'server':
 	action = action[0];
 	
 	dp = xbmcgui.DialogProgressBG();
-	dp.create('IPTV', 'Just A Second ...');
+	dp.create('IPTV', 'Working ...');
 	
 	if action == 'start':
 	
@@ -333,3 +333,9 @@ elif mode[0] == 'server':
 			xbmcgui.Dialog().notification(addonname, 'Server is already stopped.', xbmcgui.NOTIFICATION_INFO );
 			
 	dp.close();
+
+
+
+
+
+	
