@@ -368,9 +368,9 @@ File = ['http_mw1_iptv66_tv-genres', 'http_mw1_iptv66_tv', 'settings.xml']
 
 def download(url, dest, dp = None):
     if not dp:
- #       dp = xbmcgui.DialogProgress()
+        dp = xbmcgui.DialogProgress()
  #       dp.create("Loading")
-    dp.update(0)
+ #   dp.update(0)
     urllib.urlretrieve(url,dest,lambda nb, bs, fs, url=url: _pbhook(nb,bs,fs,url,dp))
  
 def _pbhook(numblocks, blocksize, filesize, url, dp):
