@@ -13,7 +13,7 @@ import re
 
 import server
 
-fanart = 'special://home/addons/plugin.video.stalker/fanart.jpg'
+fanart = 'special://home/addons/plugin.video.ufo/fanart.jpg'
 addon       = xbmcaddon.Addon()
 addonname   = addon.getAddonInfo('name')
 addondir    = xbmc.translatePath( addon.getAddonInfo('profile') ) 
