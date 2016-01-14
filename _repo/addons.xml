@@ -42,8 +42,8 @@
 	<extension point="xbmc.service" library="server.py" start="startup" />
 	<extension point="xbmc.addon.metadata">
 		<platform>all</platform>
-		<summary lang="en">IPTV KING</summary>
-		<description lang="en">IPTV Stalker Clone</description>
+		<summary lang="en">IPTV mod</summary>
+		<description lang="en">IPTV mod</description>
 		<license>GNU General Public License, v2</license>
 		<language></language>
 		<forum>Graceland</forum>

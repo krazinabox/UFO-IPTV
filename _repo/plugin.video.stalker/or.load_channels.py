@@ -18,7 +18,7 @@ device_id = None;
 device_id2 = None;
 signature = None;
 
-cache_version = '1'
+cache_version = '3'
 
 def is_json(myjson):
   try:
@@ -256,7 +256,7 @@ def getVoD(portal_mac, url, serial, path):
 			data += '{"name":"'+ name +'", "cmd":"'+ cmd +'", "logo":"'+ logo +'"}, \n'
 
 		page += 1;
-		if page > pages or page == 10:
+		if page > pages or page == 100:
 			break;
 
 	data = data[:-3] + '\n]}'
@@ -524,7 +524,7 @@ def getEPG(portal_mac, url, serial, path):
 def retriveUrl(portal_mac, url, serial, channel, tmp):
 	
 	setMac(portal_mac);
-	setSerialNumber(serial);
+	#setSerialNumber(serial);
 		
 	if 'matrix' in channel:
 		return retrieve_matrixUrl(url, channel);

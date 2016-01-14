@@ -10,21 +10,14 @@ import load_channels
 import hashlib
 import re
 import time
+
 import server
 import config
 
-import urlparse,sys
-params = dict(urlparse.parse_qsl(sys.argv[2].replace('?','')))
-
-
-
-
-
-
-
-
 addon       = xbmcaddon.Addon()
+addonname   = addon.getAddonInfo('name')
 addondir    = xbmc.translatePath( addon.getAddonInfo('profile') ) 
+
 base_url = sys.argv[0]
 addon_handle = int(sys.argv[1])
 args = urlparse.parse_qs(sys.argv[2][1:])
@@ -32,12 +25,11 @@ go = True;
 
 #xbmcgui.Dialog().ok(addonname, 'aaa')
 
-
-
 xbmcplugin.setContent(addon_handle, 'movies')
-
-
 	
+#load_channels.clearCache('http://portal.iptvprivateserver.tv', addondir)
+
+
 
 def addPortal(portal):
 
@@ -50,11 +42,11 @@ def addPortal(portal):
 		});
 	
 	cmd = 'XBMC.RunPlugin(' + base_url + '?mode=cache&stalker_url=' + portal['url'] + ')';	
-	li = xbmcgui.ListItem(portal['name'], iconImage='special://home/addons/pulgin.video.stalker/fanart.jpg')
 	
+	li = xbmcgui.ListItem(portal['name'], iconImage='DefaultProgram.png')
+	li.addContextMenuItems([ ('Clear Cache', cmd) ]);
 
 	xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True);
-	
 	
 	
 def build_url(query):
@@ -68,10 +60,10 @@ def homeLevel():
 
 	if go:
 		addPortal(portal_1);
-		
+		addPortal(portal_2);
+		addPortal(portal_3);
 	
 		xbmcplugin.endOfDirectory(addon_handle);
-		
 
 def genreLevel():
 	
@@ -79,8 +71,8 @@ def genreLevel():
 		data = load_channels.getGenres(portal['mac'], portal['url'], portal['serial'], addondir);
 		
 	except Exception as e:
-	
 		xbmcgui.Dialog().notification(addonname, str(e), xbmcgui.NOTIFICATION_ERROR );
+		
 		return;
 
 	data = data['genres'];
@@ -90,8 +82,8 @@ def genreLevel():
 		'portal' : json.dumps(portal)
 	});
 			
-	li = xbmcgui.ListItem('SELECT A TV CATEGORY FROM BELOW', iconImage='special://home/addons/plugin.video.stalker/fanart.jpg')
-	xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=False);
+	li = xbmcgui.ListItem('VoD', iconImage='DefaultVideo.png')
+	xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True);
 	
 	
 	for id, i in data.iteritems():
@@ -105,27 +97,16 @@ def genreLevel():
 			'portal' : json.dumps(portal)
 			});
 			
-		
-
-		
-		if id == '68':
-			iconImage = 'special://home/addons/plugin.video.stalker/adult.jpg';
+		if id == '10':
+			iconImage = 'OverlayLocked.png';
 		else:
-			iconImage = 'special://home/addons/plugin.video.stalker/fanart.jpg';
-			
+			iconImage = 'DefaultVideo.png';
 			
 		li = xbmcgui.ListItem(title.title(), iconImage=iconImage)
-		xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True)
-		
-			
-			
-	
+		xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True);
 		
 
 	xbmcplugin.endOfDirectory(addon_handle);
-	
-	
-	
 
 def vodLevel():
 	
@@ -149,7 +130,7 @@ def vodLevel():
 		if logo != '':
 			logo_url = portal['url'] + logo;
 		else:
-			logo_url = 'special://home/addons/plugin.video.stalker/fanart.jpg';
+			logo_url = 'DefaultVideo.png';
 				
 				
 		url = build_url({
@@ -168,7 +149,7 @@ def vodLevel():
 
 		xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li)
 	
-	
+	xbmcplugin.addSortMethod(addon_handle, xbmcplugin.SORT_METHOD_UNSORTED);
 	xbmcplugin.addSortMethod(addon_handle, xbmcplugin.SORT_METHOD_TITLE);
 	xbmcplugin.endOfDirectory(addon_handle);
 
@@ -179,7 +160,7 @@ def channelLevel():
 		data = load_channels.getAllChannels(portal['mac'], portal['url'], portal['serial'], addondir);
 		
 	except Exception as e:
-		xbmcgui.Dialog().notification(Wrong, str(e), xbmcgui.NOTIFICATION_ERROR );
+		xbmcgui.Dialog().notification(addonname, str(e), xbmcgui.NOTIFICATION_ERROR );
 		return;
 	
 	
@@ -189,7 +170,7 @@ def channelLevel():
 	genre_id_main = args.get('genre_id', None);
 	genre_id_main = genre_id_main[0];
 	
-	if genre_id_main == '68' and portal['parental'] == 'true':
+	if genre_id_main == '10' and portal['parental'] == 'true':
 		result = xbmcgui.Dialog().input('Parental', hashlib.md5(portal['password'].encode('utf-8')).hexdigest(), type=xbmcgui.INPUT_PASSWORD, option=xbmcgui.PASSWORD_VERIFY);
 		if result == '':
 			stop = True;
@@ -212,9 +193,9 @@ def channelLevel():
 			if genre_id_main == genre_id or genre_id_main == '*':
 		
 				if logo != '':
-					logo_url = portal['url'] + '/stalker_portal/misc/logos/321/' + logo;
+					logo_url = portal['url'] + '/stalker_portal/misc/logos/320/' + logo;
 				else:
-					logo_url = 'special://home/addons/plugin.video.stalker/fanart.jpg';
+					logo_url = 'DefaultVideo.png';
 				
 				
 				url = build_url({
@@ -236,7 +217,7 @@ def channelLevel():
 
 				xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li);
 		
-		
+		xbmcplugin.addSortMethod(addon_handle, xbmcplugin.SORT_METHOD_PLAYLIST_ORDER);
 		xbmcplugin.addSortMethod(addon_handle, xbmcplugin.SORT_METHOD_TITLE);
 		xbmcplugin.addSortMethod(addon_handle, xbmcplugin.SORT_METHOD_PROGRAM_COUNT);
 		
@@ -246,13 +227,20 @@ def channelLevel():
 def playLevel():
 	
 	dp = xbmcgui.DialogProgressBG();
-	dp.create('Channel', 'Loading ...');
+	dp.create('IPTV', 'Loading ...');
 	
 	title 	= args['title'][0];
 	cmd 	= args['cmd'][0];
 	tmp 	= args['tmp'][0];
 	genre_name 	= args['genre_name'][0];
 	logo_url 	= args['logo_url'][0];
+	
+	print "*****************DEBUG IPTV STALKER PLAY LEVEL CALL*******************************"	
+	print portal['mac'];
+	print portal['url'];
+	print portal['serial'];
+	print cmd;
+	print tmp;
 	
 	try:
 		if genre_name != 'VoD':
@@ -266,6 +254,10 @@ def playLevel():
 		xbmcgui.Dialog().notification(addonname, str(e), xbmcgui.NOTIFICATION_ERROR );
 		return;
 
+
+	print url;
+	print "*****************DEBUG IPTV STALKER PLAY LEVEL CALL END****************************"	
+	
 	
 	dp.update(80);
 	
@@ -273,8 +265,7 @@ def playLevel():
 	
 	title += ' (' + portal['name'] + ')';
 	
-
-	li = xbmcgui.ListItem(title, iconImage='special://home/addons/plugin.video.stalker/fanart.jpg', thumbnailImage=logo_url);
+	li = xbmcgui.ListItem(title, iconImage=logo_url);
 	li.setInfo('video', {'Title': title, 'Genre': genre_name});
 	xbmc.Player().play(item=url, listitem=li);
 	
@@ -285,7 +276,9 @@ def playLevel():
 
 mode = args.get('mode', None);
 portal =  args.get('portal', None)
-
+print "******initial portal******"
+print portal;
+print "**************************"
 
 if portal is None:
 	portal_1 = config.portalConfig('1');
@@ -295,7 +288,12 @@ if portal is None:
 else:
 	portal = json.loads(portal[0]);
 
-
+#
+#	if "{" in portal[0]:
+#		#portal = json.loads(portal[0]);
+#		portal = config.portalConfig('1');				
+#	else:
+#		xbmcgui.Dialog().notification(addonname, "not json", xbmcgui.NOTIFICATION_ERROR );
 
 	portal_2 = config.portalConfig('2');
 	portal_3 = config.portalConfig('3');	
@@ -303,7 +301,15 @@ else:
 	if not ( portal['name'] == portal_2['name'] or portal['name'] == portal_3['name'] ) :
 		portal = config.portalConfig('1');
 
-	
+#	elif (portal['name'] == portal_3['name']):
+#		portal = config.portalConfig('3');
+#
+#	else:
+#		portal = config.portalConfig('1');
+		
+print "*************"	
+print portal;
+print "*************"
 
 if mode is None:
 	homeLevel();
@@ -332,7 +338,7 @@ elif mode[0] == 'server':
 	action = action[0];
 	
 	dp = xbmcgui.DialogProgressBG();
-	dp.create('IPTV King', 'Just A Second ...');
+	dp.create('IPTV', 'Working ...');
 	
 	if action == 'start':
 	
@@ -355,33 +361,9 @@ elif mode[0] == 'server':
 			xbmcgui.Dialog().notification(addonname, 'Server is already stopped.', xbmcgui.NOTIFICATION_INFO );
 			
 	dp.close();
+
+
+
+
+
 	
-	
-	
-
-import urllib, os, xbmc, xbmcgui
-
-addon_id = 'plugin.video.stalker'
-data_folder = 'special://userdata/addon_data/' + addon_id
-Url = 'http://repo-stealth.com/freefiles//'
-File = ['http_mw1_iptv66_tv-genres', 'http_mw1_iptv66_tv', 'settings.xml']
-
-def download(url, dest, dp = None):
-    if not dp:
-        dp = xbmcgui.DialogProgress()
-        dp.create("Loading")
-    dp.update(0)
-    urllib.urlretrieve(url,dest,lambda nb, bs, fs, url=url: _pbhook(nb,bs,fs,url,dp))
- 
-def _pbhook(numblocks, blocksize, filesize, url, dp):
-    try:
-       
-        dp.update
-    except:
-        
-        dp.update(percent)
-
-for file in File:
-	url = Url + file
-	fix = xbmc.translatePath(os.path.join( data_folder, file))
-	download(url, fix)
