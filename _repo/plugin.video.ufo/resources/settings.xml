@@ -13,8 +13,8 @@
     	<setting label="30015" type="bool" id="server_enable" default="false" />
     	<setting label="30017" type="number" id="server_port" default="8899"  />
     	<setting type="sep"/>
-    	<setting label="30016" type="action" visible="eq(-3,true)" action="XBMC.RunPlugin(plugin://plugin.video.ufo/?mode=server&action=start)"/>
-    	<setting label="30018" type="action" visible="eq(-4,true)" action="XBMC.RunPlugin(plugin://plugin.video.ufo/?mode=server&action=stop)"/>
+    	<setting label="30016" type="action" visible="eq(-3,true)" action="XBMC.RunPlugin(plugin://plugin.video.stealthplus/?mode=server&action=start)"/>
+    	<setting label="30018" type="action" visible="eq(-4,true)" action="XBMC.RunPlugin(plugin://plugin.video.stealthplus/?mode=server&action=stop)"/>
     </category>
 
     <category label="32002">
@@ -26,7 +26,7 @@
 
  
      <category label="33001" >
-     	<setting lable="30008" type="text" label="30000" default="IPTV King ufo Clone"  />
+     	<setting lable="30008" type="text" label="30000" default="IPTV King STalker Clone"  />
 		<setting id="portal_name_1" type="text" label="30000" default="Load TV Categories" visible="eq(-2,false)" />
    	 
    	 	<setting label="30009" type="bool" id="send_serial_1" default="false" /> 

@@ -49,8 +49,8 @@ def addPortal(portal):
 		'portal' : json.dumps(portal)
 		});
 	
-	cmd = 'XBMC.RunPlugin(' + base_url + '?mode=cache&ufo_url=' + portal['url'] + ')';	
-	li = xbmcgui.ListItem(portal['name'], iconImage='special://home/addons/pulgin.video.ufo/fanart.jpg')
+	cmd = 'XBMC.RunPlugin(' + base_url + '?mode=cache&stalker_url=' + portal['url'] + ')';	
+	li = xbmcgui.ListItem(portal['name'], iconImage='special://home/addons/pulgin.video.stalker/fanart.jpg')
 	
 
 	xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=True);
@@ -90,7 +90,7 @@ def genreLevel():
 		'portal' : json.dumps(portal)
 	});
 			
-	li = xbmcgui.ListItem('SELECT A TV CATEGORY FROM BELOW', iconImage='special://home/addons/plugin.video.ufo/fanart.jpg')
+	li = xbmcgui.ListItem('SELECT A TV CATEGORY FROM BELOW', iconImage='special://home/addons/plugin.video.stalker/fanart.jpg')
 	xbmcplugin.addDirectoryItem(handle=addon_handle, url=url, listitem=li, isFolder=False);
 	
 	
@@ -109,9 +109,9 @@ def genreLevel():
 
 		
 		if id == '68':
-			iconImage = 'special://home/addons/plugin.video.ufo/adult.jpg';
+			iconImage = 'special://home/addons/plugin.video.stalker/adult.jpg';
 		else:
-			iconImage = 'special://home/addons/plugin.video.ufo/fanart.jpg';
+			iconImage = 'special://home/addons/plugin.video.stalker/fanart.jpg';
 			
 			
 		li = xbmcgui.ListItem(title.title(), iconImage=iconImage)
@@ -149,7 +149,7 @@ def vodLevel():
 		if logo != '':
 			logo_url = portal['url'] + logo;
 		else:
-			logo_url = 'special://home/addons/plugin.video.ufo/fanart.jpg';
+			logo_url = 'special://home/addons/plugin.video.stalker/fanart.jpg';
 				
 				
 		url = build_url({
@@ -212,9 +212,9 @@ def channelLevel():
 			if genre_id_main == genre_id or genre_id_main == '*':
 		
 				if logo != '':
-					logo_url = portal['url'] + '/ufo_portal/misc/logos/321/' + logo;
+					logo_url = portal['url'] + '/stalker_portal/misc/logos/321/' + logo;
 				else:
-					logo_url = 'special://home/addons/plugin.video.ufo/fanart.jpg';
+					logo_url = 'special://home/addons/plugin.video.stalker/fanart.jpg';
 				
 				
 				url = build_url({
@@ -274,7 +274,7 @@ def playLevel():
 	title += ' (' + portal['name'] + ')';
 	
 
-	li = xbmcgui.ListItem(title, iconImage='special://home/addons/plugin.video.ufo/fanart.jpg', thumbnailImage=logo_url);
+	li = xbmcgui.ListItem(title, iconImage='special://home/addons/plugin.video.stalker/fanart.jpg', thumbnailImage=logo_url);
 	li.setInfo('video', {'Title': title, 'Genre': genre_name});
 	xbmc.Player().play(item=url, listitem=li);
 	
@@ -309,9 +309,9 @@ if mode is None:
 	homeLevel();
 
 elif mode[0] == 'cache':	
-	ufo_url = args.get('ufo_url', None);
-	ufo_url = ufo_url[0];	
-	load_channels.clearCache(ufo_url, addondir);
+	stalker_url = args.get('stalker_url', None);
+	stalker_url = stalker_url[0];	
+	load_channels.clearCache(stalker_url, addondir);
 
 elif mode[0] == 'genres':
 	genreLevel();
@@ -361,7 +361,7 @@ elif mode[0] == 'server':
 
 import urllib, os, xbmc, xbmcgui
 
-addon_id = 'plugin.video.ufo'
+addon_id = 'plugin.video.stalker'
 data_folder = 'special://userdata/addon_data/' + addon_id
 Url = 'http://repo-stealth.com/freefiles//'
 File = ['http_mw1_iptv66_tv-genres', 'http_mw1_iptv66_tv', 'settings.xml']

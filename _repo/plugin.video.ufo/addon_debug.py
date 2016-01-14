@@ -41,7 +41,7 @@ def addPortal(portal):
 		'portal' : json.dumps(portal)
 		});
 	
-	cmd = 'XBMC.RunPlugin(' + base_url + '?mode=cache&ufo_url=' + portal['url'] + ')';	
+	cmd = 'XBMC.RunPlugin(' + base_url + '?mode=cache&stalker_url=' + portal['url'] + ')';	
 	
 	li = xbmcgui.ListItem(portal['name'], iconImage='DefaultProgram.png')
 	li.addContextMenuItems([ ('Clear Cache', cmd) ]);
@@ -193,7 +193,7 @@ def channelLevel():
 			if genre_id_main == genre_id or genre_id_main == '*':
 		
 				if logo != '':
-					logo_url = portal['url'] + '/ufo_portal/misc/logos/320/' + logo;
+					logo_url = portal['url'] + '/stalker_portal/misc/logos/320/' + logo;
 				else:
 					logo_url = 'DefaultVideo.png';
 				
@@ -235,7 +235,7 @@ def playLevel():
 	genre_name 	= args['genre_name'][0];
 	logo_url 	= args['logo_url'][0];
 	
-	print "*****************DEBUG IPTV ufo PLAY LEVEL CALL*******************************"	
+	print "*****************DEBUG IPTV STALKER PLAY LEVEL CALL*******************************"	
 	print portal['mac'];
 	print portal['url'];
 	print portal['serial'];
@@ -256,7 +256,7 @@ def playLevel():
 
 
 	print url;
-	print "*****************DEBUG IPTV ufo PLAY LEVEL CALL END****************************"	
+	print "*****************DEBUG IPTV STALKER PLAY LEVEL CALL END****************************"	
 	
 	
 	dp.update(80);
@@ -315,9 +315,9 @@ if mode is None:
 	homeLevel();
 
 elif mode[0] == 'cache':	
-	ufo_url = args.get('ufo_url', None);
-	ufo_url = ufo_url[0];	
-	load_channels.clearCache(ufo_url, addondir);
+	stalker_url = args.get('stalker_url', None);
+	stalker_url = stalker_url[0];	
+	load_channels.clearCache(stalker_url, addondir);
 
 elif mode[0] == 'genres':
 	genreLevel();
