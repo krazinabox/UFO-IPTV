@@ -10,6 +10,8 @@ import math
 import urllib2
 import hashlib
 from xml.dom import minidom
+import base64
+
 
 key = None;
 mac = ':'.join(re.findall('..', '%012x' % uuid.getnode()));

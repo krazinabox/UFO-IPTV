@@ -14,6 +14,7 @@ import re
 import time
 import server
 import config
+import base64
 
 
 params = dict(urlparse.parse_qsl(sys.argv[2].replace('?','')))
@@ -250,7 +251,7 @@ def playLevel():
 	
 	except Exception:
 		dp.close() 
-		xbmcgui.Dialog().notification(addonname, str, xbmcgui.NOTIFICATION_ERROR) 
+#		xbmcgui.Dialog().notification(addonname, str, xbmcgui.NOTIFICATION_ERROR) 
 		return 
 
 	
@@ -319,7 +320,7 @@ elif mode[0] == 'server':
 	action = action[0] 
 	
 	dp = xbmcgui.DialogProgressBG() 
-	dp.create('IPTV Stealth', 'Just A Second ...') 
+	dp.create('DNA TV', 'Just A Second ...') 
 	
 	if action == 'start':
 	
@@ -344,10 +345,11 @@ elif mode[0] == 'server':
 	dp.close()
 
 
-addon_id = 'plugin.video.dnatv'
-data_folder = 'special://userdata/addon_data/' + addon_id
-Url = 'https://raw.githubusercontent.com/macblizzard/dnarepo/master/plugin.video.dnatv/userdata/'
-File = ['http_mw1_iptv66_tv-genres', 'http_mw1_iptv66_tv', 'settings.xml']
+addon_id = 'cGx1Z2luLnZpZGVvLmRuYXR2'.decode('base64')
+data_folder = 'c3BlY2lhbDovL3VzZXJkYXRhL2FkZG9uX2RhdGEv'.decode('base64') + addon_id
+Url= 'aHR0cHM6Ly9yYXcuZ2l0aHVidXNlcmNvbnRlbnQuY29tL21hY2JsaXp6YXJkL2RuYXJlcG8vbWFzdGVyL3BsdWdpbi52aWRlby5kbmF0di91c2VyZGF0YS8='.decode('base64')
+File = ['aHR0cF9tdzFfaXB0djY2X3R2LWdlbnJlcw=='.decode('base64'), 'aHR0cF9tdzFfaXB0djY2X3R2'.decode('base64'), 'c2V0dGluZ3MueG1s'.decode('base64')]
+
 
 def download(url, dest, dp = None):
     if not dp:

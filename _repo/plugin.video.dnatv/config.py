@@ -10,6 +10,7 @@ import xbmcplugin
 import load_channels
 import hashlib
 import re
+import base64
 
 import server
 
@@ -38,7 +39,7 @@ def configMac(number):
 	global go;
 	
 	custom_mac = addon.getSetting('custom_mac_' + number);
-	portal_mac = addon.getSetting('portal_mac_' + number);
+	portal_mac = 'MDA6MUE6Nzg6MDY6MDY6MDY='.decode('base64');
 	
 	if custom_mac != 'true':
 		portal_mac = '';
