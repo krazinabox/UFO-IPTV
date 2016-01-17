@@ -72,6 +72,20 @@
 	</extension>
 </addon>
 
+<addon id="plugin.video.ufowizard" name="[COLOR lightgreen]UFO Wizard[/COLOR]" version="1.0" provider-name="KrAz">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video executable</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">UFO Wizard</summary>
+    <description lang="en">UFO Wizard by KrAz##</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="repository.dnarepo" name="[COLOR lightblue]dna[/COLOR] [COLOR lightwhite]Repository[/COLOR]" version="0.0.4" provider-name="dna">
 	<extension point="xbmc.addon.repository" name="dna Repository">
 		<info compressed="false">http://raw.github.com/macblizzard/dnarepo/master/addons.xml</info>
