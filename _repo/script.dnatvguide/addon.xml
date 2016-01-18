@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="script.dnatvguide" name="[COLOR lightblue]dnaTV[/COLOR] [COLOR lightwhite]Guide[/COLOR]" version="0.0.50" provider-name="dna">
+	<requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.simplejson" version="2.0.10"/>
+	</requires>
+	<extension point="xbmc.python.script" library="addon.py"/>
+    <extension point="xbmc.service" library="service.py" start="login"/>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">dnaTV Guide allows you to combine some of your favourite live TV plugins for use with a fully working EPG</summary>
+		<description lang="en">dnaTV Guide allows you to combine some of your favourite live TV plugins for use with a fully working EPG</description>
+		<disclaimer lang="en">dnaTV Guide is based on FTV Guide by rayw1986 and Bluezed, which in turn is based on the original TV Guide addon by twinther.</disclaimer>
+		<language></language>
+		<platform>all</platform>
+		<license>GPLv2</license>
+		<forum></forum>
+		<website></website>
+		<email></email>
+		<source></source>
+	</extension>
+</addon>

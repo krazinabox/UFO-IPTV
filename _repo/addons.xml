@@ -1,3 +1,203 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
+<addon id="plugin.video.dnatv" name="[COLOR darkorange]DNA[/COLOR] [COLOR lightblue]TV[/COLOR]" version="2.0.3" provider-name="Team DNA">
+    <requires>
+		<import addon="xbmc.python" version="2.14.0"/>
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="addon.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.service" library="server.py" start="startup" />
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary lang="en">DNA TV</summary>
+		<description lang="en">IPTV Stalker Clone</description>
+		<license>GNU General Public License, v2</license>
+		<language></language>
+	</extension>
+</addon>
+
+<addon id="plugin.video.iptvking" name="[COLOR darkorange]IPTV KING[/COLOR]" version="2.0" provider-name="Elvis">
+    <requires>
+		<import addon="xbmc.python" version="2.14.0"/>
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="addon.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.service" library="server.py" start="startup" />
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary lang="en">IPTV mod</summary>
+		<description lang="en">IPTV mod</description>
+		<license>GNU General Public License, v2</license>
+		<language></language>
+		<forum>Graceland</forum>
+
+
+	</extension>
+</addon>
+
+<addon id="plugin.video.iptvsfc" name="[COLOR darkorange]IPTV Stalker[/COLOR] [COLOR lightblue]Fucking Clone[/COLOR]" version="6.1" provider-name="Copy and Paste King">
+    <requires>
+		<import addon="xbmc.python" version="2.14.0"/>
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="addon.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.service" library="server.py" start="startup" />
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary lang="en">IPTV Clone</summary>
+		<description lang="en">Clone of a Clone by Copy and Paste King</description>
+		<license>GNU General Public License, v2</license>
+		<language></language>
+		<forum></forum>
+
+
+	</extension>
+</addon>
+
+<addon id="plugin.video.mykodibuildwizard" name="[COLOR darkorange]Kodi King build wizard[/COLOR]" version="99" provider-name="The King">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video executable</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Kodi King Build Wizard</summary>
+    <description lang="en">Easy Install With KODI / XBMC Wizard / ##CREDIT TO LEE @ COMMUNITY BUILDS FOR WRITING THE FORCE CLOSE FUNCTION AND ANY OTHER DEVS WHO CREATED ANY MODULES USED##
+##Credit To Husham for his support and friendship##</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="plugin.video.ufo" name="[COLOR lightgreen]UFO[/COLOR]" version="2.1" provider-name="KrAz">
+    <requires>
+		<import addon="xbmc.python" version="2.14.0"/>
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="addon.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.service" library="server.py" start="startup" />
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary lang="en">IPTV mod</summary>
+		<description lang="en">IPTV mod</description>
+		<license>GNU General Public License, v2</license>
+		<language></language>
+		<forum>Graceland</forum>
+
+
+	</extension>
+</addon>
+
+<addon id="plugin.video.ufowizard" name="[COLOR lightgreen]UFO Wizard[/COLOR]" version="1.0" provider-name="KrAz">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video executable</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">UFO Wizard</summary>
+    <description lang="en">UFO Wizard by KrAz##</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="repository.dnarepo" name="[COLOR lightblue]dna[/COLOR] [COLOR lightwhite]Repository[/COLOR]" version="0.0.4" provider-name="dna">
+	<extension point="xbmc.addon.repository" name="dna Repository">
+		<info compressed="false">http://raw.github.com/macblizzard/dnarepo/master/addons.xml</info>
+		<checksum>http://raw.github.com/macblizzard/dnarepo/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://raw.github.com/macblizzard/dnarepo/master</datadir>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>dna Repository</summary>
+		<description>Download and install add-ons from dna repository.</description>
+		<disclaimer>The owners and submitters to this repository do not host or distribute any of the content displayed by these addons nor do they have any affiliation with the content providers.</disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
+    <addon id="repository.ufo-repo" name="[COLOR lightgreen]UFO[/COLOR]" version="0.1.4" provider-name="krAZ">
+        <requires>
+            <import addon="xbmc.addon" version="12.0.0"/>
+        </requires>
+        <extension point="xbmc.addon.repository" name="UFO">
+            <info compressed="false">https://raw.github.com/krazinabox/UFO-IPTV/master/_repo/addons.xml</info>
+            <checksum>https://raw.github.com/krazinabox/UFO-IPTV/master/_repo/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.github.com/krazinabox/UFO-IPTV/master/_repo/</datadir>
+            <hashes>false</hashes>
+        </extension>
+        <extension point="xbmc.addon.metadata">
+            <summary>Install My Addons</summary>
+            <description>Download and install addons from KrAz!</description>
+            <platform>all</platform>
+    </extension>
+</addon>
+
+<addon id="script.dnatvguide" name="[COLOR lightblue]dnaTV[/COLOR] [COLOR lightwhite]Guide[/COLOR]" version="0.0.50" provider-name="dna">
+	<requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.simplejson" version="2.0.10"/>
+	</requires>
+	<extension point="xbmc.python.script" library="addon.py"/>
+    <extension point="xbmc.service" library="service.py" start="login"/>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">dnaTV Guide allows you to combine some of your favourite live TV plugins for use with a fully working EPG</summary>
+		<description lang="en">dnaTV Guide allows you to combine some of your favourite live TV plugins for use with a fully working EPG</description>
+		<disclaimer lang="en">dnaTV Guide is based on FTV Guide by rayw1986 and Bluezed, which in turn is based on the original TV Guide addon by twinther.</disclaimer>
+		<language></language>
+		<platform>all</platform>
+		<license>GPLv2</license>
+		<forum></forum>
+		<website></website>
+		<email></email>
+		<source></source>
+	</extension>
+</addon>
+
+<addon id="script.iptvkingguide" name="[COLOR darkorange]The King TV Guide[/COLOR]" version="2.0" provider-name="The King">
+	<requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.simplejson" version="2.0.10"/>
+	</requires>
+	<extension point="xbmc.python.script" library="addon.py"/>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">The King TV Guide allows you to combine some of your favourite live TV plugins for use with a fully working EPG</summary>
+		<description lang="be">The King TV Guide allows you to combine some of your favourite live TV plugins for use with a fully working EPG</description>
+		<disclaimer lang="en">The King TV Guide is based on Renegades TV Guide by Renegades Team and FTV Guide by Bluezed and RayW1986, which is based on the original TV Guide addon by twinther.</disclaimer>
+		<language>en</language>
+		<platform>all</platform>
+		<license>GPLv2</license>
+		<website>theking.servebeer.com</website>
+	</extension>
+</addon>
+
+<addon id="script.rawmaintenance"
+       name="Raw Maintenance"
+       version="69.69"
+       provider-name="Foreverska|Gombeek|Raw Media">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>executable</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <platform>all</platform>
+    <summary>Raw Maintinance</summary>
+    <description>
+	Your one stop tool for maintaining your device.
+	For support please visit www.no-issue.ca
+	Thank you to raw-media.ca for sponsoring the development of this add-on.
+    </description>
+    <language></language>
+    <license></license>
+    <source></source>
+    <forum></forum>
+    <website></website>
+  </extension>
+</addon>
 </addons>
