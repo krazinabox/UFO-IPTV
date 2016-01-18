@@ -166,4 +166,21 @@
     <website></website>
   </extension>
 </addon>
+
+<addon id="script.ufotvguide" name="[COLOR lightgreen]UFO TV Guide[/COLOR]" version="1.0" provider-name="KrAz">
+	<requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+		<import addon="script.module.simplejson" version="2.0.10"/>
+	</requires>
+	<extension point="xbmc.python.script" library="addon.py"/>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en">UFO TV Guide allows you to combine some of your favourite live TV plugins for use with a fully worUFO EPG</summary>
+		<description lang="be">UFO TV Guide allows you to combine some of your favourite live TV plugins for use with a fully worUFO EPG</description>
+		<disclaimer lang="en">UFO TV Guide is based on Renegades TV Guide by Renegades Team and FTV Guide by Bluezed and RayW1986, which is based on the original TV Guide addon by twinther.</disclaimer>
+		<language>en</language>
+		<platform>all</platform>
+		<license>GPLv2</license>
+		<website>theufo.servebeer.com</website>
+	</extension>
+</addon>
 </addons>

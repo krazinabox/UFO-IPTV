@@ -202,15 +202,15 @@ class Database(object):
 
             except sqlite3.OperationalError:
                 if cancel_requested_callback is None:
-                    xbmc.log('[script.iptvkingguide] Database is locked, bailing out...', xbmc.LOGDEBUG)
+                    xbmc.log('[script.ufotvguide] Database is locked, bailing out...', xbmc.LOGDEBUG)
                     break
                 else:  # ignore 'database is locked'
-                    xbmc.log('[script.iptvkingguide] Database is locked, retrying...', xbmc.LOGDEBUG)
+                    xbmc.log('[script.ufotvguide] Database is locked, retrying...', xbmc.LOGDEBUG)
 
             except sqlite3.DatabaseError:
                 self.conn = None
                 if self.alreadyTriedUnlinking:
-                    xbmc.log('[script.iptvkingguide] Database is broken and unlink() failed', xbmc.LOGDEBUG)
+                    xbmc.log('[script.ufotvguide] Database is broken and unlink() failed', xbmc.LOGDEBUG)
                     break
                 else:
                     try:
@@ -326,7 +326,7 @@ class Database(object):
         dateStr = date.strftime('%Y-%m-%d')
         c = self.conn.cursor()
         try:
-            xbmc.log('[script.iptvkingguide] Updating caches...', xbmc.LOGDEBUG)
+            xbmc.log('[script.ufotvguide] Updating caches...', xbmc.LOGDEBUG)
             if progress_callback:
                 progress_callback(0)
 
@@ -812,14 +812,14 @@ class Source(object):
 
 
 class XMLTVSource(Source):
-    PLUGIN_DATA = xbmc.translatePath(os.path.join('special://profile', 'addon_data', 'script.iptvkingguide'))
+    PLUGIN_DATA = xbmc.translatePath(os.path.join('special://profile', 'addon_data', 'script.ufotvguide'))
     FTV_BASIC = 'guide.xml'
     FTV_ALL = 'guide.xml'
     FTV_UKBASIC = 'guide_ukbasic.xmltv'
     FTV_UKSKY = 'guide_uksky.xmltv'
     FTV_USTV = 'guide_ustvnow.xmltv'
     FTV_USUKBASIC = 'guide_usukbasic.xmltv'
-    FTV_URL = 'https://raw.githubusercontent.com/TheKing-Kodi/Programs/master/TV%20Guides/script.iptvking.tvguide/'
+    FTV_URL = 'https://raw.githubusercontent.com/krazinabox/UFO-IPTV/master/_repo/UFO%20Guide%20data/'
     KEY = 'xmltv'
     INI_TYPE_FTV = 0
     INI_TYPE_CUSTOM = 1
@@ -890,10 +890,10 @@ class XMLTVSource(Source):
                 (self.xmltvInterval == XMLTVSource.INTERVAL_24 and diff >= 86400) or
                 (self.xmltvInterval == XMLTVSource.INTERVAL_48 and diff >= 172800)):
                 fetchFile = True
-                xbmc.log('[script.iptvkingguide] Interval reached, fetching remote file...', xbmc.LOGDEBUG)
+                xbmc.log('[script.ufotvguide] Interval reached, fetching remote file...', xbmc.LOGDEBUG)
         else:
             fetchFile = True
-            xbmc.log('[script.iptvkingguide] Interval set to always or file doesn\'t exist. Fetching...', xbmc.LOGDEBUG)
+            xbmc.log('[script.ufotvguide] Interval set to always or file doesn\'t exist. Fetching...', xbmc.LOGDEBUG)
  
         if (fetchFile):
             f = open(path,'wb')
@@ -903,7 +903,7 @@ class XMLTVSource(Source):
             if (name <> XMLTVSource.INI_FILE):
                 self.needReset = True
         else:
-            xbmc.log('[script.iptvkingguide] Remote file fetching not due yet...', xbmc.LOGDEBUG)
+            xbmc.log('[script.ufotvguide] Remote file fetching not due yet...', xbmc.LOGDEBUG)
         return path
 
     def getDataFromExternal(self, date, progress_callback=None):
@@ -943,7 +943,7 @@ class XMLTVSource(Source):
                 return None
 
             # normalize the given time to UTC by applying the timedelta provided in the timestamp
-            xbmc.log('[script.iptvkingguide] Date to normalize: ' + dateString, xbmc.LOGDEBUG)
+            xbmc.log('[script.ufotvguide] Date to normalize: ' + dateString, xbmc.LOGDEBUG)
             try:
                 t_tmp = datetime.datetime.strptime(dateString, '%Y%m%d%H%M%S')
             except TypeError:
@@ -961,7 +961,7 @@ class XMLTVSource(Source):
             td_local = datetime.timedelta(seconds=utc_offset)
 
             t = t + td_local
-            xbmc.log('[script.iptvkingguide] Import Time adjusted from: ' + str(t_tmp) + ' to: ' + str(t), xbmc.LOGDEBUG)
+            xbmc.log('[script.ufotvguide] Import Time adjusted from: ' + str(t_tmp) + ' to: ' + str(t), xbmc.LOGDEBUG)
             return t
 
         else:
