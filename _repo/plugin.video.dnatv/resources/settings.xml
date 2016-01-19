@@ -24,7 +24,7 @@
 
  
      <category label="33001" >
-     	<setting lable="30008" type="text" label="30000" default="DNA TV"  />
+     	<setting lable="30008" type="text" label="30000" default="Please be patient if a channel does not load on single click. Try multiple times. Due to heavy load on servers channel availability might be overbooked."  />
 		<setting id="portal_name_1" type="text" label="30000" default="ENTER DNA TV" visible="eq(-2,false)" />
    	 
    	 	<setting label="30009" type="bool" id="send_serial_1" default="false" /> 
