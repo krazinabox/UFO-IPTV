@@ -1,7 +1,7 @@
 # XBMC Media Center language file
-# Addon Name: The King TV Guide
-# Addon id: script.iptvkingguide
-# Addon Provider: Elvis
+# Addon Name: The UFO TV Guide
+# Addon id: script.ufotvguide
+# Addon Provider: KrAz
 msgid ""
 msgstr ""
 "Project-Id-Version: XBMC Addons\n"
@@ -163,7 +163,7 @@ msgid "URL"
 msgstr ""
 
 msgctxt "#30126"
-msgid "The King TV Guide"
+msgid "The UFO TV Guide"
 msgstr ""
 
 msgctxt "#30127"
@@ -231,7 +231,7 @@ msgid "Custom File"
 msgstr ""
 
 msgctxt "#30143"
-msgid "The King TV Guide"
+msgid "The UFO TV Guide"
 msgstr ""
 
 msgctxt "#30144"
