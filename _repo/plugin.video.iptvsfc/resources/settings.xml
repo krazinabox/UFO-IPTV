@@ -5,7 +5,7 @@
 		<setting id="portal_name_1" type="text" label="30000" default="NFPS" />
    	 	<setting id="portal_url_1" type="text" label="30001" default="http://portal.iptvprivateserver.tv" />
    	 	<setting label="30008" type="bool" id="custom_mac_1" default="true"/>
-   	 	<setting id="portal_mac_1" type="text" label="30002" default="00:1A:78:22:33:44" visible="eq(-2,true)" />
+   	 	<setting id="portal_mac_1" type="text" label="30002" default="00:1A:78:07:07:07" visible="eq(-2,true)" />
    	 	
    	 	<setting label="30009" type="bool" id="send_serial_1" default="true"/>
    	 	<setting label="30014" type="bool" id="custom_serial_1" default="false" visible="eq(-1,true)"/>
