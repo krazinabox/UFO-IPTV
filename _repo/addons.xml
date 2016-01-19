@@ -37,6 +37,26 @@
 	</extension>
 </addon>
 
+<addon id="plugin.video.iptvsfc" name="[COLOR darkorange]IPTV Stalker[/COLOR] [COLOR lightblue]Fucking Clone[/COLOR]" version="6.2" provider-name="Copy and Paste King">
+    <requires>
+		<import addon="xbmc.python" version="2.14.0"/>
+	</requires>
+	<extension point="xbmc.python.pluginsource" library="addon.py">
+		<provides>video</provides>
+	</extension>
+	<extension point="xbmc.service" library="server.py" start="startup" />
+	<extension point="xbmc.addon.metadata">
+		<platform>all</platform>
+		<summary lang="en">IPTV Clone</summary>
+		<description lang="en">Clone of a Clone by Copy and Paste King</description>
+		<license>GNU General Public License, v2</license>
+		<language></language>
+		<forum></forum>
+
+
+	</extension>
+</addon>
+
 <addon id="plugin.video.mykodibuildwizard" name="[COLOR darkorange]Kodi King build wizard[/COLOR]" version="99" provider-name="The King">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
