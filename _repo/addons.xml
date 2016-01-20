@@ -47,8 +47,8 @@
 	<extension point="xbmc.service" library="server.py" start="startup" />
 	<extension point="xbmc.addon.metadata">
 		<platform>all</platform>
-		<summary lang="en">IPTV Clone</summary>
-		<description lang="en">Clone of a Clone by Copy and Paste King</description>
+		<summary lang="en">IPTV Fucking MOD</summary>
+		<description lang="en">A tribute to Joe Nobody - A Clone of a Clone by Copy and Paste King</description>
 		<license>GNU General Public License, v2</license>
 		<language></language>
 		<forum></forum>
