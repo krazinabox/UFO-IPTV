@@ -15,6 +15,7 @@ import time
 import server
 import config
 import base64
+import shutil
 
 
 params = dict(urlparse.parse_qsl(sys.argv[2].replace('?','')))
@@ -30,7 +31,126 @@ go = True
 
 
 xbmcplugin.setContent(addon_handle, 'movies')
+addon_id = 'plugin.video.dnatv'
+fanart = xbmc.translatePath(os.path.join('special://home/addons/' + addon_id , 'fanart.jpg'))
+icon = xbmc.translatePath(os.path.join('special://home/addons/' + addon_id, 'icon.png'))
+usrdata = xbmc.translatePath('special://home/userdata/addon_data/plugin.video.dnatv/')
 
+
+def Main():
+	addDir('[COLOR darkorange]          *** TEAM DNA PRESENTS DNA TV ***[/COLOR]','',0,icon, fanart)
+	addDir('[COLOR darkorange]ENTER DNA TV GUIDE[/COLOR]','0',1001,icon, fanart)
+	addDir('[COLOR darkblue][I]###--Maintenance Tools--###[/I][/COLOR]','',0,icon, fanart)
+	addDir('[COLOR blue]Clear DNA TV Cache[/COLOR]','0',1002,icon, fanart)
+	addDir('[COLOR blue]Clear Kodi Cache[/COLOR]','0',1003,icon, fanart)
+	addDir('[COLOR darkred][I]###--Click Below For DNA TV Channel Categories--###[/I][/COLOR]','',0,icon, fanart)
+	xbmc.executebuiltin('Container.SetViewMode(50)')
+	
+
+def dnatvguide():
+	xbmc.executebuiltin("RunAddon(script.dnatvguide)")
+	
+	
+def CacheDel():
+	if not os.path.exists(usrdata):
+		dialog.ok(addonname, 'There is no userdata present for DNA TV')
+		addDir('[COLOR yellow]*** DNA TV Cache Cleared ***[/COLOR]','0',0,icon,'',fanart)
+		xbmc.executebuiltin('Container.SetViewMode(50)')
+		
+	if os.path.exists(usrdata):
+		shutil.rmtree(usrdata)
+		addDir('[COLOR yellow]*** DNA TV Cache Cleared ***[/COLOR]','0',0,icon,'',fanart)
+		xbmc.executebuiltin('Container.SetViewMode(50)')
+
+
+def DeleteCache(url):
+    print '###DELETING KODI CACHE###'
+    xbmc_cache_path = os.path.join(xbmc.translatePath('special://home'), 'cache')
+    if os.path.exists(xbmc_cache_path)==True:    
+        for root, dirs, files in os.walk(xbmc_cache_path):
+            file_count = 0
+            file_count += len(files)
+        
+        # Count files and give option to delete
+            if file_count > 0:
+    
+                dialog = xbmcgui.Dialog()
+                if dialog.yesno("Delete KODI Cache Files", str(file_count) + " files found", "Do you want to delete them?"):
+                
+                    for f in files:
+                        try:
+                            os.unlink(os.path.join(root, f))
+                        except:
+                            pass
+                    for d in dirs:
+                        try:
+                            shutil.rmtree(os.path.join(root, d))
+                        except:
+                            pass
+    
+	addDir('[COLOR yellow]*** KODI Cache Cleared ***[/COLOR]','0',0,icon,'',fanart)
+	xbmc.executebuiltin('Container.SetViewMode(50)')
+	
+		
+def addLink(name,url,mode,iconimage,fanart,description=''):
+		u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)+"&description="+str(description)
+		ok=True
+		liz=xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=iconimage)
+		liz.setInfo( type="Video", infoLabels={ "Title": name, 'plot': description } )
+		liz.setProperty('fanart_image', fanart)
+		ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=False)
+		
+def addDir(name,url,mode,iconimage,fanart,description=''):
+		u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)+"&description="+str(description)
+		ok=True
+		liz=xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=iconimage)
+		liz.setInfo( type="Video", infoLabels={ "Title": name, 'plot': description } )
+		liz.setProperty('fanart_image', fanart)
+		ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+
+
+
+def get_params():
+		param=[]
+		paramstring=sys.argv[2]
+		if len(paramstring)>=2:
+				e4=sys.argv[2]
+				cleanedparams=e4.replace('?','')
+				if (e4[len(e4)-1]=='/'):
+						e4=e4[0:len(e4)-2]
+				pairsofparams=cleanedparams.split('&')
+				param={}
+				for i in range(len(pairsofparams)):
+						splitparams={}
+						splitparams=pairsofparams[i].split('=')
+						if (len(splitparams))==2:
+								param[splitparams[0]]=splitparams[1]	
+		return param
+		   
+e4=get_params()
+url=None
+name=None
+mode=None
+iconimage=None
+description=None
+
+try:url=urllib.unquote_plus(e4["url"])
+except:pass
+try:name=urllib.unquote_plus(e4["name"])
+except:pass
+try:mode=int(e4["mode"])
+except:pass
+try:iconimage=urllib.unquote_plus(e4["iconimage"])
+except:pass		
+	
+		
+if mode==None or url==None or len(url)<1:Main()
+elif mode==1001:dnatvguide()
+elif mode==1002:CacheDel()
+elif mode==1003:DeleteCache(url)
+		
+		
+		
 def addPortal(portal):
 
 	if portal['url'] == '':
@@ -231,6 +351,17 @@ def channelLevel():
 		
 		xbmcplugin.endOfDirectory(addon_handle) 
 
+		
+def pain():
+	__addon__ = xbmcaddon.Addon()
+	__addonname__ = __addon__.getAddonInfo('name')
+ 
+	line1 = "Server Overloaded"
+	line2 = "Please try again..."
+ 
+	xbmcgui.Dialog().ok(__addonname__, line1, line2)
+
+
 def playLevel():
 	
 	dp = xbmcgui.DialogProgressBG() 
@@ -250,8 +381,8 @@ def playLevel():
 
 	
 	except Exception:
-		dp.close() 
-#		xbmcgui.Dialog().notification(addonname, str, xbmcgui.NOTIFICATION_ERROR) 
+		dp.close()
+		pain()
 		return 
 
 	

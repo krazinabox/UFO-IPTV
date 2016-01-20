@@ -10,7 +10,7 @@
 	</category>
 	
 	<category label="30148">
-		<setting id="skin" label="30141" type="fileenum" values="resources/skins" mask="/" default="Elvis" />
+		<setting id="skin" label="30141" type="fileenum" values="resources/skins" mask="/" default="Area 51" />
 		
 		<setting id="logos.enabled" label="30117" type="bool" default="true" />
         <setting id="logos.source" label="30146" type="enum" default="0" lvalues="30143|30147" visible="eq(-1,true)" />

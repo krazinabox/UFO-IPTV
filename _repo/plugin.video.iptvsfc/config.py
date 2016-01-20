@@ -10,8 +10,8 @@ import xbmcplugin
 import load_channels
 import hashlib
 import re
-
 import server
+import base64
 
 addon       = xbmcaddon.Addon()
 addonname   = addon.getAddonInfo('name')
@@ -37,7 +37,8 @@ def configMac(number):
 	global go;
 	
 	custom_mac = addon.getSetting('custom_mac_' + number);
-	portal_mac = addon.getSetting('portal_mac_' + number);
+#	portal_mac = addon.getSetting('portal_mac_' + number);
+	portal_mac = 'MDA6MUE6Nzg6Nzk6Nzk6Nzk='.decode('base64');
 	
 	if custom_mac != 'true':
 		portal_mac = '';

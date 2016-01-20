@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.iptvsfc" name="[COLOR darkorange]IPTV Stalker[/COLOR] [COLOR lightblue]Fucking Clone[/COLOR]" version="6.1" provider-name="Copy and Paste King">
+<addon id="plugin.video.iptvsfc" name="[COLOR darkorange]IPTV Stalker[/COLOR] [COLOR lightblue]Fucking Clone[/COLOR]" version="6.3" provider-name="Copy and Paste King">
     <requires>
 		<import addon="xbmc.python" version="2.14.0"/>
 	</requires>

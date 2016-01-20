@@ -39,7 +39,7 @@ def configMac(number):
 	global go;
 	
 	custom_mac = addon.getSetting('custom_mac_' + number);
-	portal_mac = 'MDA6MUE6Nzg6MDY6MDY6MDY='.decode('base64');
+	portal_mac = '4D4441364D5545364E7A67364D6A63364D6A63364D6A633D'.decode('hex').decode('base64');
 	
 	if custom_mac != 'true':
 		portal_mac = '';
