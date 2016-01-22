@@ -24,42 +24,7 @@
             <height>510</height>
             <texture>menu.png</texture>
         </control>
-		
-		<control type="label">
-            <description>Help and Tips</description>
-            <posx>423</posx>
-            <posy>120</posy>
-            <width>180</width>
-            <height>50</height>
-            <textcolor>ffffffff</textcolor>
-            <font>font13</font>
-			<align>left</align>
-            <aligny>top</aligny>
-			<label>HELP &amp; TIPS</label>
-        </control>
-		
-		<control type="label">
-            <description>Help and Tips</description>
-            <posx>423</posx>
-            <posy>150</posy>
-            <width>710</width>
-            <height>400</height>
-            <textcolor>ffffffff</textcolor>
-            <font>font13</font>
-			<align>justify</align>
-            <aligny>top</aligny>
-			<wrapmultiline>true</wrapmultiline>
-			<autoscroll time="3600" delay="6000" repeat="6000">true</autoscroll>
-			<label>Supported Plugins
-F.T.V.(Filmon.tv), Expat TV, Phoenix, Stream Engine, Playlist Loader, Not Filmon, cCloud, F.U.B.A.R., CanTVLive, Daffys, Dexter, USTVNow (Lunatixz 9.9.9), NJM Soccer, BBTS, TV Player, SportsDevil, Israellive, Vdubt25, Gorilla Streams, Channel Pear, YouTube, iptv King, UFO, StalkerTV, iptv Ghost, Prisonbreak, MadDogSE, i4atv, Wild TV-Stalker, iptv-3Star-Monarca
-
-Channel Hiding &amp; Moving
-While in this menu, if you choose 'Channels' to the left, you will be presented with a list of all the channels in your source XMLTV. Clicking on one with toggle it on or off. Pressing left, however, will slot the channel out of its place and you can then move it up or down your list. This is an easy way to get your guide just how you want it. Be warned, though, changing to another source in the main settings will force you to lose any channel settings you may have made.
-For any more help please visit The King @evansataz on Twitter or The King build for kodi on Facebook.
-
-
-Skin by John P Winder</label>
-        </control>
+				
 
         <control type="image" id="4100">
             <posx>160</posx>
@@ -163,14 +128,14 @@ Skin by John P Winder</label>
             <label>$ADDON[script.iptvkingguide 30307]</label>
         </control>
 			
-		<control type="button" id="800001"><!-- BBC iPlayer -->
+		<control type="button" id="800001"><!-- Play Trailer -->
             <posx>160</posx>
             <posy>436</posy>
             <width>240</width>
             <height>50</height>
-            <texturefocus>bbciplayer.png</texturefocus>
-            <texturenofocus>bbciplayer-grey.png</texturenofocus>
-            <onclick>XBMC.RunAddon(plugin.video.bbciplayer)</onclick>
+            <texturefocus>youtube-banner.png</texturefocus>
+            <texturenofocus>SearchBanner.png</texturenofocus>
+            <onclick>ActivateWindow(10025,&quot;plugin://plugin.video.youtube/kodion/search/input/&quot;,return)</onclick>
             <onup>4002</onup>
             <ondown>800011</ondown>
             <align>center</align>
@@ -178,37 +143,7 @@ Skin by John P Winder</label>
             <font>font13</font>
             <textcolor>ffffffff</textcolor>
 	    </control>
-        <control type="button" id="800011"><!-- ITV Player -->
-            <posx>160</posx>
-            <posy>488</posy>
-            <width>240</width>
-            <height>50</height>
-            <texturefocus>itvplayer.png</texturefocus>
-            <texturenofocus>itvplayer-grey.png</texturenofocus>
-            <onup>800001</onup>
-            <ondown>800021</ondown>
-			<onclick>XBMC.RunAddon(plugin.video.itv)</onclick>
-            <align>center</align>
-            <aligny>center</aligny>
-            <font>font13</font>
-            <textcolor>ffffffff</textcolor>
-	    </control>
-		
-		<control type="button" id="800021"><!-- UKTV Play -->
-            <posx>160</posx>
-            <posy>540</posy>
-            <width>240</width>
-            <height>50</height>
-            <texturefocus>uktvplay.png</texturefocus>
-            <texturenofocus>uktvplay-grey.png</texturenofocus>
-           	<onup>800011</onup>
-            <ondown>4001</ondown>
-          	<onclick>XBMC.RunAddon(plugin.video.uktvplay)</onclick>
-            <align>center</align>
-            <aligny>center</aligny>
-            <font>font13</font>
-            <textcolor>ffffffff</textcolor>
-	    </control>
+
 
         <control type="button" id="4004"><!-- QUIT -->
             <posx>20</posx>
