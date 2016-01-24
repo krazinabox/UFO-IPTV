@@ -218,7 +218,7 @@
 	</extension>
 </addon>
 
-<addon id="service.area-51buildupdate" name="[COLOR lightgreen]Area-51 Build UPDATE Service[/COLOR]" version="1.0" provider-name="Team DNA">
+<addon id="service.area-51update" name="[COLOR lightgreen]Area-51 Build UPDATE Service[/COLOR]" version="1.0" provider-name="Team DNA">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
