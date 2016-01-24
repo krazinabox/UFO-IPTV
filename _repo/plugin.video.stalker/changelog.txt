@@ -49,9 +49,3 @@ Added new server page to be compatible with SIMPLE IPTV (https://play.google.com
 1.0.18
 Added start/stop button on config - M3U Server
 Fixed some small bugs
-
-9.0.18 (dara)
-Initial modification to stop serial number and ivue compatible
-
-9.0.19 (dara)
-Fixed portal selection as standalone.

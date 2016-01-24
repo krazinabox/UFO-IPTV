@@ -256,7 +256,7 @@ def getVoD(portal_mac, url, serial, path):
 			data += '{"name":"'+ name +'", "cmd":"'+ cmd +'", "logo":"'+ logo +'"}, \n'
 
 		page += 1;
-		if page > pages or page == 100:
+		if page > pages or page == 10:
 			break;
 
 	data = data[:-3] + '\n]}'
@@ -524,7 +524,7 @@ def getEPG(portal_mac, url, serial, path):
 def retriveUrl(portal_mac, url, serial, channel, tmp):
 	
 	setMac(portal_mac);
-	#setSerialNumber(serial);
+	setSerialNumber(serial);
 		
 	if 'matrix' in channel:
 		return retrieve_matrixUrl(url, channel);

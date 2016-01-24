@@ -1,4 +1,4 @@
-import sys
+﻿import sys
 import os
 import json
 import urllib
@@ -26,7 +26,9 @@ go = True;
 #xbmcgui.Dialog().ok(addonname, 'aaa')
 
 xbmcplugin.setContent(addon_handle, 'movies')
-	
+
+
+
 
 def addPortal(portal):
 
@@ -232,6 +234,7 @@ def playLevel():
 	genre_name 	= args['genre_name'][0];
 	logo_url 	= args['logo_url'][0];
 	
+	
 	try:
 		if genre_name != 'VoD':
 			url = load_channels.retriveUrl(portal['mac'], portal['url'], portal['serial'], cmd, tmp);
@@ -243,7 +246,6 @@ def playLevel():
 		dp.close();
 		xbmcgui.Dialog().notification(addonname, str(e), xbmcgui.NOTIFICATION_ERROR );
 		return;
-
 	
 	dp.update(80);
 	
@@ -263,24 +265,13 @@ def playLevel():
 mode = args.get('mode', None);
 portal =  args.get('portal', None)
 
-
 if portal is None:
 	portal_1 = config.portalConfig('1');
 	portal_2 = config.portalConfig('2');
 	portal_3 = config.portalConfig('3');	
-
 else:
 	portal = json.loads(portal[0]);
 
-#  Modification to force outside call to portal_1 (9.0.19)
-
-	portal_2 = config.portalConfig('2');
-	portal_3 = config.portalConfig('3');	
-
-	if not ( portal['name'] == portal_2['name'] or portal['name'] == portal_3['name'] ) :
-		portal = config.portalConfig('1');
-
-	
 
 if mode is None:
 	homeLevel();
