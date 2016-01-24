@@ -27,6 +27,9 @@ go = True;
 
 xbmcplugin.setContent(addon_handle, 'movies')
 	
+#load_channels.clearCache('http://portal.iptvprivateserver.tv', addondir)
+
+
 
 def addPortal(portal):
 
@@ -232,6 +235,13 @@ def playLevel():
 	genre_name 	= args['genre_name'][0];
 	logo_url 	= args['logo_url'][0];
 	
+	print "*****************DEBUG IPTV STALKER PLAY LEVEL CALL*******************************"	
+	print portal['mac'];
+	print portal['url'];
+	print portal['serial'];
+	print cmd;
+	print tmp;
+	
 	try:
 		if genre_name != 'VoD':
 			url = load_channels.retriveUrl(portal['mac'], portal['url'], portal['serial'], cmd, tmp);
@@ -244,6 +254,10 @@ def playLevel():
 		xbmcgui.Dialog().notification(addonname, str(e), xbmcgui.NOTIFICATION_ERROR );
 		return;
 
+
+	print url;
+	print "*****************DEBUG IPTV STALKER PLAY LEVEL CALL END****************************"	
+	
 	
 	dp.update(80);
 	
@@ -262,7 +276,9 @@ def playLevel():
 
 mode = args.get('mode', None);
 portal =  args.get('portal', None)
-
+print "******initial portal******"
+print portal;
+print "**************************"
 
 if portal is None:
 	portal_1 = config.portalConfig('1');
@@ -272,7 +288,12 @@ if portal is None:
 else:
 	portal = json.loads(portal[0]);
 
-#  Modification to force outside call to portal_1 (9.0.19)
+#
+#	if "{" in portal[0]:
+#		#portal = json.loads(portal[0]);
+#		portal = config.portalConfig('1');				
+#	else:
+#		xbmcgui.Dialog().notification(addonname, "not json", xbmcgui.NOTIFICATION_ERROR );
 
 	portal_2 = config.portalConfig('2');
 	portal_3 = config.portalConfig('3');	
@@ -280,7 +301,15 @@ else:
 	if not ( portal['name'] == portal_2['name'] or portal['name'] == portal_3['name'] ) :
 		portal = config.portalConfig('1');
 
-	
+#	elif (portal['name'] == portal_3['name']):
+#		portal = config.portalConfig('3');
+#
+#	else:
+#		portal = config.portalConfig('1');
+		
+print "*************"	
+print portal;
+print "*************"
 
 if mode is None:
 	homeLevel();
