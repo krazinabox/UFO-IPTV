@@ -19,7 +19,7 @@ PATH = "mykodibuildwizard"
 
     
 def CATEGORIES():
-    link = OPEN_URL('https://archive.org/download/UFOBuilds/UFO%20Builds.txt').replace('\n','').replace('\r','')
+    link = OPEN_URL('https://archive.org/download/UFOBuilds/UfoBuilds.txt').replace('\n','').replace('\r','')
     match = re.compile('name="(.+?)".+?rl="(.+?)".+?mg="(.+?)".+?anart="(.+?)".+?escription="(.+?)"').findall(link)
     for name,url,iconimage,fanart,description in match:
         addDir(name,url,1,iconimage,fanart,description)
