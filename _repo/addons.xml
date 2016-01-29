@@ -112,6 +112,21 @@
 	</extension>
 </addon>
 
+<addon id="plugin.video.UFOBuilds" name="[COLOR lightgreen]UFO[/COLOR] build wizard" version="2.0" provider-name="UFO">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource" library="default.py">
+        <provides>video executable</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">UFO Build Wizard</summary>
+    <description lang="en">Easy Build Install With KODI / XBMC Wizard / ##CREDIT TO LEE @ COMMUNITY BUILDS FOR WRITING THE FORCE CLOSE FUNCTION AND ANY OTHER DEVS WHO CREATED ANY MODULES USED##
+##Credit To Husham for his support##</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="plugin.video.ufowizard" name="[COLOR lightgreen]UFO Wizard[/COLOR]" version="1.0" provider-name="KrAz">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
