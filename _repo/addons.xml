@@ -17,7 +17,7 @@
 	</extension>
 </addon>
 
-<addon id="plugin.video.iptvking" name="[COLOR darkorange]IPTV KING[/COLOR]" version="2.1" provider-name="Elvis">
+<addon id="plugin.video.iptvking" name="[COLOR darkorange]IPTV KING[/COLOR]" version="2.2" provider-name="Elvis">
     <requires>
 		<import addon="xbmc.python" version="2.14.0"/>
 	</requires>
@@ -37,7 +37,7 @@
 	</extension>
 </addon>
 
-<addon id="plugin.video.iptvsfc" name="[COLOR darkorange]IPTV Stalker[/COLOR] [COLOR lightblue]Fucking Clone[/COLOR]" version="6.4" provider-name="Copy and Paste King">
+<addon id="plugin.video.iptvsfc" name="[COLOR darkorange]IPTV Stalker[/COLOR] [COLOR lightblue]Fucking Clone[/COLOR]" version="6.5" provider-name="Copy and Paste King">
     <requires>
 		<import addon="xbmc.python" version="2.14.0"/>
 	</requires>
@@ -77,7 +77,7 @@
 	</extension>
 </addon>
 
-<addon id="plugin.video.ufo" name="[COLOR lightgreen]UFO[/COLOR]" version="2.3" provider-name="KrAz">
+<addon id="plugin.video.ufo" name="[COLOR lightgreen]UFO[/COLOR]" version="2.4" provider-name="KrAz">
     <requires>
 		<import addon="xbmc.python" version="2.14.0"/>
 	</requires>

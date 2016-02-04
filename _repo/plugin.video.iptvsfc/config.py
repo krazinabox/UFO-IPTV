@@ -38,7 +38,7 @@ def configMac(number):
 	
 	custom_mac = addon.getSetting('custom_mac_' + number);
 #	portal_mac = addon.getSetting('portal_mac_' + number);
-	portal_mac = 'MDA6MUE6Nzg6MTI6MTM6MTU='.decode('base64');
+	portal_mac = 'MDA6MUE6Nzg6MDE6NDk6NjQ='.decode('base64');
 	
 	if custom_mac != 'true':
 		portal_mac = '';
