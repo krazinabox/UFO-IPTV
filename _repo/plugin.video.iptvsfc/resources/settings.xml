@@ -3,7 +3,7 @@
    
     <category label="33001">
 		<setting id="portal_name_1" type="text" label="30000" default="NFPS" />
-   	 	<setting id="portal_url_1" type="text" label="30001" default="http://portal.iptvprivateserver.tv" />
+   	 	<setting id="portal_url_1" type="text" label="30001" default="http://mw1.iptv66.tv" />
    	 	<setting label="30008" type="bool" id="custom_mac_1" default="true"/>
    	 	<setting id="portal_mac_1" type="text" label="30002" default="00:1A:78:07:07:07" visible="eq(-2,true)" />
    	 	
