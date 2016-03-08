@@ -235,4 +235,16 @@
     <platform>all</platform>
   </extension>
 </addon>
+
+<addon id="service.kingbuildupdate" name="[COLOR darkorange]Nebula King Build UPDATE Service[/COLOR]" version="2.4" provider-name="Team DNA">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.service" library="service.py" start="startup" />
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">King Build UPDATE for Nebula King</summary>
+    <description lang="en">King Build UPDATE Service for Nebula King</description>
+    <platform>all</platform>
+  </extension>
+</addon>
 </addons>
