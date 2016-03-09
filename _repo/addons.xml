@@ -77,26 +77,6 @@
 	</extension>
 </addon>
 
-<addon id="plugin.video.ufo" name="[COLOR lightgreen]UFO[/COLOR]" version="2.5" provider-name="KrAz">
-    <requires>
-		<import addon="xbmc.python" version="2.14.0"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="addon.py">
-		<provides>video</provides>
-	</extension>
-	<extension point="xbmc.service" library="server.py" start="startup" />
-	<extension point="xbmc.addon.metadata">
-		<platform>all</platform>
-		<summary lang="en">IPTV mod</summary>
-		<description lang="en">IPTV mod</description>
-		<license>GNU General Public License, v2</license>
-		<language></language>
-		<forum>Graceland</forum>
-
-
-	</extension>
-</addon>
-
 <addon id="plugin.video.UFOBuilds" name="[COLOR lightgreen]UFO[/COLOR] build wizard" version="2.0" provider-name="UFO">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
