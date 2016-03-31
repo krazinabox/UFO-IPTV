@@ -35,8 +35,8 @@ def wizard():
 	if choice == 0:
 		return
 	elif choice == 1:
-		#xbmc.executebuiltin("RunAddon(plugin.program.area-51wizard)")
-		xbmc.executebuiltin('ActivateWindow(10025,plugin://plugin.video.ufowizard/?url=https://archive.org/download/area-51update/area-51update.zip&mode=1&name=UPDATE&iconimage=https://archive.org/download/newicon_201601/newicon.png)')
+		#xbmc.executebuiltin("RunAddon(plugin.video.UFOBuilds)")
+		xbmc.executebuiltin('ActivateWindow(10025,plugin://plugin.video.UFOBuilds/?url=https://archive.org/download/area-51update/area-51update.zip&mode=1&name=UPDATE&iconimage=https://archive.org/download/newicon_201601/newicon.png)')
 		file_i = open(installed, "w")
 		file_i.write(checksum_latest)
 		file_i.close()
