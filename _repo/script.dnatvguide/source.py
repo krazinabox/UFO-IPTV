@@ -821,7 +821,7 @@ class XMLTVSource(Source):
     KEY = 'xmltv'
     INI_TYPE_DNATV = 0
     INI_TYPE_CUSTOM = 1
-    INI_FILE = 'addons.ini'
+    INI_FILE = 'addons2.ini'
     LOGO_SOURCE_DNATV = 0
     LOGO_SOURCE_CUSTOM = 1
 
