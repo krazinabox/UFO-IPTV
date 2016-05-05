@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<window type="dialog">
+	<allowoverlay>no</allowoverlay>
+	<defaultcontrol always="false">4000</defaultcontrol>
+	<coordinates>
+		<system>1</system>
+		<posx>0</posx>
+		<posy>0</posy>
+	</coordinates>
+    <controls>
+
+        <control type="image">
+            <posx>110</posx>
+            <posy>203</posy>
+            <width>796</width>
+            <height>120</height>
+            <texture>tvguide-menu-bkgrd.png</texture>
+        </control>
+        <control type="image">
+            <posx>110</posx>
+            <posy>203</posy>
+            <width>796</width>
+            <height>120</height>
+            <texture>tvguide-menu-bkgrd.png</texture>
+            <fadetime>1000</fadetime>
+        </control>
+			
+        <control type="image" id="4100">
+            <posx>120</posx>
+            <posy>220</posy>
+            <width>150</width>
+            <height>30</height>
+            <aspectratio>keep</aspectratio>
+        </control>
+        <control type="label" id="4101">
+            <posx>20</posx>
+            <posy>50</posy>
+            <width>240</width>
+            <height>30</height>
+            <align>center</align>
+            <aligny>center</aligny>
+            <font>osdTitle</font>
+            <textcolor>ffffffff</textcolor>
+        </control>
+
+        <control type="button" id="4000"><!-- watch -->
+            <posx>130</posx>
+            <posy>40</posy>
+            <width>240</width>
+            <height>31St0</height>
+            <texturefocus>tvguide-program-menu-focus.png</texturefocus>
+			<texturenofocus>tvguide-program-grey2.png</texturenofocus>
+            <onup>4000</onup>
+            <ondown>4002</ondown>
+            <align>center</align>
+            <aligny>center</aligny>
+            <font>font13</font>
+	    <visible>false</visible>	
+            <textcolor>ffffffff</textcolor>
+        </control>
+
+        <control type="label" id="4102"><!-- Show Title -->
+            <posx>130</posx>
+            <posy>70</posy>
+            <width>240</width>
+            <height>30</height>
+            <align>center</align>
+            <aligny>center</aligny>
+            <font>tvg_font13</font>
+            <textcolor>ffffffff</textcolor>
+	    <visible>false</visible>	
+        </control>
+		
+        <control type="button" id="4002"><!-- REMINDER -->
+            <posx>740</posx>
+            <posy>220</posy>
+            <width>150</width>
+            <height>30</height>
+            <texturefocus>tvguide-program-grey-focus1.png</texturefocus>
+            <texturenofocus>tvguide-program-grey1.png</texturenofocus>
+            <onup>4000</onup>
+            <ondown>4004</ondown>
+	    <onleft>90005</onleft>
+            <align>center</align>
+            <aligny>center</aligny>
+            <font>font13_title</font>
+            <textcolor>ffc0c0c0</textcolor>
+            <focusedcolor>ffffffff</focusedcolor>
+        </control>
+		
+
+        <control type="button" id="4001"><!-- Choose Stream -->
+            <posx>275</posx>
+            <posy>220</posy>
+            <width>150</width>
+            <height>30</height>
+            <texturefocus>tvguide-program-grey-focus1.png</texturefocus>
+            <texturenofocus>tvguide-program-grey1.png</texturenofocus>
+            <onleft>90001</onleft>
+            <ondown>90002</ondown>
+	    <onright>4003</onright>
+            <align>center</align>
+            <aligny>center</aligny>
+            <font>font13_title</font>
+            <textcolor>ffc0c0c0</textcolor>
+            <focusedcolor>ffffffff</focusedcolor>
+            <label>$ADDON[script.tvguidetecbox 30304]</label>
+        </control>
+#        <control type="label"> <!-- Choose Stream Text -->
+#            <posx>130</posx>
+#            <posy>310</posy>
+#            <width>240</width>
+#            <height>200</height>
+#            <font>font13_title</font>
+#            <textcolor>ffffffff</textcolor>
+#            <label>$ADDON[script.tvguidetecbox 30305]</label>
+#            <wrapmultiline>true</wrapmultiline>
+#        </control>
+
+        <control type="button" id="4003"><!-- CHANNELS -->
+            <posx>430</posx>
+            <posy>220</posy>
+            <width>150</width>
+            <height>30</height>
+            <texturefocus>tvguide-program-grey-focus1.png</texturefocus>
+            <texturenofocus>tvguide-program-grey1.png</texturenofocus>
+            <ondown>90003</ondown>
+	    <onright>90005</onright>
+	    <onleft>4001</onleft>
+            <align>center</align>
+            <aligny>center</aligny>
+            <font>font13_title</font>
+            <textcolor>ffc0c0c0</textcolor>
+            <focusedcolor>ffffffff</focusedcolor>
+            <label>$ADDON[script.tvguidetecbox 30307]</label>
+        </control>
+        <control type="button" id="4004"><!-- QUIT -->
+            <posx>740</posx>
+            <posy>260</posy>
+            <width>150</width>
+            <height>30</height>
+            <texturefocus>tvguide-program-grey-focus1.png</texturefocus>
+            <texturenofocus>tvguide-program-grey1.png</texturenofocus>
+            <onup>4002</onup>
+	    <onleft>90004</onleft>
+            <align>center</align>
+            <aligny>center</aligny>
+            <font>font13_title</font>
+            <textcolor>ffc0c0c0</textcolor>
+            <focusedcolor>ffffffff</focusedcolor>
+            <label>$ADDON[script.tvguidetecbox 30308]</label>
+        </control>
+        <control type="button" id="90001"><!-- Sports TV Guide -->
+            <posx>120</posx>
+            <posy>260</posy>
+            <width>150</width>
+            <height>30</height>
+            <texturefocus>tvguide-program-grey-focus1.png</texturefocus>
+            <texturenofocus>tvguide-program-grey1.png</texturenofocus>
+            <onup>4001</onup>
+            <onright>90002</onright>
+            <align>center</align>
+            <aligny>center</aligny>
+            <font>font13_title</font>
+            <textcolor>ffc0c0c0</textcolor>
+            <focusedcolor>ffffffff</focusedcolor>
+            <label>Sports TV</label>
+        </control>
+
+        <control type="button" id="90002"><!-- Kids TV Guide -->
+            <posx>275</posx>
+            <posy>260</posy>
+            <width>150</width>
+            <height>30</height>
+            <texturefocus>tvguide-program-grey-focus1.png</texturefocus>
+            <texturenofocus>tvguide-program-grey1.png</texturenofocus>
+            <onleft>90001</onleft>
+            <onright>90003</onright>
+	    <onup>4001</onup>
+            <align>center</align>
+            <aligny>center</aligny>
+            <font>font13_title</font>
+            <textcolor>ffc0c0c0</textcolor>
+            <focusedcolor>ffffffff</focusedcolor>
+            <label>Kids TV</label>
+        </control>
+		
+        <control type="button" id="90003"><!-- Movie TV Guide -->
+            <posx>430</posx>
+            <posy>260</posy>
+            <width>150</width>
+            <height>30</height>
+            <texturefocus>tvguide-program-grey-focus1.png</texturefocus>
+            <texturenofocus>tvguide-program-grey1.png</texturenofocus>
+            <onleft>90002</onleft>
+            <onright>90004</onright>
+	    <onup>4003</onup>
+            <align>center</align>
+            <aligny>center</aligny>
+            <font>font13_title</font>
+            <textcolor>ffc0c0c0</textcolor>
+            <focusedcolor>ffffffff</focusedcolor>
+            <label>Movie TV</label>
+        </control>
+		
+        <control type="button" id="90004"><!-- News TV Guide -->
+            <posx>585</posx>
+            <posy>260</posy>
+            <width>150</width>
+            <height>30</height>
+            <texturefocus>tvguide-program-grey-focus1.png</texturefocus>
+            <texturenofocus>tvguide-program-grey1.png</texturenofocus>
+            <onleft>90003</onleft>
+            <onright>4004</onright>
+	    <onup>90005</onup>
+            <align>center</align>
+            <aligny>center</aligny>
+            <font>font13_title</font>
+            <textcolor>ffc0c0c0</textcolor>
+            <focusedcolor>ffffffff</focusedcolor>
+            <label>News TV</label>
+        </control>
+  	<control type="button" id="90005">            
+	    <description>backup db</description>
+            <posx>585</posx>
+            <posy>220</posy>
+            <width>150</width>
+            <height>30</height>
+            <label>Backup DB</label>
+            <textcolor>ffc0c0c0</textcolor>
+            <focusedcolor>ffffffff</focusedcolor>
+	    <ondown>90004</ondown>
+	    <onleft>4003</onleft>
+	    <onright>4002</onright>	
+            <font>font13_title</font>
+            <aligny>center</aligny>
+            <align>center</align>
+            <texturefocus>tvguide-program-grey-focus1.png</texturefocus>
+            <texturenofocus>tvguide-program-grey1.png</texturenofocus>
+        </control>
+    </controls>
+</window>
