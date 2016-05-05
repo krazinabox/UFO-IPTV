@@ -31,7 +31,7 @@ import xbmcaddon
 class StreamsService(object):
     def __init__(self, addon):
         if (int(addon.getSetting('addons.ini.type')) == 0):
-            path = xbmc.translatePath(os.path.join('special://profile', 'addon_data', 'script.dnatvguide', 'addons.ini'))
+            path = xbmc.translatePath(os.path.join('special://profile', 'addon_data', 'script.dnatvguide', 'addons2.ini'))
         else:
             path = str(addon.getSetting('addons.ini.file'))
 
@@ -40,7 +40,7 @@ class StreamsService(object):
         try:
             self.addonsParser.read(path)
         except:
-            print 'unable to parse addons.ini'
+            print 'unable to parse addons2.ini'
 
     def loadFavourites(self):
         entries = list()
