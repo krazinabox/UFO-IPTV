@@ -823,7 +823,7 @@ class XMLTVSource(Source):
     KEY = 'xmltv'
     INI_TYPE_FTV = 0
     INI_TYPE_CUSTOM = 1
-    INI_FILE = 'addons2.ini'
+    INI_FILE = 'addons.ini'
     TYPE_FTV_ALL = 0
     TYPE_FTV_BASIC = 1
     TYPE_FTV_UKBASIC = 2
