@@ -10,10 +10,13 @@ import zipfile
 import ntpath
 
 
+
 USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3'
-base='http://www.husham.com'
+base='http://google.com'
 ADDON=xbmcaddon.Addon(id='plugin.video.UFOBuilds')
-dialog = xbmcgui.Dialog()    
+
+
+
 VERSION = "1.0.1"
 PATH = "UFOBuilds"            
 
@@ -21,8 +24,10 @@ PATH = "UFOBuilds"
 def CATEGORIES():
     link = OPEN_URL('https://archive.org/download/UFOBuilds/wizard.txt').replace('\n','').replace('\r','')
     match = re.compile('name="(.+?)".+?rl="(.+?)".+?mg="(.+?)".+?anart="(.+?)".+?escription="(.+?)"').findall(link)
+    addDir('Fresh Start','', 2, 'http://www.afreshstartinc.com/images/logo-fresh-start.png', 'http://www.afreshstartinc.com/images/logo-fresh-start.png','Perform Fresh Start')
     for name,url,iconimage,fanart,description in match:
         addDir(name,url,1,iconimage,fanart,description)
+	
     setView('movies', 'MAIN')
         
     
@@ -53,7 +58,7 @@ def wizard(name,url,description):
     print '======================================='
     extract.all(lib,addonfolder,dp)
     dialog = xbmcgui.Dialog()
-    dialog.ok("DOWNLOAD COMPLETE", 'Unfortunately the only way to get the new changes to stick is', 'to force close kodi. Click ok to force Kodi to close,', 'DO NOT use the quit/exit options in Kodi., If the Force close does not close for some reason please Restart Device or kill task manaully')
+    dialog.ok("DOWNLOAD COMPLETE", 'To ensure all changes are saved you must now close Kodi', 'to force close kodi. Click ok to force Kodi to close,', 'DO NOT use the quit/exit options in Kodi., If the Force close does not close for some reason please Restart Device or kill task manaully')
     killxbmc()
         
       
@@ -151,6 +156,37 @@ def addDir(name,url,mode,iconimage,fanart,description):
         
        
         
+def freshstart():   # By Mark Dobson
+	
+	freshstartprompt = xbmcgui.Dialog().yesno('WARNING', 'This will erase all data and reset Kodi to defaults', 'Are you sure you want to continue?', nolabel='No, Cancel',yeslabel='Yes')
+	if freshstartprompt == 1:
+		dp = xbmcgui.DialogProgress()
+		dp.create("Fresh Start" ,"Please Wait...")
+		dp.update(1)
+		homefolder = xbmc.translatePath('special://home/')
+		for root, dirs, files in os.walk(homefolder,topdown=False):
+			for f in files:
+				path = os.path.join(root, f)
+				if 'UFO' not in path:
+					try: 
+						os.remove(os.path.join(root,f))
+					except:
+						pass
+			for d in dirs:
+				path = os.path.join(root, d)
+				if 'UFO' not in path:
+					try: 
+						os.rmdir(os.path.join(root,d))
+					except:
+						pass
+		dp.close
+		
+		
+
+
+
+	
+
 def get_params():
         param=[]
         paramstring=sys.argv[2]
@@ -219,12 +255,19 @@ def setView(content, viewType):
     if ADDON.getSetting('auto-view')=='true':
         xbmc.executebuiltin("Container.SetViewMode(%s)" % ADDON.getSetting(viewType) )
         
+if mode == 2:
+    freshstart()
+    dialog = xbmcgui.Dialog()
+    dialog.ok("Fresh Start complete", "Fresh start complete, please now restart Kodi, any method will do.")
         
-if mode==None or url==None or len(url)<1:
+elif mode==None or url==None or len(url)<1:
         CATEGORIES()
        
 elif mode==1:
         wizard(name,url,description)
+		
+
+        
         
 
         
