@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<settings>
+    <!-- General -->
+    <category id="general" label="32010">
+        <setting id="offset1hr" type="bool" label="32101" default="false"/>
+          <setting id="donation" type="text" label="33000" default="" />
+          <setting id="mac" type="text" label="33001" default="" />
+          <setting id="configureSimple" type="bool" default="false" label="33002" />
+          <setting id="configureStalker" type="bool" default="false"  label="33003" />
+          <setting id="portalEndpoint" type="enum" label="34001" lvalues="34002|34003|34004|34005|34006|34007|34008|34009|34011|34012|34013|34014|34015" default="0" enable="true"/>
+          <setting id="downloadPath" type="text" label="35001" default="special://temp" enable="true"/>
+
+      		<setting id="enable_scheduler" type="bool" label="30060" default="true" enable="true"/>
+      		<setting id="schedule_interval" type="enum" label="30061" lvalues="30079|30072|30073|30074|30075" default="1" enable="eq(-1,true)" visible="false"/>
+      		<setting id="schedule_time" type="string" label="30062" default="02:00"  enable="eq(-2,true)"/>
+      		<setting id="day_of_week" type="enum" label="30063" lvalues="30065|30066|30067|30068|30069|30070|30071" default="0" visible="false"  enable="eq(-3,true)"/>
+          <setting id="cron_schedule" type="text" label="30064" default="0 0 * * *" visible="false"  enable="eq(-4,true)" />
+
+    </category>
+
+</settings>

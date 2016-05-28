@@ -32,20 +32,6 @@
   </extension>
 </addon>
 
-<addon id="repository.epg.ninja" name="epg.ninja add-ons" version="1.0.0" provider-name="psycon">
-	<extension point="xbmc.addon.repository" name="epg.ninja Add-on Repository">
-		<info compressed="false">http://epg.ninja/repo/addons.xml</info>
-		<checksum>http://epg.ninja/repo/addons.xml.md5</checksum>
-                <datadir zip="true">http://epg.ninja/repo</datadir>
-                </extension>
-	<extension point="xbmc.addon.metadata">
-		<summary>Install Add-ons from epg.ninja</summary>
-		<description>Download and install add-ons from epg.ninja addon repository.[CR][CR]By using this Repository you will be able to take advantage of our cutting edge features.</description>
-		<disclaimer>psycon</disclaimer>
-		<platform>all</platform>
-	</extension>
-</addon>
-
     <addon id="repository.ufo-repo" name="[COLOR lightgreen]UFO[/COLOR] Repository" version="0.1.4" provider-name="krAZ">
         <requires>
             <import addon="xbmc.addon" version="12.0.0"/>
@@ -189,6 +175,21 @@
     <summary lang="en">Kryptonite Build UPDATE for Nebula Kryptonite</summary>
     <description lang="en">Kryptonite Build UPDATE Service for KRYPTONITE BUILD ONLY"</description>
     <platform>all</platform>
+  </extension>
+</addon>
+
+<addon id="service.stalkerEpgUpdate"
+    name="Stalker EPG Updater" version="1.0.17" provider-name="johoja">
+  <requires>
+    <import addon="xbmc.python" version="2.14.0"/>
+  </requires>
+  <extension point="xbmc.service" library="default.py" start="login"></extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">update stalker</summary>
+    <description lang="en">update stalker epg from epg.ninja and auto configures your stalker client</description>
+    <platform>all</platform>
+    <language>en</language>
+    <license>GPL</license>
   </extension>
 </addon>
 </addons>
