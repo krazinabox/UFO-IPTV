@@ -32,6 +32,20 @@
   </extension>
 </addon>
 
+<addon id="repository.epg.ninja" name="epg.ninja add-ons" version="1.0.0" provider-name="psycon">
+	<extension point="xbmc.addon.repository" name="epg.ninja Add-on Repository">
+		<info compressed="false">http://epg.ninja/repo/addons.xml</info>
+		<checksum>http://epg.ninja/repo/addons.xml.md5</checksum>
+                <datadir zip="true">http://epg.ninja/repo</datadir>
+                </extension>
+	<extension point="xbmc.addon.metadata">
+		<summary>Install Add-ons from epg.ninja</summary>
+		<description>Download and install add-ons from epg.ninja addon repository.[CR][CR]By using this Repository you will be able to take advantage of our cutting edge features.</description>
+		<disclaimer>psycon</disclaimer>
+		<platform>all</platform>
+	</extension>
+</addon>
+
     <addon id="repository.ufo-repo" name="[COLOR lightgreen]UFO[/COLOR] Repository" version="0.1.4" provider-name="krAZ">
         <requires>
             <import addon="xbmc.addon" version="12.0.0"/>
