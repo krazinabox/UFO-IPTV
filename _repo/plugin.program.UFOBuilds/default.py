@@ -24,7 +24,7 @@ PATH = "UFOBuilds"
 def CATEGORIES():
     link = OPEN_URL('https://archive.org/download/UFOBuilds/wizard.txt').replace('\n','').replace('\r','')
     match = re.compile('name="(.+?)".+?rl="(.+?)".+?mg="(.+?)".+?anart="(.+?)".+?escription="(.+?)"').findall(link)
-    addDir('Fresh Start','', 2, 'http://www.afreshstartinc.com/images/logo-fresh-start.png', 'http://www.afreshstartinc.com/images/logo-fresh-start.png','Perform Fresh Start')
+    addDir('Fresh Start','', 2, 'https://archive.org/download/UFOBuilds/fresh-start.png', 'https://archive.org/download/UFOBuilds/FreshStartFanart.jpg','Perform Fresh Start')
     for name,url,iconimage,fanart,description in match:
         addDir(name,url,1,iconimage,fanart,description)
 	
