@@ -35,8 +35,8 @@ def wizard():
 	if choice == 0:
 		return
 	elif choice == 1:
-		#xbmc.executebuiltin("RunAddon(plugin.video.UFOBuilds)")
-		xbmc.executebuiltin('ActivateWindow(10025,plugin://plugin.video.UFOBuilds/?url=https://archive.org/download/kryptonite_20160224/Update.zip&mode=1&name=UPDATE&iconimage=https://archive.org/download/krazinabox_gmail_Icon_201601/icon.png)')
+		#xbmc.executebuiltin("RunAddon(plugin.program.UFOBuilds)")
+		xbmc.executebuiltin('ActivateWindow(10025,plugin://plugin.program.UFOBuilds/?url=https://archive.org/download/kryptonite_20160224/Update.zip&mode=1&name=UPDATE&iconimage=https://archive.org/download/krazinabox_gmail_Icon_201601/icon.png)')
 		file_i = open(installed, "w")
 		file_i.write(checksum_latest)
 		file_i.close()
