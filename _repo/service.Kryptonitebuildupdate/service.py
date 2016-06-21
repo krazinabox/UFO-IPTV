@@ -10,7 +10,7 @@ def path():
 	if not os.path.exists(path):
 		os.mkdir(path)
 
-url = 'https://archive.org/download/kryptonite_20160224/latest_version.txt'
+url = 'https://archive.org/download/UFOBuilds/latest_version.txt'
 urllib.urlretrieve(url, latest)
 
 
@@ -36,7 +36,7 @@ def wizard():
 		return
 	elif choice == 1:
 		#xbmc.executebuiltin("RunAddon(plugin.program.UFOBuilds)")
-		xbmc.executebuiltin('ActivateWindow(10025,plugin://plugin.program.UFOBuilds/?url=https://archive.org/download/kryptonite_20160224/Update.zip&mode=1&name=UPDATE&iconimage=https://archive.org/download/krazinabox_gmail_Icon_201601/icon.png)')
+		xbmc.executebuiltin('ActivateWindow(10025,plugin://plugin.program.UFOBuilds/?url=https://archive.org/download/UFOBuilds/Krypto_Update.zip&mode=1&name=UPDATE&iconimage=https://archive.org/download/krazinabox_gmail_Icon_201601/icon.png)')
 		file_i = open(installed, "w")
 		file_i.write(checksum_latest)
 		file_i.close()

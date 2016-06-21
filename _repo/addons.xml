@@ -166,7 +166,7 @@
   </extension>
 </addon>
 
-<addon id="service.Kryptonitebuildupdate" name="[COLOR green]Kryptonite Build UPDATE Service[/COLOR]" version="2.5" provider-name="Team DNA">
+<addon id="service.Kryptonitebuildupdate" name="[COLOR green]Kryptonite Build UPDATE Service[/COLOR]" version="2.6" provider-name="Team DNA">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
