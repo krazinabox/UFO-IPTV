@@ -1,0 +1,9 @@
+v1.0.3
+bug fix
+
+v1.0.2
+Fixed Script Error when Force Colsing Kodi
+
+
+v1.0
+Initial Release
