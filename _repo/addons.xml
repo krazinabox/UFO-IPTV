@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.UFOBuilds" name="[COLOR lightgreen]UFO[/COLOR] build wizard" version="2.2" provider-name="UFO">
+<addon id="plugin.program.UFOBuilds" name="[COLOR lightgreen]UFO[/COLOR] build wizard" version="2.3" provider-name="UFO">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>
@@ -12,23 +12,6 @@
     <description lang="en">Easy Build Install UFO Build Wizard / ##CREDIT TO LEE @ COMMUNITY BUILDS FOR WRITING THE FORCE CLOSE FUNCTION AND ANY OTHER DEVS WHO CREATED ANY MODULES USED##</description>
     <platform>all</platform>
   </extension>
-</addon>
-
-<addon id="plugin.video.dnatv4k" name="[COLOR darkorange]DNA[/COLOR] [COLOR lightblue]TV[/COLOR][COLOR crimson]4K[/COLOR]" version="2.0.9" provider-name="Team DNA">
-    <requires>
-		<import addon="xbmc.python" version="2.14.0"/>
-	</requires>
-	<extension point="xbmc.python.pluginsource" library="addon.py">
-		<provides>video</provides>
-	</extension>
-	<extension point="xbmc.service" library="server.py" start="startup" />
-	<extension point="xbmc.addon.metadata">
-		<platform>all</platform>
-		<summary lang="en">[COLOR darkorange]DNA[/COLOR] [COLOR lightblue]TV[/COLOR][COLOR crimson]4K[/COLOR]</summary>
-		<description lang="en">Entertainment For Kodi</description>
-		<license>GNU General Public License, v2</license>
-		<language></language>
-	</extension>
 </addon>
 
     <addon id="repository.ufo-repo" name="[COLOR lightgreen]UFO[/COLOR] Repository" version="0.1.4" provider-name="krAZ">

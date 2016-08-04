@@ -31,7 +31,7 @@ def check(checksum):
 	return updated
 
 def wizard():
-	choice = xbmcgui.Dialog().yesno('King Build Updater for Nebula King Build', 'Update available for Nebula King BUILD', 'Select OK to start updating', nolabel='Cancel',yeslabel='OK')
+	choice = xbmcgui.Dialog().yesno('King Build Updater for Nebula King Build', 'Update available for Nebula King BUILD', 'If you are NOT using Nebula King Build then DO NOT CONTINUE', 'Select OK to start updating', nolabel='Cancel',yeslabel='OK')
 	if choice == 0:
 		return
 	elif choice == 1:

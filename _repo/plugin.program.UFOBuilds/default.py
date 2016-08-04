@@ -15,16 +15,19 @@ USER_AGENT = 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/
 base='http://google.com'
 ADDON=xbmcaddon.Addon(id='plugin.program.UFOBuilds')
 
-
-
+    
+    
 VERSION = "1.0.1"
 PATH = "UFOBuilds"            
 
-    
+def path():
+	if not os.path.exists(path):
+		os.mkdir(path)
+
+		
 def CATEGORIES():
-    link = OPEN_URL('https://archive.org/download/UFOBuilds/UfoRepoWizard.txt').replace('\n','').replace('\r','')
+    link = OPEN_URL('https://archive.org/download/UFOBuilds/wizard.txt').replace('\n','').replace('\r','')
     match = re.compile('name="(.+?)".+?rl="(.+?)".+?mg="(.+?)".+?anart="(.+?)".+?escription="(.+?)"').findall(link)
-    addDir('Fresh Start','', 2, 'https://archive.org/download/UFOBuilds/fresh-start.png', 'https://archive.org/download/UFOBuilds/FreshStartFanart.jpg','Perform Fresh Start')
     for name,url,iconimage,fanart,description in match:
         addDir(name,url,1,iconimage,fanart,description)
 	
@@ -39,32 +42,11 @@ def OPEN_URL(url):
     response.close()
     return link
     
-    
-def wizard(name,url,description):
-    path = xbmc.translatePath(os.path.join('special://home/addons','packages'))
-    dp = xbmcgui.DialogProgress()
-    dp.create("UFO Wizard","Downloading ",'', 'Please Wait')
-    lib=os.path.join(path, name+'.zip')
-    try:
-       os.remove(lib)
-    except:
-       pass
-    downloader.download(url, lib, dp)
-    addonfolder = xbmc.translatePath(os.path.join('special://','home'))
-    time.sleep(2)
-    dp.update(0,"", "Extracting Zip Please Wait")
-    print '======================================='
-    print addonfolder
-    print '======================================='
-    extract.all(lib,addonfolder,dp)
-    dialog = xbmcgui.Dialog()
-    dialog.ok("DOWNLOAD COMPLETE", 'To ensure all changes are saved you must now close Kodi', 'to force close kodi. Click ok to force Kodi to close,', 'DO NOT use the quit/exit options in Kodi., If the Force close does not close for some reason please Restart Device or kill task manaully')
-    killxbmc()
         
       
         
 def killxbmc():
-    choice = xbmcgui.Dialog().yesno('You MUST Force Close', 'DO NOT exit back to main menu if force close fails just simply reboot your device', 'Would you like to continue?', nolabel='No, Cancel',yeslabel='Yes, Close')
+    choice = xbmcgui.Dialog().yesno('You MUST Close', 'Would you like to continue?', nolabel='No, Cancel',yeslabel='Yes, Close')
     if choice == 0:
         return
     elif choice == 1:
@@ -95,11 +77,11 @@ def killxbmc():
         except: pass
         try: os.system('adb shell am force-stop org.kodi')
         except: pass
-        try: os.system('adb shell am force-stop org.xbmc.xbmc')
+        try: os.system('adb shell am force-stop org.xbmc.kodi')
         except: pass
-        try: os.system('adb shell am force-stop org.xbmc')
+        try: os.system('adb shell am force-stop org.kodi')
         except: pass        
-        dialog.ok("[COLOR=red][B]WARNING  !!![/COLOR][/B]", "Your system has been detected as Android, you ", "[COLOR=yellow][B]MUST[/COLOR][/B] force close. [COLOR=lime]DO NOT[/COLOR] exit cleanly via the menu.","Either close using Task Manager (If unsure pull the plug).")
+        dialog.ok("[COLOR=red][B]WARNING  !!![/COLOR][/B]", "Your system has been detected as Android, you ", "[COLOR=yellow][B]MUST[/COLOR][/B] force close. [COLOR=lime]DO NOT[/COLOR] exit cleanly via the menu.","Either close using Task Manager (If unsure just pull the plug).")
     elif myplatform == 'windows': # Windows
         print "############   try windows force close  #################"
         try:
@@ -157,36 +139,80 @@ def addDir(name,url,mode,iconimage,fanart,description):
        
         
 def freshstart():   # By Mark Dobson
-	
-	freshstartprompt = xbmcgui.Dialog().yesno('WARNING', 'This will erase all data and reset Kodi to defaults', 'Are you sure you want to continue?', nolabel='No, Cancel',yeslabel='Yes')
-	if freshstartprompt == 1:
+	choice = xbmcgui.Dialog().yesno("BUILD INSTALL", 'Click UPDATE to update or for 1st time install', 'Click [COLOR crimson]CLEAN and INSTALL[/COLOR] For a clean install  [COLOR crimson]THIS WILL DELETE ALL FILES[/COLOR]', yeslabel='[COLOR crimson]CLEAN and INSTALL[/COLOR]',nolabel='UPDATE')
+	if choice == 0:
+		wizard(name,url,description)
+	elif choice == 1:
+		update(name,url,description)
+
+				
+def freshupdate():	
 		dp = xbmcgui.DialogProgress()
-		dp.create("Fresh Start" ,"Please Wait...")
+		dp.create("FRESH INSTALL SELECTED" ,"Please wait while your files are deleted.")
 		dp.update(1)
 		homefolder = xbmc.translatePath('special://home/')
 		for root, dirs, files in os.walk(homefolder,topdown=False):
 			for f in files:
 				path = os.path.join(root, f)
-				if 'UFO' not in path:
+				if 'vdub' not in path:
 					try: 
 						os.remove(os.path.join(root,f))
 					except:
 						pass
 			for d in dirs:
 				path = os.path.join(root, d)
-				if 'UFO' not in path:
+				if 'packages' not in path:
 					try: 
 						os.rmdir(os.path.join(root,d))
 					except:
 						pass
-		dp.close
+
+						
 		
 		
-
-
-
+def update(name,url,description):	
+	freshupdate()
+	path = xbmc.translatePath(os.path.join('special://home/addons','packages'))
+	dp = xbmcgui.DialogProgress()
+	dp.create("Progress ",'', 'Please Wait')
+	lib=os.path.join(path, name+'.zip')
+	try:
+		os.remove(lib)
+	except:
+		pass
+	downloader.download(url, lib, dp)
+	addonfolder = xbmc.translatePath(os.path.join('special://','home'))
+	time.sleep(2)
+	dp.update(0,"", "Installing .....", 'Please wait')
+	print '======================================='
+	print addonfolder
+	print '======================================='
+	extract.all(lib,addonfolder,dp)
+	dialog = xbmcgui.Dialog()
+	dialog.ok("INSTALL COMPLETE", 'To ensure all changes are saved you must FORCE CLOSE.', 'if FORCE CLOSE fails then you must at that time reboot device.')
+	killxbmc()
 	
-
+def wizard(name,url,description):
+    path = xbmc.translatePath(os.path.join('special://home/addons','packages'))
+    dp = xbmcgui.DialogProgress()
+    dp.create("Progress ",'', 'Please Wait')
+    lib=os.path.join(path, name+'.zip')
+    try:
+       os.remove(lib)
+    except:
+       pass
+    downloader.download(url, lib, dp)
+    addonfolder = xbmc.translatePath(os.path.join('special://','home'))
+    time.sleep(2)
+    dp.update(0,"", "Installing ......", 'Please wait')
+    print '======================================='
+    print addonfolder
+    print '======================================='
+    extract.all(lib,addonfolder,dp)
+    dialog = xbmcgui.Dialog()
+    dialog.ok("INSTALL COMPLETE", 'To ensure all changes are saved you must FORCE CLOSE.', 'if FORCE CLOSE fails then you must at that time reboot device.')
+    killxbmc()
+	
 def get_params():
         param=[]
         paramstring=sys.argv[2]
@@ -257,18 +283,16 @@ def setView(content, viewType):
         
 if mode == 2:
     freshstart()
-    dialog = xbmcgui.Dialog()
-    dialog.ok("Fresh Start complete", "Fresh start complete, please now restart Kodi, any method will do.")
+
         
 elif mode==None or url==None or len(url)<1:
         CATEGORIES()
+
        
 elif mode==1:
-        wizard(name,url,description)
+        freshstart()
 		
-
-        
-        
+ 
 
         
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
