@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-<addon id="plugin.program.UFOBuilds" name="[COLOR lightgreen]UFO[/COLOR] build wizard" version="2.3" provider-name="UFO">
+<addon id="plugin.program.UFOBuilds" name="[COLOR lightgreen]UFO[/COLOR] build wizard" version="2.4" provider-name="UFO">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
   </requires>

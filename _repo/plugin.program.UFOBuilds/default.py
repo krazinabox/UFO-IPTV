@@ -154,7 +154,7 @@ def freshupdate():
 		for root, dirs, files in os.walk(homefolder,topdown=False):
 			for f in files:
 				path = os.path.join(root, f)
-				if 'vdub' not in path:
+				if 'UFO' not in path:
 					try: 
 						os.remove(os.path.join(root,f))
 					except:
