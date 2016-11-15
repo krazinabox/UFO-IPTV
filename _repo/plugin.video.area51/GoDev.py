@@ -7,7 +7,7 @@ import xbmcgui
 import time
 import extract
 
-ADDON=xbmcaddon.Addon(id='plugin.video.teqiqiptv')
+ADDON=xbmcaddon.Addon(id='plugin.video.area51')
 dialog       =  xbmcgui.Dialog()
 dialogprocess =  xbmcgui.DialogProgress()
 log_path   =  xbmc.translatePath('special://logpath/')
