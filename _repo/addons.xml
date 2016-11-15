@@ -14,6 +14,25 @@
   </extension>
 </addon>
 
+<addon id="plugin.video.area51"
+       name="[COLOR lightgreen]Area-51 IPTV[/COLOR]"
+       version="1.1"
+       provider-name="Area-51">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+  </requires>
+  <extension point="xbmc.python.pluginsource"
+            library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary lang="en">Area-51 IPTV</summary>
+    <language>en</language>
+    <description lang="en">Area-51 - Live TV / PPV / Sports / Kids / Movies / Entertainment at an affordable price for all.</description>
+     <platform>all</platform>
+  </extension>
+</addon>
+
     <addon id="repository.ufo-repo" name="[COLOR lightgreen]UFO[/COLOR] Repository" version="0.1.4" provider-name="krAZ">
         <requires>
             <import addon="xbmc.addon" version="12.0.0"/>
