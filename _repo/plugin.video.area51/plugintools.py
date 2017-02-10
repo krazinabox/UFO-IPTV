@@ -178,8 +178,8 @@ def find_single_match(text,pattern): # Parse string and extracts first match as 
     try: matches=re.findall(pattern,text,flags=re.DOTALL); result=matches[0]
     except: result=""
     return result
-def add_item(action="",title="",plot="",url="",thumbnail="",fanart="",show="",episode="",extra="",page="",info_labels=None,isPlayable=False,folder=True):
-    _log("add_item action=["+action+"] title=["+title+"] url=["+url+"] thumbnail=["+thumbnail+"] fanart=["+fanart+"] show=["+show+"] episode=["+episode+"] extra=["+extra+"] page=["+page+"] isPlayable=["+str(isPlayable)+"] folder=["+str(folder)+"]")
+def add_item(action="",title="",plot="",url="",thumbnail="",fanart="",show="",episode="",extra="",page="",info_labels=None,isPlayable=True,folder=True):
+    _log("add_item action=["+action+"] title=[COLOR yellow][B][I]["+title+"][/I][/B][/COLOR] url=["+url+"] thumbnail=["+thumbnail+"] fanart=["+fanart+"] show=["+show+"] episode=["+episode+"] extra=["+extra+"] page=["+page+"] isPlayable=["+str(isPlayable)+"] folder=["+str(folder)+"]")
     listitem=xbmcgui.ListItem(title,iconImage="DefaultVideo.png",thumbnailImage=thumbnail)
     if info_labels is None: info_labels={"Title":title,"FileName":title,"Plot":plot}
     listitem.setInfo( "video", info_labels )
@@ -187,6 +187,15 @@ def add_item(action="",title="",plot="",url="",thumbnail="",fanart="",show="",ep
     if url.startswith("plugin://"): itemurl=url; listitem.setProperty('IsPlayable','true'); xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=itemurl,listitem=listitem,isFolder=folder)
     elif isPlayable: listitem.setProperty("Video","true"); listitem.setProperty('IsPlayable','true'); itemurl='%s?action=%s&title=%s&url=%s&thumbnail=%s&plot=%s&extra=%s&page=%s' % (sys.argv[0],action,urllib.quote_plus(title),urllib.quote_plus(url),urllib.quote_plus(thumbnail),urllib.quote_plus(plot),urllib.quote_plus(extra),urllib.quote_plus(page)); xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=itemurl,listitem=listitem,isFolder=folder)
     else: itemurl='%s?action=%s&title=%s&url=%s&thumbnail=%s&plot=%s&extra=%s&page=%s' % (sys.argv[0],action,urllib.quote_plus(title),urllib.quote_plus(url),urllib.quote_plus(thumbnail),urllib.quote_plus(plot),urllib.quote_plus(extra),urllib.quote_plus(page)); xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=itemurl,listitem=listitem,isFolder=folder)
+
+def addItem(name,url,mode,iconimage,fanart):
+	u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)+"&fanart="+urllib.quote_plus(fanart)
+	ok=True
+	liz=xbmcgui.ListItem(name, iconImage="DefaultFolder.png", thumbnailImage=iconimage)
+	liz.setInfo( type="Video", infoLabels={ "Title": name } )
+	liz.setProperty( "Fanart_Image", fanart )
+	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=False)
+	
 def close_item_list(): _log("close_item_list"); xbmcplugin.endOfDirectory(handle=int(sys.argv[1]),succeeded=True)
 def play_resolved_url(url):
     _log("play_resolved_url ["+url+"]"); listitem=xbmcgui.ListItem(path=url); listitem.setProperty('IsPlayable','true')
