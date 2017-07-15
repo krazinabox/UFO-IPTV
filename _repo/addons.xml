@@ -16,7 +16,7 @@
 
 <addon id="plugin.video.area51"
        name="[COLOR lightgreen]Area-51 IPTV[/COLOR]"
-       version="1.7"
+       version="1.8"
        provider-name="Area-51">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
