@@ -14,7 +14,7 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.area51x"
+<addon id="plugin.video.area51"
 		name="[COLOR lightgreen]Area-51 IPTV[/COLOR]
 		version="2.0"
 		provider-name="@Nemzzy">
