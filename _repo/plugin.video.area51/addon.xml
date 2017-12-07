@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addon id="plugin.video.area51"
-		name="[COLOR lightgreen]Area-51 IPTV[/COLOR]
+		name="[COLOR lightgreen]Area-51 IPTV[/COLOR]"
 		version="2.0" 
 		provider-name="@Nemzzy">
   <requires>
