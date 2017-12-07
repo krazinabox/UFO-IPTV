@@ -14,7 +14,10 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.area51x" name="[COLOR green]Area-51 IPTV[/COLOR]" version="2.0" provider-name="@Nemzzy">
+<addon id="plugin.video.area51x"
+		name="[COLOR green]Area-51 IPTV[/COLOR]"
+		version="2.0"
+		provider-name="@Nemzzy">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.addon.common" version="2.0.0" />
@@ -23,8 +26,9 @@
     <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en">guit</summary>
-    <description lang="en">guit</description>
+    <summary lang="en">Area-51 IPTV</summary>
+    <language>en</language>
+    <description lang="en">Area-51 - Live TV / PPV / Sports / Kids / Movies / Entertainment at an affordable price for all.</description>
     <platform>all</platform>
   </extension>
 </addon>
