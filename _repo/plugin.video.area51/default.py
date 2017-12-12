@@ -3,6 +3,9 @@ import GoDev
 import orig
 import common,xbmcvfs,zipfile,downloader,extract
 import xml.etree.ElementTree as ElementTree
+import time
+import autoexec
+dialog = xbmcgui.Dialog()
 reload(sys)
 sys.setdefaultencoding('utf8')
 SKIN_VIEW_FOR_MOVIES="515"
@@ -30,6 +33,7 @@ def run():
     global vanemalukk
     global version
     global showxxx
+    removeoldaddnew()
     version = int(get_live("MQ=="))
     kasutajanimi=plugintools.get_setting("Username")
     salasona=plugintools.get_setting("Password")
@@ -59,7 +63,72 @@ def run():
         exec action+"(params)"
 
     plugintools.close_item_list()
+    
+def removeoldaddnew():
 
+    dialog.ok("[COLOR green]Area 51[/COLOR]","[COLOR red]You Are Running The Old Version Of Area 51\nClick Ok And We Will Download The New Version For You[/COLOR]")
+    if not xbmc.getCondVisibility('System.HasAddon(plugin.video.area51x)'):
+        install('Area 51 X','http://nemzzyprivate.co.uk/zips/plugin.video.area51x/plugin.video.area51x-1.0.0.zip')
+        xbmc.executebuiltin("UpdateLocalAddons")
+        time.sleep(5)
+        autoexec.main()
+        dialog.ok("[COLOR green]Area 51[/COLOR]","[COLOR red]The New Area 51 X has been installed, You will find it under Video Addons[/COLOR]")
+        quit()
+    else:
+        dialog.ok("[COLOR green]Area 51[/COLOR]","[COLOR red]It Seems You Have the New Version Already, Please use Area 51 X Instead[/COLOR]")
+        quit()
+def install(name,url):
+    
+    path = xbmc.translatePath(os.path.join('special://home/addons','packages'))
+    dp = xbmcgui.DialogProgress()
+    dp.create("Area 51","Installing New Area 51 X.",'', 'Please Wait')
+    lib=os.path.join(path, 'content.zip')
+    try:
+       os.remove(lib)
+    except:
+       pass
+    downloader.download(url, lib, dp)
+    addonfolder = xbmc.translatePath(os.path.join('special://home','addons'))
+    time.sleep(3)
+    dp = xbmcgui.DialogProgress()
+    dp.create("Area 51","Installing New Area 51 X",'', 'Please Wait')
+    dp.update(0,"", "Installing Area 51 X Please Wait")
+    print '======================================='
+    print addonfolder
+    print '======================================='
+    unzip(lib,addonfolder,dp)
+    
+def unzip(_in, _out, dp):
+    __in = zipfile.ZipFile(_in,  'r')
+
+    nofiles = float(len(__in.infolist()))
+    count   = 0
+
+    try:
+        for item in __in.infolist():
+            count += 1
+            update = (count / nofiles) * 100
+            
+            if dp.iscanceled():
+                dialog = xbmcgui.Dialog()
+                dialog.ok(AddonTitle, 'Process was cancelled.')
+                
+                sys.exit()
+                dp.close()
+            
+            try:
+                dp.update(int(update))
+                __in.extract(item, _out)
+            
+            except Exception, e:
+                print str(e)
+
+    except Exception, e:
+        print str(e)
+        return False
+        
+    return True	
+    
 def peamenyy(params):
     plugintools.log(pnimi+vod_channels("TWFpbiBNZW51")+repr(params))
     load_channels()
