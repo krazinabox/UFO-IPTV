@@ -18,12 +18,14 @@ import urllib2
 import json
 import time
 import webbrowser
+import autoexec
 
 import pyxbmct.addonwindow as pyxbmct
 from addon.common.addon import Addon
 
 dp = xbmcgui.DialogProgress()
 dialog = xbmcgui.Dialog()
+oldaddon = os.path.join(os.path.join(xbmc.translatePath('special://home'), 'addons'),'plugin.video.area51')
 
 
 #############################################################
@@ -142,13 +144,41 @@ def checksubstatus():
         else:
             quit()
             
+def clearup():
+
+    cachePath     = xbmc.translatePath(os.path.join('special://home/cache'))
+    thumbPath     = xbmc.translatePath(os.path.join('special://profile/Thumbnails'))
+    packcagesPath = xbmc.translatePath(os.path.join('special://home/addons/packages'))
+    
+    i =[(cachePath,'Cache'),(thumbPath,'Thumbnails'),(packcagesPath,'Packages')]
+    for r in i:
+        for root,dirs,files in os.walk(r[0]):
+            for f in files:
+                if (f.endswith('.log')): continue
+                try: os.unlink(os.path.join(root, f))
+                except: pass
+    xbmc.executebuiltin('Container.Refresh')
+    
+def Remove_Old():
+
+    try:
+        addontoremove = ['plugin.video.area51']
+        approve = any(xbmc.getCondVisibility('System.HasAddon(%s)' % (addon)) for addon in addontoremove)
+        if approve:
+            #dialog.ok("[COLOR green]Area 51 X[/COLOR]","[COLOR red]You Still Have The Old Area 51 Installed\nYou No Longer Need this\nClick Ok To Remove It[/COLOR]")
+            import shutil
+            shutil.rmtree(oldaddon)
+            xbmc.executebuiltin('Container.Refresh')
+    except: pass
 def START():
 
+    clearup()
+    
     checkuser()
     checksubstatus()
     try:
         Main.MainWindow()
     except (RuntimeError, SystemError):
         pass
-
+Remove_Old()
 START()

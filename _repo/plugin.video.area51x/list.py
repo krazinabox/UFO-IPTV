@@ -15,6 +15,7 @@ import Main
 import json
 import base64
 import time
+from datetime import datetime
 
 
 import pyxbmct.addonwindow as pyxbmct
@@ -74,6 +75,13 @@ def Get_Data(url):
     response.close()
 
     return data
+    
+def Time_Clean(text):
+
+    text=str(text)
+    d = datetime.strptime(text, "%H:%M")
+    converted = d.strftime("%I:%M %p")
+    return converted
     
     
 def CLEANUP(text):
@@ -152,22 +160,6 @@ def passed(self, title):
             conurl = 'VODCATS:' + baseurl + vodcatsstream + str(catid)
             Item_Link.append(conurl)
             self.List.addItem(catname)
-        # url = baseurl + vodsapi
-        # link = Get_Data(url)
-        # data = json.loads(link)
-        # for i in data:
-            # title = i['name']
-            # Item_Title.append(title)
-            # Item_Desc.append(title)
-            # streamid = i['stream_id']
-            # streamtype = i['container_extension']
-            # streamdes = i['stream_type']
-            # playurl = 'PLAY:' + baseurl + streamdes + '/' + username + '/' + password + '/' + str(streamid) + '.' + streamtype
-            # icon = i ['stream_icon']
-            # Item_Icon.append(icon)
-            # Item_Link.append(playurl)
-            # self.List.addItem(title)
-
 
 def List_Selected(self):
     global Media_Link
@@ -184,6 +176,11 @@ def List_Selected(self):
         Item_Link  =  []
         Item_Desc  =  []
         Item_Icon  =  []
+        titles = []
+        epgs = []
+        streams = []
+        icons = []
+        combined = []
         
         newlink = Media_Link.replace('CAT:','')
         title = 'Live Channels'
@@ -202,7 +199,8 @@ def List_Selected(self):
             desc = ''
             decode = ''
             channame = i['name']
-            Item_Title.append(channame)
+            titles.append(channame)
+            #Item_Title.append(channame)
             streamid = i['stream_id']
             streamid2 = str(streamid)
             streamdes = i ['stream_type']
@@ -212,25 +210,38 @@ def List_Selected(self):
             info = data2['epg_listings']
             if len(info) == 0:
                 epgguide = 'No EPG Available For This Channel'
-                Item_Desc.append(epgguide)
+                epgs.append(epgguide)
+                #Item_Desc.append(epgguide)
             else:
                 for info2 in info[:1]:
                     start = info2['start']
                     end = info2 ['end']
                     guidedata = info2['description']
-                    decode += base64.b64decode(guidedata) + '\n\n'
-                    desc = 'Start: ' + str(start)[:-3].split(' ')[1] + "  End: " + str(end)[:-3].split(' ')[1] + '\n\n' +  decode
-                    Item_Desc.append(desc)
+                    title = info2['title']
+                    decodetitle = base64.b64decode(title)
+                    decodeguide = base64.b64decode(guidedata) + '\n\n'
+                    starttime = str(start)[:-3].split(' ')[1]
+                    endtime = str(end)[:-3].split(' ')[1]
+                    starttime = Time_Clean(starttime)
+                    endtime = Time_Clean(endtime)
+                    desc = 'Start: ' + starttime + " End: " + endtime + '\n\n' + '[COLOR white]' + decodetitle + '[/COLOR]' + '\n\n' + decodeguide
+                    desc1 = str(desc)
+                    epgs.append(desc1)
+                    #Item_Desc.append(desc)
             channellogo = i ['stream_icon']
-            Item_Icon.append(channellogo)
-            if '(D)' in channame:
-                playlink = 'PLAY:' + baseurl + streamdes + '/' + username + '/' + password + '/' + streamid2 + '.m3u8'
-                Item_Link.append(playlink)
-                self.List.addItem(channame)
-            else:
-                playlink = 'PLAY:' + baseurl + streamdes + '/' + username + '/' + password + '/' + streamid2 + '.ts'
-                Item_Link.append(playlink)
-                self.List.addItem(channame)
+            icons.append(channellogo)
+            #Item_Icon.append(channellogo)
+            playlink = 'PLAY:' + baseurl + streamdes + '/' + username + '/' + password + '/' + streamid2 + '.m3u8'
+            streams.append(playlink)
+            #Item_Link.append(playlink)
+            combined = list(zip(titles,epgs,streams,icons))
+        tup = sorted(combined,reverse=False)
+        for chantitle,epginfo,playlinks,chanlogos in tup:
+            Item_Title.append(chantitle)
+            Item_Desc.append(epginfo)
+            Item_Link.append(playlinks)
+            Item_Icon.append(chanlogos)
+            self.List.addItem(chantitle)
         xbmc.executebuiltin("Dialog.Close(dialog)")
         dialog.notification("[COLOR green]All Done[/COLOR]", '[COLOR red]Thank You[/COLOR]', Addon_Image, 5000)
         
