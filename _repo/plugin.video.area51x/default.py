@@ -18,7 +18,6 @@ import urllib2
 import json
 import time
 import webbrowser
-import autoexec
 
 import pyxbmct.addonwindow as pyxbmct
 from addon.common.addon import Addon
