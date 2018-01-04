@@ -39,6 +39,8 @@ vodsapi = ('player_api.php?username=%s&password=%s&action=get_vod_streams' % (us
 vodcats = ('player_api.php?username=%s&password=%s&action=get_vod_categories' % (username,password))
 vodcatsstream = ('player_api.php?username=%s&password=%s&action=get_vod_streams&category_id=' % (username,password))
 epgapi = ('/player_api.php?username=%s&password=%s&action=get_short_epg&stream_id=' %(username,password))
+adultpassword = xbmc.translatePath(os.path.join('special://home/addons/' + _addon_id_ , 'adult.txt'))
+AddonTitle = '[COLOR green]Area 51 X[/COLOR]'
 global username
 global password
 
@@ -52,17 +54,22 @@ _images_    = '/resources/' + _theme_
 Background_Image    = xbmc.translatePath(os.path.join('special://home/addons/' + _addon_id_ + _images_, 'listbg51.gif'))
 Listbg = xbmc.translatePath(os.path.join('special://home/addons/' + _addon_id_ + _images_, 'listbg.png'))
 Addon_Image = xbmc.translatePath(os.path.join('special://home/addons/' + _addon_id_ + _images_, 'icon.png'))
+#MainMenu = xbmc.translatePath(os.path.join('special://home/addons/' + _addon_id_ + _images_, 'mainmenu.png'))
+#MainMenuF = xbmc.translatePath(os.path.join('special://home/addons/' + _addon_id_ + _images_, 'mainmenuF.png'))
+
 
 
 
 ########## Function To Call That Starts The Window ##########
 def listwindow(ta):
+    
     global data
     global List
     
     data = ta
     window = list_window('area51x')
     window.doModal()
+
     del window
 
 def Get_Data(url):
@@ -82,6 +89,45 @@ def Time_Clean(text):
     d = datetime.strptime(text, "%H:%M")
     converted = d.strftime("%I:%M %p")
     return converted
+    
+def Adult_Check():
+    
+    readadult = open(adultpassword).read().replace('\n', '').replace('\r','').replace('\t','')
+    if readadult == '':
+        dialog.ok(AddonTitle,"[COLOR green]Please Enter A Password To Prevent Unauthorized Access[/COLOR]")
+        string =''
+        keyboard = xbmc.Keyboard(string, 'Enter The Password You Set')
+        keyboard.doModal()
+        if keyboard.isConfirmed():
+            string = keyboard.getText()
+            if len(string)>1:
+                term = string
+            else: quit()
+        with open(adultpassword, "w") as output:
+            output.write(term)
+            dialog.notification(AddonTitle, '[COLOR yellow]Password Saved, Thank you[/COLOR]', icon, 5000)
+            Main.MainWindow
+    else:
+        string =''
+        keyboard = xbmc.Keyboard(string, '[COLOR green]Enter The Password You Set[/COLOR]')
+        keyboard.doModal()
+        if keyboard.isConfirmed():
+            string = keyboard.getText()
+            if len(string)>1:
+                term = string
+            else: quit()
+        if term == readadult:
+            return
+        elif term == 'wipemypass':
+            with open(adultpassword, "w") as output:
+                wipe = ''
+                output.write(wipe)
+                dialog.ok(AddonTitle, '[COLOR yellow]Master Pass entered\nPassword has now been wiped clean\nHit back and re enter a new password[/COLOR]')
+                quit()
+                
+        else:
+            dialog.notification(AddonTitle, '[COLOR yellow]Wrong Password, I\'m Telling Mum!, Click back to exit[/COLOR]', icon, 5000)
+            quit()
     
     
 def CLEANUP(text):
@@ -118,6 +164,8 @@ def passed(self, title):
     Item_Link  =  []
     Item_Desc  =  []
     Item_Icon  =  []
+    
+    
     
     if 'Live' in title:
         title = title.upper()
@@ -163,7 +211,7 @@ def passed(self, title):
 
 def List_Selected(self):
     global Media_Link
-
+    
     if 'CAT:' in Media_Link:
         self.List.reset()
         self.List.setVisible(True)
@@ -181,6 +229,9 @@ def List_Selected(self):
         streams = []
         icons = []
         combined = []
+        
+        if 'ADULT' in Media_Title:
+            Adult_Check()
         
         newlink = Media_Link.replace('CAT:','')
         title = 'Live Channels'
@@ -243,7 +294,7 @@ def List_Selected(self):
             Item_Icon.append(chanlogos)
             self.List.addItem(chantitle)
         xbmc.executebuiltin("Dialog.Close(dialog)")
-        dialog.notification("[COLOR green]All Done[/COLOR]", '[COLOR red]Thank You[/COLOR]', Addon_Image, 5000)
+        dialog.notification("[COLOR green]All Done[/COLOR]", '[COLOR red]Thank You[/COLOR]', Addon_Image, 2500)
         
     if 'VODCATS:' in Media_Link:
         self.List.reset()
@@ -311,6 +362,7 @@ class list_window(pyxbmct.AddonFullWindow):
 
         self.set_navigation()
 
+        #self.connect(pyxbmct.ACTION_NAV_BACK, lambda:listwindow(data))
         self.connect(pyxbmct.ACTION_NAV_BACK, self.close)
         self.connect(self.List, lambda:List_Selected(self))
         
@@ -332,6 +384,10 @@ class list_window(pyxbmct.AddonFullWindow):
     def set_active_controls(self):
         self.List =	pyxbmct.List(buttonFocusTexture=Listbg,_space=12,_itemTextYOffset=-7,textColor='0xFF00f72c')
         self.placeControl(self.List, 12, 1, 85, 15)
+        
+        # self.button1 = pyxbmct.Button('',   noFocusTexture=MainMenu, focusTexture=MainMenuF)
+        # self.placeControl(self.button1, 65, 26,  9, 8)
+
         
         self.connectEventList(
             [pyxbmct.ACTION_MOVE_DOWN,

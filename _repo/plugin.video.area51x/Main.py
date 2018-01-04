@@ -61,6 +61,9 @@ ButtoneNF = xbmc.translatePath(os.path.join('special://home/addons/' + _addon_id
 ButtonfF = xbmc.translatePath(os.path.join('special://home/addons/' + _addon_id_ + _images_, 'webf.png'))
 ButtonfNF = xbmc.translatePath(os.path.join('special://home/addons/' + _addon_id_ + _images_, 'web.png'))
 
+ButtongF = xbmc.translatePath(os.path.join('special://home/addons/' + _addon_id_ + _images_, 'quitF.png'))
+ButtongNF = xbmc.translatePath(os.path.join('special://home/addons/' + _addon_id_ + _images_, 'quit.png'))
+
 
 #############################################################
 ########## Function To Call That Starts The Window ##########
@@ -69,7 +72,6 @@ def MainWindow():
     window = Main('area51x')
     window.doModal()
     del window
-    xbmc.executebuiltin("Dialog.Close(busydialog)")
 
 def Get_Data(url):
 
@@ -117,13 +119,14 @@ myplatform = platform()
 
 def sendtolistlive(self):
 
-    self.close
+    #self.close
     list.listwindow('Live')
     
 def sendtolistvod(self):
 
     self.close
     list.listwindow('Vod')
+    
 
     
 
@@ -155,6 +158,7 @@ class Main(pyxbmct.AddonFullWindow):
         self.connect(self.button3, lambda:sendtolistvod(self))
         self.connect(self.button4, lambda:_self_.openSettings())
         self.connect(self.button5, lambda:openpage(self))
+        self.connect(self.button6, self.close)
         self.setFocus(self.button1)
 
     def set_info_controls(self):
@@ -176,6 +180,9 @@ class Main(pyxbmct.AddonFullWindow):
         
         self.button5 = pyxbmct.Button('',   focusTexture=ButtonfF,   noFocusTexture=ButtonfNF)
         self.placeControl(self.button5, 101, 0,  8, 12)
+        
+        self.button6 = pyxbmct.Button('',   focusTexture=ButtongF,   noFocusTexture=ButtongNF)
+        self.placeControl(self.button6, 101, 12,  8, 8)
 
 
 
@@ -193,6 +200,6 @@ class Main(pyxbmct.AddonFullWindow):
         self.button4.controlUp(self.button3)
         self.button5.controlUp(self.button4)
         
-      
-        
+        self.button5.controlRight(self.button6)
+        self.button6.controlLeft(self.button5)
         

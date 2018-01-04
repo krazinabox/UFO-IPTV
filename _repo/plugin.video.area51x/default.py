@@ -51,53 +51,16 @@ def Get_Data(url):
 
     return data
     
-def platform():
-    if xbmc.getCondVisibility('system.platform.android'):
-        return 'android'
-    elif xbmc.getCondVisibility('system.platform.linux'):
-        return 'linux'
-    elif xbmc.getCondVisibility('system.platform.windows'):
-        return 'windows'
-    elif xbmc.getCondVisibility('system.platform.osx'):
-        return 'osx'
-    elif xbmc.getCondVisibility('system.platform.atv2'):
-        return 'atv2'
-    elif xbmc.getCondVisibility('system.platform.ios'):
-        return 'ios'
-
-myplatform = platform()
-
-def openpage():
-    if myplatform == 'android':
-        opensite = xbmc.executebuiltin( 'StartAndroidActivity(,android.intent.action.VIEW,,%s)' % ( 'http://area-51-hosting.host' ) )
-    else:
-        opensite = webbrowser . open('http://area-51-hosting.host')
 
 def checkuser():
 
-    if username =='':
-        dialog.ok("[COLOR green]Area 51 X[/COLOR]","[COLOR green]Welcome New User, Please Enter Your Login Details[/COLOR]")
-        user =''
-        keyboard = xbmc.Keyboard(user, '[COLOR green]Enter User Name[/COLOR]')
-        keyboard.doModal()
-        if keyboard.isConfirmed():
-            user = keyboard.getText()
-            if len(user)>=1:
-                _self_.setSetting('Username', user)
-            else:
-                quit()
-    if password =='':
-        passw =''
-        keyboard = xbmc.Keyboard(passw, '[COLOR green]Enter Password[/COLOR]')
-        keyboard.doModal()
-        if keyboard.isConfirmed():
-            passw = keyboard.getText()
-            if len(passw)>=1:
-                _self_.setSetting('Password', passw)
-                dialog.ok("[COLOR green]Area 51 X[/COLOR]","[COLOR green]Thank you, Please Re-Open Addon and Enjoy[/COLOR]")
-                quit()
-            else:
-                quit()
+    if username =='' or password =='':
+        dialog.ok("[COLOR green]Area 51 X[/COLOR]","[COLOR green]Welcome New User, Please Enter Your Login Details then click ok[/COLOR]")
+        _self_.openSettings()
+        dialog.ok("[COLOR green]Area 51 X[/COLOR]","[COLOR red]Thank You, Please Re Launch Addon[/COLOR]")
+        quit()
+    else:
+        checksubstatus()
     
 
 def checksubstatus():
@@ -110,74 +73,15 @@ def checksubstatus():
         data = json.loads(link)
         serveruser = data['user_info']['username']
         expiry = data['user_info']['exp_date']
-        if expiry == None:
+        try:
             Main.MainWindow()
-        else:
-            d = int(expiry[:10])
-            expiry = datetime.fromtimestamp(d).strftime('%Y-%m-%d')
-            start = datetime.strptime(expiry, "%Y-%m-%d")
-            end = start - timedelta(days=3)
-            now = time.strftime("%Y-%m-%d")
-            now = datetime.strptime(now, "%Y-%m-%d")
-            if now in (start,end):
-                source = dialog.select("[COLOR red]Sub Almost Expired[/COLOR]", ['[COLOR green]Renew Sub[/COLOR]', '[COLOR red]Continue[/COLOR]'])
-                if source ==0:
-                    openpage()
-                elif source ==1:
-                    Main.MainWindow()
-                else:
-                    Main.MainWindow()
-            else:
-                Main.MainWindow()
+        except:
+            dialog.ok("[COLOR green]Area 51 X[/COLOR]","[COLOR red]Add on Failed To Run Contact Support[/COLOR]")
     except:
-        source = dialog.select("[COLOR red]It Seems Your User or Password Is Wrong, Or Your Sub Has Expired[/COLOR]", ['[COLOR green]Renew Sub[/COLOR]', '[COLOR red]Quit[/COLOR]'])
-        if source ==0:
-            _self_.setSetting('Username', '')
-            _self_.setSetting('Password', '')
-            openpage()
-            quit()
-        elif source ==1:
-            _self_.setSetting('Username', '')
-            _self_.setSetting('Password', '')
-            quit()
-        else:
-            quit()
-            
-def clearup():
+        dialog.ok("[COLOR red]Details Incorrect Or Sub Expired[/COLOR]","[COLOR green]Current User Name Entered : [COLOR white]" + username + "[/COLOR]\n[COLOR green]Current Password Entered : [COLOR white]" + password + "[/COLOR]\n\n[COLOR red]If You think this is wrong, screen-shot this window and send to support[/COLOR]")
+        _self_.setSetting('Username', '')
+        _self_.setSetting('Password', '')
+        quit()
 
-    cachePath     = xbmc.translatePath(os.path.join('special://home/cache'))
-    thumbPath     = xbmc.translatePath(os.path.join('special://profile/Thumbnails'))
-    packcagesPath = xbmc.translatePath(os.path.join('special://home/addons/packages'))
-    
-    i =[(cachePath,'Cache'),(thumbPath,'Thumbnails'),(packcagesPath,'Packages')]
-    for r in i:
-        for root,dirs,files in os.walk(r[0]):
-            for f in files:
-                if (f.endswith('.log')): continue
-                try: os.unlink(os.path.join(root, f))
-                except: pass
-    xbmc.executebuiltin('Container.Refresh')
-    
-def Remove_Old():
-
-    try:
-        addontoremove = ['plugin.video.area51']
-        approve = any(xbmc.getCondVisibility('System.HasAddon(%s)' % (addon)) for addon in addontoremove)
-        if approve:
-            #dialog.ok("[COLOR green]Area 51 X[/COLOR]","[COLOR red]You Still Have The Old Area 51 Installed\nYou No Longer Need this\nClick Ok To Remove It[/COLOR]")
-            import shutil
-            shutil.rmtree(oldaddon)
-            xbmc.executebuiltin('Container.Refresh')
-    except: pass
-def START():
-
-    clearup()
-    
-    checkuser()
-    checksubstatus()
-    try:
-        Main.MainWindow()
-    except (RuntimeError, SystemError):
-        pass
-Remove_Old()
-START()
+      
+checkuser()
