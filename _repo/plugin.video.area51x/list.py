@@ -85,10 +85,14 @@ def Get_Data(url):
     
 def Time_Clean(text):
 
-    text=str(text)
-    d = datetime.strptime(text, "%H:%M")
-    converted = d.strftime("%I:%M %p")
-    return converted
+    try:
+        text=str(text)
+        d = datetime.strptime(text, "%H:%M")
+        converted = d.strftime("%I:%M %p")
+        return converted
+    except:
+        converted = 'No Time Returned By EPG API'
+        return converted
     
 def Adult_Check():
     
@@ -189,6 +193,7 @@ def passed(self, title):
             self.List.addItem(catname)
             
     elif 'Vod' in title:
+        
         title = title.upper()
         Item_Title.append('[COLOR yellow]' + title + '[/COLOR]')
         Item_Link.append('')
@@ -197,6 +202,12 @@ def passed(self, title):
         self.List.addItem('[COLOR red]' + 'Videos On Demand Catergories'  + '[/COLOR]')
         self.textbox.setText('Area 51 X :: http://area-51-hosting.host/')
         self.Show_Logo.setImage(Addon_Image)
+        catname1 = 'XXX On Demand'
+        Item_Title.append(catname1)
+        Item_Desc.append(catname1)
+        conurl = 'VODXXX:https://www.eporner.com/'
+        Item_Link.append(conurl)
+        self.List.addItem(catname1)
         url = baseurl + vodcats
         link = Get_Data(url)
         data = json.loads(link)
@@ -208,9 +219,13 @@ def passed(self, title):
             conurl = 'VODCATS:' + baseurl + vodcatsstream + str(catid)
             Item_Link.append(conurl)
             self.List.addItem(catname)
+            
+    
+        
 
 def List_Selected(self):
     global Media_Link
+    #dialog.ok("here2",str(Media_Link))
     
     if 'CAT:' in Media_Link:
         self.List.reset()
@@ -332,10 +347,192 @@ def List_Selected(self):
             Item_Icon.append(icon)
             Item_Link.append(playurl)
             self.List.addItem(title)
+            
+    if 'VODXXX:' in Media_Link:
+        self.List.reset()
+        self.List.setVisible(True)
+        global Item_Title
+        global Item_Link
+        global Item_Desc
+        global Item_Icon
+        
+        Item_Title =  []
+        Item_Link  =  []
+        Item_Desc  =  []
+        Item_Icon  =  []
+        Media_Link = Media_Link.replace('VODXXX:','')
+        title = 'XXX On Demand'
+        title = title.upper()
+        Item_Title.append('[COLOR green]Main ' + title + ' List[/COLOR]')
+        Item_Link.append('')
+        Item_Desc.append('')
+        Item_Icon.append(Addon_Image)
+        self.List.addItem('[COLOR yellow]' + title + ' List[/COLOR]')
+        self.textbox.setText('')
+        self.Show_Logo.setImage(Addon_Image)
+        link = Get_Data(Media_Link)
+        match = re.compile ('<li class="">(.+?)</li>').findall(link)
+        for links in match:
+            title = re.compile ('<strong>(.+?)</strong>').findall(links)[0]
+            number = re.compile ('<div class="cllnumber">(.+?)</div>').findall(links)[0]
+            url1 = re.compile ('<a href="(.+?)"').findall(links)[0]
+            url = 'PORN:https://www.eporner.com' + url1
+            if not 'All'in title:
+                if not 'Homemade' in title:
+                    Item_Title.append(title)
+                    Item_Link.append(url)
+                    Item_Icon.append(Addon_Image)
+                    self.List.addItem(title)
+                    Item_Desc.append(title)
+                    
+    if 'PORN:' in Media_Link:
+        self.List.reset()
+        self.List.setVisible(True)
+        global Item_Title
+        global Item_Link
+        global Item_Desc
+        global Item_Icon
+        
+        Item_Title =  []
+        Item_Link  =  []
+        Item_Desc  =  []
+        Item_Icon  =  []
+        Media_Link = Media_Link.replace('PORN:','')
+        global Media_Title
+        global Media_Link
+        global Item_Title
+        global Item_Link
+        global Item_Desc
+        global Item_Icon
+        
+        Item_Title =  []
+        Item_Link  =  []
+        Item_Desc  =  []
+        Item_Icon  =  []
+        title = 'XXX On Demand'
+        title = title.upper()
+        Item_Title.append('[COLOR green]Main ' + title + ' List[/COLOR]')
+        Item_Link.append('')
+        Item_Desc.append('')
+        Item_Icon.append(Addon_Image)
+        self.List.addItem('[COLOR yellow]' + title + ' List[/COLOR]')
+        self.textbox.setText('')
+        self.Show_Logo.setImage(Addon_Image)
+        
+        link = Get_Data(Media_Link)
+        match = re.compile('<div class="mbtit"(.+?)onmouseover=').findall(link)
+        for links in match:
+            title = re.compile ('title="(.+?)"').findall(links)[0]
+            url1 = re.compile ('<a href="(.+?)"').findall(links)[0]
+            icon = re.compile ('src="(.+?)"').findall(links)[0]
+            url = 'GETVIDS:https://www.eporner.com' + url1
+            Item_Title.append(title)
+            Item_Link.append(url)
+            Item_Icon.append(icon)
+            self.List.addItem(title)
+            Item_Desc.append('')
+            
+        try:
+            try:
+                np = re.compile ('<a href=\"([^"]*)\" title="Next page">').findall(link)[0]
+            except IndexError:
+                np = re.compile ("<a href=\'([^']*)\' title='Next page'>").findall(link)[0]
+            nextpage = 'NEXT:https://www.eporner.com' + np
+            npicon = 'http://imgur.com/3eNoY0p'
+            nptitle = '[COLOR red]Next Page[/COLOR]'
+            Item_Title.append(nptitle)
+            Item_Link.append(nextpage)
+            Item_Icon.append(npicon)
+            self.List.addItem(nptitle)
+            Item_Desc.append('')
+        except:pass
+        
+    elif 'NEXT' in Media_Link:
+        Media_Link = Media_Link.replace('NEXT:','')
+
+        global Media_Title
+        global Media_Link
+        global Item_Title
+        global Item_Link
+        global Item_Desc
+        global Item_Icon
+        
+        Item_Title =  []
+        Item_Link  =  []
+        Item_Desc  =  []
+        Item_Icon  =  []
+        
+        self.List.reset()
+        self.List.setVisible(True)
+        title = 'XXX On Demand'
+        title = title.upper()
+        Item_Title.append('[COLOR green]Main ' + title + ' List[/COLOR]')
+        Item_Link.append('')
+        Item_Desc.append('')
+        Item_Icon.append(Addon_Image)
+        self.List.addItem('[COLOR yellow]' + title + ' List[/COLOR]')
+        self.textbox.setText('')
+        self.Show_Logo.setImage(Addon_Image)
+        
+        link = Get_Data(Media_Link)
+        match = re.compile('<div class="mbtit"(.+?)onmouseover=').findall(link)
+        for links in match:
+            title = re.compile ('title="(.+?)"').findall(links)[0]
+            url1 = re.compile ('<a href="(.+?)"').findall(links)[0]
+            icon = re.compile ('src="(.+?)"').findall(links)[0]
+            url = 'GETVIDS:https://www.eporner.com' + url1
+            Item_Title.append(title)
+            Item_Link.append(url)
+            Item_Icon.append(icon)
+            self.List.addItem(title)
+            Item_Desc.append('')
+            
+        try:
+            np = re.compile ('<a href=\"([^"]*)\" title="Next page">').findall(link)[0]
+            nextpage = 'NEXT:https://www.eporner.com' + np
+            npicon = 'http://imgur.com/3eNoY0p'
+            nptitle = '[COLOR red]Next Page[/COLOR]'
+            Item_Title.append(nptitle)
+            Item_Link.append(nextpage)
+            Item_Icon.append(npicon)
+            self.List.addItem(nptitle)
+            Item_Desc.append('')
+        except:pass
+        
+    
     if 'PLAY' in Media_Link:
         Media_Link = Media_Link.replace('PLAY:','')
         Show_List  =  xbmcgui.ListItem(Media_Title)
         xbmc.Player().play(Media_Link, Show_List, False)
+        
+    if 'GETVIDS:' in Media_Link:
+        Media_Link = Media_Link.replace('GETVIDS:','')
+        global Media_Title
+        global Media_Link
+        global Item_Title
+        global Item_Link
+        global Item_Desc
+        global Item_Icon
+        
+        self.List.reset()
+        self.List.setVisible(True)
+        
+        Item_Title =  []
+        Item_Link  =  []
+        Item_Desc  =  []
+        Item_Icon  =  []
+        link = Get_Data(Media_Link).replace('\n', '').replace('\r','').replace('\t','')
+        play = re.compile ('<div id="hd-porn-dload">(.+?)</div>').findall(link)[0]
+        grab = re.compile ('<strong>(.+?)</strong>.+?<a href="(.+?)"').findall(play)
+        for quality,link in grab:
+            quality = quality.replace(':', '')
+            url = 'PLAY:https://www.eporner.com' + link
+            title = 'Play Video at Quality : ' + quality
+            Item_Title.append(title)
+            Item_Link.append(url)
+            Item_Icon.append(Media_Icon)
+            self.List.addItem(title)
+            Item_Desc.append('')
             
             
             
