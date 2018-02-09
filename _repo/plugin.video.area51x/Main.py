@@ -205,9 +205,11 @@ def checksub(self):
     data = json.loads(link)
     serveruser = data['user_info']['username']
     substatus = data['user_info']['status']
-    expiry = data['user_info']['exp_date']
-    #try:
-    expiry = datetime.datetime.fromtimestamp(int(expiry)).strftime('%Y-%m-%d %H:%M')
+    try:
+        expiry = data['user_info']['exp_date']
+        expiry = datetime.datetime.fromtimestamp(int(expiry)).strftime('%Y-%m-%d %H:%M')
+    except:
+        expiry = 'Unlimited'
     #except:
         #expiry = 'Unkown Expiry Date'
     dialog.ok('[COLOR green]Thank You For Choosing Area 51 X[/COLOR]','User Name :: ' + str(serveruser)+ '\nSubscription Status :: ' + str(substatus) + '\nSubscription Exp Date :: ' + str(expiry))

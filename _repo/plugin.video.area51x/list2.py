@@ -171,6 +171,10 @@ def passed(self, link, title):
 
     Media_Title = link
     Media_Link = title
+    
+    if 'ADULT' in Media_Title:
+        Adult_Check()
+        
 
     if 'CAT:' in Media_Link:
         self.List.reset()
@@ -190,8 +194,6 @@ def passed(self, link, title):
         icons = []
         combined = []
         
-        if 'ADULT' in Media_Title:
-            Adult_Check()
         
         newlink = Media_Link.replace('CAT:','')
         title = 'Live Channels'
@@ -222,7 +224,6 @@ def passed(self, link, title):
             if len(info) == 0:
                 epgguide = 'No EPG Available For This Channel'
                 epgs.append(epgguide)
-                #Item_Desc.append(epgguide)
             else:
                 for info2 in info[:1]:
                     start = info2['start']
@@ -238,13 +239,10 @@ def passed(self, link, title):
                     desc = 'Start: ' + starttime + " End: " + endtime + '\n\n' + '[COLOR deepskyblue]' + decodetitle + '[/COLOR]' + '\n\n' + decodeguide
                     desc1 = str(desc)
                     epgs.append(desc1)
-                    #Item_Desc.append(desc)
             channellogo = i ['stream_icon']
             icons.append(channellogo)
-            #Item_Icon.append(channellogo)
             playlink = 'PLAY:' + baseurl + streamdes + '/' + username + '/' + password + '/' + streamid2 + '.m3u8'
             streams.append(playlink)
-            #Item_Link.append(playlink)
             combined = list(zip(titles,epgs,streams,icons))
         tup = sorted(combined,reverse=False)
         for chantitle,epginfo,playlinks,chanlogos in tup:
@@ -256,71 +254,7 @@ def passed(self, link, title):
         xbmc.executebuiltin("Dialog.Close(dialog)")
         dialog.notification("[COLOR green]All Done[/COLOR]", '[COLOR deepskyblue]Thank You[/COLOR]', Addon_Image, 2500)
     
-    if 'ADULT' in Media_Title:
-        Adult_Check()
-        
-        newlink = Media_Link.replace('CAT:','')
-        title = 'Live Channels'
-        Item_Title.append('[COLOR yellow]' + title + '[/COLOR]')
-        Item_Link.append('')
-        Item_Desc.append('Area 51 X :: http://area-51-hosting.host/')
-        Item_Icon.append(Addon_Image)
-        self.List.addItem('[COLOR deepskyblue]' + title  + '[/COLOR]')
-        
-        url = baseurl + livechanapi + newlink
-        link = Get_Data(url)
-        data = json.loads(link)
-        dialog.notification("[COLOR green]Loading Channels and EPG Data[/COLOR]", '[COLOR deepskyblue]Please Wait[/COLOR]', Addon_Image, 50000)
-        
-        for i in data:
-            desc = ''
-            decode = ''
-            channame = i['name']
-            titles.append(channame)
-            #Item_Title.append(channame)
-            streamid = i['stream_id']
-            streamid2 = str(streamid)
-            streamdes = i ['stream_type']
-            epg = baseurl + epgapi + streamid2
-            getepg = Get_Data(epg)
-            data2 = json.loads(getepg)
-            info = data2['epg_listings']
-            if len(info) == 0:
-                epgguide = 'No EPG Available For This Channel'
-                epgs.append(epgguide)
-                #Item_Desc.append(epgguide)
-            else:
-                for info2 in info[:1]:
-                    start = info2['start']
-                    end = info2 ['end']
-                    guidedata = info2['description']
-                    title = info2['title']
-                    decodetitle = base64.b64decode(title)
-                    decodeguide = base64.b64decode(guidedata) + '\n\n'
-                    starttime = str(start)[:-3].split(' ')[1]
-                    endtime = str(end)[:-3].split(' ')[1]
-                    starttime = Time_Clean(starttime)
-                    endtime = Time_Clean(endtime)
-                    desc = 'Start: ' + starttime + " End: " + endtime + '\n\n' + '[COLOR white]' + decodetitle + '[/COLOR]' + '\n\n' + decodeguide
-                    desc1 = str(desc)
-                    epgs.append(desc1)
-                    #Item_Desc.append(desc)
-            channellogo = i ['stream_icon']
-            icons.append(channellogo)
-            #Item_Icon.append(channellogo)
-            playlink = 'PLAY:' + baseurl + streamdes + '/' + username + '/' + password + '/' + streamid2 + '.m3u8'
-            streams.append(playlink)
-            #Item_Link.append(playlink)
-            combined = list(zip(titles,epgs,streams,icons))
-        tup = sorted(combined,reverse=False)
-        for chantitle,epginfo,playlinks,chanlogos in tup:
-            Item_Title.append(chantitle)
-            Item_Desc.append(epginfo)
-            Item_Link.append(playlinks)
-            Item_Icon.append(chanlogos)
-            self.List.addItem(chantitle)
-        xbmc.executebuiltin("Dialog.Close(dialog)")
-        dialog.notification("[COLOR green]All Done[/COLOR]", '[COLOR deepskyblue]Thank You[/COLOR]', Addon_Image, 2500)
+    
         
     if 'VODCATS:' in Media_Link:
         self.List.reset()
@@ -396,244 +330,14 @@ def passed(self, link, title):
                     self.List.addItem(title)
                     Item_Desc.append(title)
                     
-    if 'PORN:' in Media_Link:
-        self.List.reset()
-        self.List.setVisible(True)
-        global Item_Title
-        global Item_Link
-        global Item_Desc
-        global Item_Icon
-        
-        Item_Title =  []
-        Item_Link  =  []
-        Item_Desc  =  []
-        Item_Icon  =  []
-        Media_Link = Media_Link.replace('PORN:','')
-        global Media_Title
-        global Media_Link
-        global Item_Title
-        global Item_Link
-        global Item_Desc
-        global Item_Icon
-        
-        Item_Title =  []
-        Item_Link  =  []
-        Item_Desc  =  []
-        Item_Icon  =  []
-        title = 'XXX On Demand'
-        title = title.upper()
-        Item_Title.append('[COLOR green]Main ' + title + ' List[/COLOR]')
-        Item_Link.append('')
-        Item_Desc.append('')
-        Item_Icon.append(Addon_Image)
-        self.List.addItem('[COLOR yellow]' + title + ' List[/COLOR]')
-        self.textbox.setText('')
-        self.Show_Logo.setImage(Addon_Image)
-        
-        link = Get_Data(Media_Link)
-        match = re.compile('<div class="mbtit"(.+?)onmouseover=').findall(link)
-        for links in match:
-            title = re.compile ('title="(.+?)"').findall(links)[0]
-            url1 = re.compile ('<a href="(.+?)"').findall(links)[0]
-            icon = re.compile ('src="(.+?)"').findall(links)[0]
-            url = 'GETVIDS:https://www.eporner.com' + url1
-            Item_Title.append(title)
-            Item_Link.append(url)
-            Item_Icon.append(icon)
-            self.List.addItem(title)
-            Item_Desc.append('')
-            
-        try:
-            try:
-                np = re.compile ('<a href=\"([^"]*)\" title="Next page">').findall(link)[0]
-            except IndexError:
-                np = re.compile ("<a href=\'([^']*)\' title='Next page'>").findall(link)[0]
-            nextpage = 'NEXT:https://www.eporner.com' + np
-            npicon = 'http://imgur.com/3eNoY0p'
-            nptitle = '[COLOR deepskyblue]Next Page[/COLOR]'
-            Item_Title.append(nptitle)
-            Item_Link.append(nextpage)
-            Item_Icon.append(npicon)
-            self.List.addItem(nptitle)
-            Item_Desc.append('')
-        except:pass
-        
-    elif 'NEXT' in Media_Link:
-        Media_Link = Media_Link.replace('NEXT:','')
-
-        global Media_Title
-        global Media_Link
-        global Item_Title
-        global Item_Link
-        global Item_Desc
-        global Item_Icon
-        
-        Item_Title =  []
-        Item_Link  =  []
-        Item_Desc  =  []
-        Item_Icon  =  []
-        
-        self.List.reset()
-        self.List.setVisible(True)
-        title = 'XXX On Demand'
-        title = title.upper()
-        Item_Title.append('[COLOR green]Main ' + title + ' List[/COLOR]')
-        Item_Link.append('')
-        Item_Desc.append('')
-        Item_Icon.append(Addon_Image)
-        self.List.addItem('[COLOR yellow]' + title + ' List[/COLOR]')
-        self.textbox.setText('')
-        self.Show_Logo.setImage(Addon_Image)
-        
-        link = Get_Data(Media_Link)
-        match = re.compile('<div class="mbtit"(.+?)onmouseover=').findall(link)
-        for links in match:
-            title = re.compile ('title="(.+?)"').findall(links)[0]
-            url1 = re.compile ('<a href="(.+?)"').findall(links)[0]
-            icon = re.compile ('src="(.+?)"').findall(links)[0]
-            url = 'GETVIDS:https://www.eporner.com' + url1
-            Item_Title.append(title)
-            Item_Link.append(url)
-            Item_Icon.append(icon)
-            self.List.addItem(title)
-            Item_Desc.append('')
-            
-        try:
-            np = re.compile ('<a href=\"([^"]*)\" title="Next page">').findall(link)[0]
-            nextpage = 'NEXT:https://www.eporner.com' + np
-            npicon = 'http://imgur.com/3eNoY0p'
-            nptitle = '[COLOR deepskyblue]Next Page[/COLOR]'
-            Item_Title.append(nptitle)
-            Item_Link.append(nextpage)
-            Item_Icon.append(npicon)
-            self.List.addItem(nptitle)
-            Item_Desc.append('')
-        except:pass
-        
-    
-    if 'PLAY' in Media_Link:
-        Media_Link = Media_Link.replace('PLAY:','')
-        Show_List  =  xbmcgui.ListItem(Media_Title)
-        xbmc.Player().play(Media_Link, Show_List, False)
-        
-    if 'GETVIDS:' in Media_Link:
-        Media_Link = Media_Link.replace('GETVIDS:','')
-        global Media_Title
-        global Media_Link
-        global Item_Title
-        global Item_Link
-        global Item_Desc
-        global Item_Icon
-        
-        self.List.reset()
-        self.List.setVisible(True)
-        
-        Item_Title =  []
-        Item_Link  =  []
-        Item_Desc  =  []
-        Item_Icon  =  []
-        link = Get_Data(Media_Link).replace('\n', '').replace('\r','').replace('\t','')
-        play = re.compile ('<div id="hd-porn-dload">(.+?)</div>').findall(link)[0]
-        grab = re.compile ('<strong>(.+?)</strong>.+?<a href="(.+?)"').findall(play)
-        for quality,link in grab:
-            quality = quality.replace(':', '')
-            url = 'PLAY:https://www.eporner.com' + link
-            title = 'Play Video at Quality : ' + quality
-            Item_Title.append(title)
-            Item_Link.append(url)
-            Item_Icon.append(Media_Icon)
-            self.List.addItem(title)
-            Item_Desc.append('')
             
     
         
 
 def List_Selected(self):
     global Media_Link
-    
-    if 'CAT:' in Media_Link:
-        self.List.reset()
-        self.List.setVisible(True)
-        global Item_Title
-        global Item_Link
-        global Item_Desc
-        global Item_Icon
-        
-        Item_Title =  []
-        Item_Link  =  []
-        Item_Desc  =  []
-        Item_Icon  =  []
-        titles = []
-        epgs = []
-        streams = []
-        icons = []
-        combined = []
-        
-    if 'ADULT' in Media_Title:
-        Adult_Check()
-        
-        newlink = Media_Link.replace('CAT:','')
-        title = 'Live Channels'
-        Item_Title.append('[COLOR yellow]' + title + '[/COLOR]')
-        Item_Link.append('')
-        Item_Desc.append('Area 51 X :: http://area-51-hosting.host/')
-        Item_Icon.append(Addon_Image)
-        self.List.addItem('[COLOR deepskyblue]' + title  + '[/COLOR]')
-        
-        url = baseurl + livechanapi + newlink
-        link = Get_Data(url)
-        data = json.loads(link)
-        dialog.notification("[COLOR green]Loading Channels and EPG Data[/COLOR]", '[COLOR deepskyblue]Please Wait[/COLOR]', Addon_Image, 50000)
-        
-        for i in data:
-            desc = ''
-            decode = ''
-            channame = i['name']
-            titles.append(channame)
-            #Item_Title.append(channame)
-            streamid = i['stream_id']
-            streamid2 = str(streamid)
-            streamdes = i ['stream_type']
-            epg = baseurl + epgapi + streamid2
-            getepg = Get_Data(epg)
-            data2 = json.loads(getepg)
-            info = data2['epg_listings']
-            if len(info) == 0:
-                epgguide = 'No EPG Available For This Channel'
-                epgs.append(epgguide)
-                #Item_Desc.append(epgguide)
-            else:
-                for info2 in info[:1]:
-                    start = info2['start']
-                    end = info2 ['end']
-                    guidedata = info2['description']
-                    title = info2['title']
-                    decodetitle = base64.b64decode(title)
-                    decodeguide = base64.b64decode(guidedata) + '\n\n'
-                    starttime = str(start)[:-3].split(' ')[1]
-                    endtime = str(end)[:-3].split(' ')[1]
-                    starttime = Time_Clean(starttime)
-                    endtime = Time_Clean(endtime)
-                    desc = 'Start: ' + starttime + " End: " + endtime + '\n\n' + '[COLOR white]' + decodetitle + '[/COLOR]' + '\n\n' + decodeguide
-                    desc1 = str(desc)
-                    epgs.append(desc1)
-                    #Item_Desc.append(desc)
-            channellogo = i ['stream_icon']
-            icons.append(channellogo)
-            #Item_Icon.append(channellogo)
-            playlink = 'PLAY:' + baseurl + streamdes + '/' + username + '/' + password + '/' + streamid2 + '.m3u8'
-            streams.append(playlink)
-            #Item_Link.append(playlink)
-            combined = list(zip(titles,epgs,streams,icons))
-        tup = sorted(combined,reverse=False)
-        for chantitle,epginfo,playlinks,chanlogos in tup:
-            Item_Title.append(chantitle)
-            Item_Desc.append(epginfo)
-            Item_Link.append(playlinks)
-            Item_Icon.append(chanlogos)
-            self.List.addItem(chantitle)
-        xbmc.executebuiltin("Dialog.Close(dialog)")
-        dialog.notification("[COLOR green]All Done[/COLOR]", '[COLOR deepskyblue]Thank You[/COLOR]', Addon_Image, 2500)
+    global Media_Title
+    Media_Title = '[COLOR green]Area 51 X[/COLOR]'
         
     if 'VODCATS:' in Media_Link:
         self.List.reset()
@@ -672,43 +376,6 @@ def List_Selected(self):
             Item_Link.append(playurl)
             self.List.addItem(title)
             
-    if 'VODXXX:' in Media_Link:
-        self.List.reset()
-        self.List.setVisible(True)
-        global Item_Title
-        global Item_Link
-        global Item_Desc
-        global Item_Icon
-        
-        Item_Title =  []
-        Item_Link  =  []
-        Item_Desc  =  []
-        Item_Icon  =  []
-        Media_Link = Media_Link.replace('VODXXX:','')
-        title = 'XXX On Demand'
-        title = title.upper()
-        Item_Title.append('[COLOR green]Main ' + title + ' List[/COLOR]')
-        Item_Link.append('')
-        Item_Desc.append('')
-        Item_Icon.append(Addon_Image)
-        self.List.addItem('[COLOR yellow]' + title + ' List[/COLOR]')
-        self.textbox.setText('')
-        self.Show_Logo.setImage(Addon_Image)
-        link = Get_Data(Media_Link)
-        match = re.compile ('<li class="">(.+?)</li>').findall(link)
-        for links in match:
-            title = re.compile ('<strong>(.+?)</strong>').findall(links)[0]
-            number = re.compile ('<div class="cllnumber">(.+?)</div>').findall(links)[0]
-            url1 = re.compile ('<a href="(.+?)"').findall(links)[0]
-            url = 'PORN:https://www.eporner.com' + url1
-            if not 'All'in title:
-                if not 'Homemade' in title:
-                    Item_Title.append(title)
-                    Item_Link.append(url)
-                    Item_Icon.append(Addon_Image)
-                    self.List.addItem(title)
-                    Item_Desc.append(title)
-                    
     if 'PORN:' in Media_Link:
         self.List.reset()
         self.List.setVisible(True)
@@ -826,7 +493,7 @@ def List_Selected(self):
     
     if 'PLAY' in Media_Link:
         Media_Link = Media_Link.replace('PLAY:','')
-        Show_List  =  xbmcgui.ListItem(Media_Title)
+        Show_List  = xbmcgui.ListItem(Media_Title)
         xbmc.Player().play(Media_Link, Show_List, False)
         
     if 'GETVIDS:' in Media_Link:
