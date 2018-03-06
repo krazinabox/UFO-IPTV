@@ -16,6 +16,7 @@ import json
 import base64
 import time
 from datetime import datetime
+import xml.etree.ElementTree as ET
 
 
 import pyxbmct.addonwindow as pyxbmct
@@ -34,7 +35,7 @@ username = _self_.getSetting('Username')
 password = _self_.getSetting('Password')
 baseurl = base64.b64decode('aHR0cDovL2lwdHYtYXJlYS01MS50djoyMDk1Lw==')
 livecatapi = ('player_api.php?username=%s&password=%s&action=get_live_categories' %(username,password))
-livechanapi = ('player_api.php?username=%s&password=%s&action=get_live_streams&category_id=' %(username,password))
+livechanapi = ('enigma2.php?username=%s&password=%s&type=get_live_streams&cat_id=' %(username,password))
 vodsapi = ('player_api.php?username=%s&password=%s&action=get_vod_streams' % (username,password))
 vodcats = ('player_api.php?username=%s&password=%s&action=get_vod_categories' % (username,password))
 vodcatsstream = ('player_api.php?username=%s&password=%s&action=get_vod_streams&category_id=' % (username,password))
@@ -107,7 +108,11 @@ def tick(self):
 def Adult_Check():
     
     readadult = open(adultpassword).read().replace('\n', '').replace('\r','').replace('\t','')
-    if readadult == '':
+    try:
+        getpass = re.compile ('<password>(.*?)</password>').findall(readadult)[0]
+    except:
+        getpass = ''
+    if getpass == '':
         dialog.ok(AddonTitle,"[COLOR green]Please Enter A Password To Prevent Unauthorized Access[/COLOR]")
         string =''
         keyboard = xbmc.Keyboard(string, 'Enter The Password You Set')
@@ -118,30 +123,38 @@ def Adult_Check():
                 term = string
             else: quit()
         with open(adultpassword, "w") as output:
-            output.write(term)
+            passwordsave = '<password>' + term + '</password>\n'
+            temppass = passwordsave + '<date>' + Date + '</date>'
+            output.write(temppass)
             dialog.notification(AddonTitle, '[COLOR yellow]Password Saved, Thank you[/COLOR]', icon, 5000)
             Main.MainWindow
     else:
-        string =''
-        keyboard = xbmc.Keyboard(string, '[COLOR green]Enter The Password You Set[/COLOR]')
-        keyboard.doModal()
-        if keyboard.isConfirmed():
-            string = keyboard.getText()
-            if len(string)>1:
-                term = string
-            else: quit()
-        if term == readadult:
+        checkdate = re.compile ('<date>(.*?)</date>').findall(readadult)[0]
+        if checkdate == Date:
             return
-        elif term == 'wipemypass':
-            with open(adultpassword, "w") as output:
-                wipe = ''
-                output.write(wipe)
-                dialog.ok(AddonTitle, '[COLOR yellow]Master Pass entedeepskyblue\nPassword has now been wiped clean\nHit back and re enter a new password[/COLOR]')
-                quit()
-                
         else:
-            dialog.notification(AddonTitle, '[COLOR yellow]Wrong Password, I\'m Telling Mum!, Click back to exit[/COLOR]', icon, 5000)
-            quit()
+            string =''
+            keyboard = xbmc.Keyboard(string, '[COLOR green]Enter The Password You Set[/COLOR]')
+            keyboard.doModal()
+            if keyboard.isConfirmed():
+                string = keyboard.getText()
+                if len(string)>1:
+                    term = string
+                else: quit()
+            if term == getpass:
+                with open(adultpassword, "a") as output:
+                    temppass = '<date>' + Date + '</date>'
+                    output.write(temppass)
+                    return
+            elif term == 'wipemypass':
+                with open(adultpassword, "w") as output:
+                    wipe = ''
+                    output.write(wipe)
+                    dialog.ok(AddonTitle, '[COLOR yellow]Master Pass entedeepskyblue\nPassword has now been wiped clean\nHit back and re enter a new password[/COLOR]')
+                    quit()
+            else:
+                dialog.notification(AddonTitle, '[COLOR yellow]Wrong Password, I\'m Telling Mum!, Click back to exit[/COLOR]', icon, 5000)
+                quit()
     
     
 def CLEANUP(text):
@@ -169,170 +182,147 @@ def CLEANUP(text):
 
 def passed(self, link, title):
 
-    Media_Title = link
-    Media_Link = title
-    
-    if 'ADULT' in Media_Title:
-        Adult_Check()
-        
+	Media_Title = link
+	Media_Link = title
 
-    if 'CAT:' in Media_Link:
-        self.List.reset()
-        self.List.setVisible(True)
-        global Item_Title
-        global Item_Link
-        global Item_Desc
-        global Item_Icon
-        
-        Item_Title =  []
-        Item_Link  =  []
-        Item_Desc  =  []
-        Item_Icon  =  []
-        titles = []
-        epgs = []
-        streams = []
-        icons = []
-        combined = []
-        
-        
-        newlink = Media_Link.replace('CAT:','')
-        title = 'Live Channels'
-        Item_Title.append('[COLOR yellow]' + title + '[/COLOR]')
-        Item_Link.append('')
-        Item_Desc.append('Area 51 X :: http://area-51-hosting.host/')
-        Item_Icon.append(Addon_Image)
-        self.List.addItem('[COLOR deepskyblue]' + title  + '[/COLOR]')
-        
-        url = baseurl + livechanapi + newlink
-        link = Get_Data(url)
-        data = json.loads(link)
-        dialog.notification("[COLOR green]Loading Channels and EPG Data[/COLOR]", '[COLOR deepskyblue]Please Wait[/COLOR]', Addon_Image, 50000)
-        
-        for i in data:
-            desc = ''
-            decode = ''
-            channame = i['name']
-            titles.append(channame)
-            Item_Title.append(channame)
-            streamid = i['stream_id']
-            streamid2 = str(streamid)
-            streamdes = i ['stream_type']
-            epg = baseurl + epgapi + streamid2
-            getepg = Get_Data(epg)
-            data2 = json.loads(getepg)
-            info = data2['epg_listings']
-            if len(info) == 0:
-                epgguide = 'No EPG Available For This Channel'
-                epgs.append(epgguide)
-            else:
-                for info2 in info[:1]:
-                    start = info2['start']
-                    end = info2 ['end']
-                    guidedata = info2['description']
-                    title = info2['title']
-                    decodetitle = base64.b64decode(title)
-                    decodeguide = base64.b64decode(guidedata) + '\n\n'
-                    starttime = str(start)[:-3].split(' ')[1]
-                    endtime = str(end)[:-3].split(' ')[1]
-                    starttime = Time_Clean(starttime)
-                    endtime = Time_Clean(endtime)
-                    desc = 'Start: ' + starttime + " End: " + endtime + '\n\n' + '[COLOR deepskyblue]' + decodetitle + '[/COLOR]' + '\n\n' + decodeguide
-                    desc1 = str(desc)
-                    epgs.append(desc1)
-            channellogo = i ['stream_icon']
-            icons.append(channellogo)
-            playlink = 'PLAY:' + baseurl + streamdes + '/' + username + '/' + password + '/' + streamid2 + '.m3u8'
-            streams.append(playlink)
-            combined = list(zip(titles,epgs,streams,icons))
-        tup = sorted(combined,reverse=False)
-        for chantitle,epginfo,playlinks,chanlogos in tup:
-            Item_Title.append(chantitle)
-            Item_Desc.append(epginfo)
-            Item_Link.append(playlinks)
-            Item_Icon.append(chanlogos)
-            self.List.addItem(chantitle)
-        xbmc.executebuiltin("Dialog.Close(dialog)")
-        dialog.notification("[COLOR green]All Done[/COLOR]", '[COLOR deepskyblue]Thank You[/COLOR]', Addon_Image, 2500)
-    
-    
-        
-    if 'VODCATS:' in Media_Link:
-        self.List.reset()
-        self.List.setVisible(True)
-        global Item_Title
-        global Item_Link
-        global Item_Desc
-        global Item_Icon
-        
-        Item_Title =  []
-        Item_Link  =  []
-        Item_Desc  =  []
-        Item_Icon  =  []
-        title = 'VOD\'s'
-        title = title.upper()
-        Item_Title.append('[COLOR yellow]' + title + '[/COLOR]')
-        Item_Link.append('')
-        Item_Desc.append('Area 51 X :: http://area-51-hosting.host/')
-        Item_Icon.append(Addon_Image)
-        self.List.addItem('[COLOR deepskyblue]' + 'Videos On Demand'  + '[/COLOR]')
-        self.textbox.setText('Area 51 X :: http://area-51-hosting.host/')
-        self.Show_Logo.setImage(Addon_Image)
-        Media_Link = Media_Link.replace('VODCATS:','')
-        link = Get_Data(Media_Link)
-        data = json.loads(link)
-        for i in data:
-            title = i['name']
-            Item_Title.append(title)
-            Item_Desc.append(title)
-            streamid = i['stream_id']
-            streamtype = i['container_extension']
-            streamdes = i['stream_type']
-            playurl = 'PLAY:' + baseurl + streamdes + '/' + username + '/' + password + '/' + str(streamid) + '.' + streamtype
-            icon = i ['stream_icon']
-            Item_Icon.append(icon)
-            Item_Link.append(playurl)
-            self.List.addItem(title)
-            
-    if 'VODXXX:' in Media_Link:
-        self.List.reset()
-        self.List.setVisible(True)
-        global Item_Title
-        global Item_Link
-        global Item_Desc
-        global Item_Icon
-        
-        Item_Title =  []
-        Item_Link  =  []
-        Item_Desc  =  []
-        Item_Icon  =  []
-        Media_Link = Media_Link.replace('VODXXX:','')
-        title = 'XXX On Demand'
-        title = title.upper()
-        Item_Title.append('[COLOR green]Main ' + title + ' List[/COLOR]')
-        Item_Link.append('')
-        Item_Desc.append('')
-        Item_Icon.append(Addon_Image)
-        self.List.addItem('[COLOR yellow]' + title + ' List[/COLOR]')
-        self.textbox.setText('')
-        self.Show_Logo.setImage(Addon_Image)
-        link = Get_Data(Media_Link)
-        match = re.compile ('<li class="">(.+?)</li>').findall(link)
-        for links in match:
-            title = re.compile ('<strong>(.+?)</strong>').findall(links)[0]
-            number = re.compile ('<div class="cllnumber">(.+?)</div>').findall(links)[0]
-            url1 = re.compile ('<a href="(.+?)"').findall(links)[0]
-            url = 'PORN:https://www.eporner.com' + url1
-            if not 'All'in title:
-                if not 'Homemade' in title:
-                    Item_Title.append(title)
-                    Item_Link.append(url)
-                    Item_Icon.append(Addon_Image)
-                    self.List.addItem(title)
-                    Item_Desc.append(title)
-                    
-            
-    
-        
+	if 'ADULT' in Media_Title:
+		Adult_Check()
+		
+
+	if 'CAT:' in Media_Link:
+		self.List.reset()
+		self.List.setVisible(True)
+		global Item_Title
+		global Item_Link
+		global Item_Desc
+		global Item_Icon
+		
+		Item_Title =  []
+		Item_Link  =  []
+		Item_Desc  =  []
+		Item_Icon  =  []
+		titles = []
+		epgs = []
+		streams = []
+		icons = []
+		combined = []
+		
+		
+		newlink = Media_Link.replace('CAT:','')
+		title = 'Live Channels'
+		Item_Title.append('[COLOR yellow]' + title + '[/COLOR]')
+		Item_Link.append('')
+		Item_Desc.append('Area 51 X :: http://area-51-hosting.host/')
+		Item_Icon.append(Addon_Image)
+		self.List.addItem('[COLOR deepskyblue]' + title  + '[/COLOR]')
+		
+		url = baseurl + livechanapi + newlink
+		link = Get_Data(url)
+		tree = ET.ElementTree(ET.fromstring(link))
+		root = tree.getroot()
+		for channel in root.findall('channel'):
+			title = channel.find('title').text
+			title = base64.b64decode(title)
+			icon = channel.find('desc_image').text
+			link = channel.find('stream_url').text
+			link = 'PLAY:' + link
+			try:
+				description = channel.find('description').text
+				description = base64.b64decode(description)
+			except : description = 'No EPG Info Available For This Channel'
+			titles.append(title)
+			icons.append(icon)
+			if '(D)' in title:
+				link = link.replace('.ts','.m3u8')
+			streams.append(link)
+			epgs.append(description)
+			combined = list(zip(titles,icons,streams,epgs))
+		tup = sorted(combined,reverse=False)
+		for chantitle,chanlogos,playlinks,epginfo in tup:
+			Item_Title.append(chantitle)
+			Item_Icon.append(chanlogos)
+			Item_Link.append(playlinks)
+			Item_Desc.append(epginfo)
+			self.List.addItem(chantitle)
+
+		
+	if 'VODCATS:' in Media_Link:
+		self.List.reset()
+		self.List.setVisible(True)
+		global Item_Title
+		global Item_Link
+		global Item_Desc
+		global Item_Icon
+		
+		Item_Title =  []
+		Item_Link  =  []
+		Item_Desc  =  []
+		Item_Icon  =  []
+		title = 'VOD\'s'
+		title = title.upper()
+		Item_Title.append('[COLOR yellow]' + title + '[/COLOR]')
+		Item_Link.append('')
+		Item_Desc.append('Area 51 X :: http://area-51-hosting.host/')
+		Item_Icon.append(Addon_Image)
+		self.List.addItem('[COLOR deepskyblue]' + 'Videos On Demand'  + '[/COLOR]')
+		self.textbox.setText('Area 51 X :: http://area-51-hosting.host/')
+		self.Show_Logo.setImage(Addon_Image)
+		Media_Link = Media_Link.replace('VODCATS:','')
+		link = Get_Data(Media_Link)
+		data = json.loads(link)
+		for i in data:
+			title = i['name']
+			Item_Title.append(title)
+			Item_Desc.append(title)
+			streamid = i['stream_id']
+			streamtype = i['container_extension']
+			streamdes = i['stream_type']
+			playurl = 'PLAY:' + baseurl + streamdes + '/' + username + '/' + password + '/' + str(streamid) + '.' + streamtype
+			icon = i ['stream_icon']
+			Item_Icon.append(icon)
+			Item_Link.append(playurl)
+			self.List.addItem(title)
+			
+	if 'VODXXX:' in Media_Link:
+		self.List.reset()
+		self.List.setVisible(True)
+		global Item_Title
+		global Item_Link
+		global Item_Desc
+		global Item_Icon
+		
+		Item_Title =  []
+		Item_Link  =  []
+		Item_Desc  =  []
+		Item_Icon  =  []
+		Media_Link = Media_Link.replace('VODXXX:','')
+		title = 'XXX On Demand'
+		title = title.upper()
+		Item_Title.append('[COLOR green]Main ' + title + ' List[/COLOR]')
+		Item_Link.append('')
+		Item_Desc.append('')
+		Item_Icon.append(Addon_Image)
+		self.List.addItem('[COLOR yellow]' + title + ' List[/COLOR]')
+		self.textbox.setText('')
+		self.Show_Logo.setImage(Addon_Image)
+		link = Get_Data(Media_Link)
+		match = re.compile ('<li class="">(.+?)</li>').findall(link)
+		for links in match:
+			title = re.compile ('<strong>(.+?)</strong>').findall(links)[0]
+			number = re.compile ('<div class="cllnumber">(.+?)</div>').findall(links)[0]
+			url1 = re.compile ('<a href="(.+?)"').findall(links)[0]
+			url = 'PORN:https://www.eporner.com' + url1
+			if not 'All'in title:
+				if not 'Homemade' in title:
+					Item_Title.append(title)
+					Item_Link.append(url)
+					Item_Icon.append(Addon_Image)
+					self.List.addItem(title)
+					Item_Desc.append(title)
+					
+			
+
+		
 
 def List_Selected(self):
     global Media_Link

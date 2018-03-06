@@ -23,9 +23,10 @@ import pyxbmct.addonwindow as pyxbmct
 from addon.common.addon import Addon
 
 dialog = xbmcgui.Dialog()
+Date = time.strftime("%d/%m")
 
 
-
+#  http://iptv-area-51.tv:2095/enigma2.php?username=nemzzywemzzy&password=entertheufo&type=get_live_streams&cat_id=3
 #############################################################
 #################### SET ADDON ID ###########################
 _addon_id_  = 'plugin.video.area51x'
@@ -106,7 +107,11 @@ def Time_Clean(text):
 def Adult_Check():
     
     readadult = open(adultpassword).read().replace('\n', '').replace('\r','').replace('\t','')
-    if readadult == '':
+    try:
+        getpass = re.compile ('<password>(.*?)</password>').findall(readadult)[0]
+    except:
+        getpass = ''
+    if getpass == '':
         dialog.ok(AddonTitle,"[COLOR green]Please Enter A Password To Prevent Unauthorized Access[/COLOR]")
         string =''
         keyboard = xbmc.Keyboard(string, 'Enter The Password You Set')
@@ -117,30 +122,38 @@ def Adult_Check():
                 term = string
             else: quit()
         with open(adultpassword, "w") as output:
-            output.write(term)
+            passwordsave = '<password>' + term + '</password>\n'
+            temppass = passwordsave + '<date>' + Date + '</date>'
+            output.write(temppass)
             dialog.notification(AddonTitle, '[COLOR yellow]Password Saved, Thank you[/COLOR]', icon, 5000)
             Main.MainWindow
     else:
-        string =''
-        keyboard = xbmc.Keyboard(string, '[COLOR green]Enter The Password You Set[/COLOR]')
-        keyboard.doModal()
-        if keyboard.isConfirmed():
-            string = keyboard.getText()
-            if len(string)>1:
-                term = string
-            else: quit()
-        if term == readadult:
+        checkdate = re.compile ('<date>(.*?)</date>').findall(readadult)[0]
+        if checkdate == Date:
             return
-        elif term == 'wipemypass':
-            with open(adultpassword, "w") as output:
-                wipe = ''
-                output.write(wipe)
-                dialog.ok(AddonTitle, '[COLOR yellow]Master Pass entedeepskyblue\nPassword has now been wiped clean\nHit back and re enter a new password[/COLOR]')
-                quit()
-                
         else:
-            dialog.notification(AddonTitle, '[COLOR yellow]Wrong Password, I\'m Telling Mum!, Click back to exit[/COLOR]', icon, 5000)
-            quit()
+            string =''
+            keyboard = xbmc.Keyboard(string, '[COLOR green]Enter The Password You Set[/COLOR]')
+            keyboard.doModal()
+            if keyboard.isConfirmed():
+                string = keyboard.getText()
+                if len(string)>1:
+                    term = string
+                else: quit()
+            if term == getpass:
+                with open(adultpassword, "a") as output:
+                    temppass = '<date>' + Date + '</date>'
+                    output.write(temppass)
+                    return
+            elif term == 'wipemypass':
+                with open(adultpassword, "w") as output:
+                    wipe = ''
+                    output.write(wipe)
+                    dialog.ok(AddonTitle, '[COLOR yellow]Master Pass entedeepskyblue\nPassword has now been wiped clean\nHit back and re enter a new password[/COLOR]')
+                    quit()
+            else:
+                dialog.notification(AddonTitle, '[COLOR yellow]Wrong Password, I\'m Telling Mum!, Click back to exit[/COLOR]', icon, 5000)
+                quit()
     
     
 def CLEANUP(text):
@@ -165,45 +178,7 @@ def CLEANUP(text):
     text = text.lstrip('	')
 
     return text
-    
-def Adult_Check():
-    
-    readadult = open(adultpassword).read().replace('\n', '').replace('\r','').replace('\t','')
-    if readadult == '':
-        dialog.ok(AddonTitle,"[COLOR green]Please Enter A Password To Prevent Unauthorized Access[/COLOR]")
-        string =''
-        keyboard = xbmc.Keyboard(string, 'Enter The Password You Set')
-        keyboard.doModal()
-        if keyboard.isConfirmed():
-            string = keyboard.getText()
-            if len(string)>1:
-                term = string
-            else: quit()
-        with open(adultpassword, "w") as output:
-            output.write(term)
-            dialog.notification(AddonTitle, '[COLOR yellow]Password Saved, Thank you[/COLOR]', icon, 5000)
-            Main.MainWindow
-    else:
-        string =''
-        keyboard = xbmc.Keyboard(string, '[COLOR green]Enter The Password You Set[/COLOR]')
-        keyboard.doModal()
-        if keyboard.isConfirmed():
-            string = keyboard.getText()
-            if len(string)>1:
-                term = string
-            else: quit()
-        if term == readadult:
-            return
-        elif term == 'wipemypass':
-            with open(adultpassword, "w") as output:
-                wipe = ''
-                output.write(wipe)
-                dialog.ok(AddonTitle, '[COLOR yellow]Master Pass entedeepskyblue\nPassword has now been wiped clean\nHit back and re enter a new password[/COLOR]')
-                quit()
-                
-        else:
-            dialog.notification(AddonTitle, '[COLOR yellow]Wrong Password, I\'m Telling Mum!, Click back to exit[/COLOR]', icon, 5000)
-            quit()
+
 
 def passed(self, title):
 
