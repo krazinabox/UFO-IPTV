@@ -24,7 +24,7 @@ from addon.common.addon import Addon
 
 #############################################################
 #################### SET ADDON ID ###########################
-_addon_id_	= 'plugin.video.EpicStream'
+_addon_id_	= 'plugin.video.area51x'
 _self_		= xbmcaddon.Addon(id=_addon_id_)
 addon		= Addon(_addon_id_, sys.argv)
 
@@ -84,7 +84,7 @@ PLAY_SEL = xbmc.translatePath(os.path.join(Skin_Path, 'play-sel.png'))
 ########## Function To Call That Starts The Window ##########
 def MoviesWindow():
 	
-    window = Movies('EpicStream')
+    window = Movies('area51x')
     window.doModal()
     del window
 
@@ -613,7 +613,7 @@ class Movies(pyxbmct.AddonFullWindow):
 	#CLOSE THE BUSY SPINNER THAT ALL WAYS APPEARS USING PYXBMCT
 	xbmc.executebuiltin("Dialog.Close(busydialog)")
 
-	def __init__(self, title='EpicStream'):
+	def __init__(self, title='area51x'):
 		super(Movies, self).__init__(title)
 		
 		#set the location and size of your window in kodi
