@@ -1,6 +1,5 @@
 <settings>
 <category label="Settings">
-    <setting label="Addon Theme" type="text" id="Theme" values="kong" default="area51x" visible="false"/>
-    <setting id="Username" type="text" label="User Name : " default="" visible="true"/>    <setting id="Password" type="text" label="Password : " default="" visible="true" option="hidden"/>
+	<setting id="Server" type="text" label="Server URL : " default="iptv-area-51.tv" visible="false"/>	<setting id="Mode" type="text" label="Auto Loads : " default="Live"/>	<setting id="LIVE_CAT" type="text" label="LAST CATEGORY" default="" visible="false"/>	<setting id="Port" type="text" label="Server Port : " default="2095" visible="false"/>	<setting id="LastCat" type="text" label="" default="" visible="false"/>	<setting id="Username" type="text" label="Account Username : " default="" visible="true"/>	<setting id="Password" type="text" label="Account password : " default="" visible="true"/>	<setting id="Tmdb" type="text" label="TMDB API KEY : " default="45937b7d04244a92494fea9c5e1f145a" visible="true"/>	<setting id="messageurl" type="text" label="News Message URL : " default="https://pastebin.com/raw/SxjKGitk" visible="true"/>
 </category>
 </settings>

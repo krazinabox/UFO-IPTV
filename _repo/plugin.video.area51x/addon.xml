@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="plugin.video.area51x" name="[COLOR green]Area 51 X[/COLOR]" version="6.0.0" provider-name="Ragnar Lothbrock">
+<addon id="plugin.video.area51x" name="[COLOR green]Area 51 X[/COLOR]" version="7.000.000" provider-name="Ragnor">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.addon.common" version="2.0.0" />
@@ -8,8 +8,8 @@
     <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
-    <summary lang="en">Area 51 X :: Visit http://area-51-hosting.host</summary>
-    <description lang="en">Area 51 X :: Visit http://area-51-hosting.host</description>
+    <summary lang="en">[COLOR green]Area 51 X[/COLOR]</summary>
+    <description lang="en">A Kodi Bassed MultiMedia Addon.</description>
     <platform>all</platform>
   </extension>
 </addon>

@@ -1,3 +1,4 @@
+#!/usr/bin/env python2.7
 # *
 # *  Copyright (C) 2012-2013 Garrett Brown
 # *  Copyright (C) 2010      j48antialias
@@ -21,9 +22,14 @@
 # *  https://anarchintosh-projects.googlecode.com/files/addons_xml_generator.py
  
 """ addons.xml generator """
- 
+
 import os
 import sys
+import zipfile
+import re
+import time
+import shutil
+import xml.etree.ElementTree as ET
  
 # Compatibility with 3.0, 3.1 and 3.2 not supporting u"" literals
 if sys.version < '3':
@@ -60,7 +66,7 @@ class Generator:
                 # create path
                 _path = os.path.join( addon, "addon.xml" )
                 # split lines for stripping
-                xml_lines = open( _path, "r" , encoding="UTF-8").read().splitlines()
+                xml_lines = open( _path, "r" ).read().splitlines()
                 # new addon
                 addon_xml = ""
                 # loop thru cleaning each line
@@ -107,6 +113,79 @@ class Generator:
             print("An error occurred saving %s file!\n%s" % ( file, e ))
  
  
+def zipfolder(foldername, target_dir, zips_dir):            
+    zipobj = zipfile.ZipFile(zips_dir + foldername, 'w', zipfile.ZIP_DEFLATED)
+    rootlen = len(target_dir) + 1
+    for base, dirs, files in os.walk(target_dir):
+        for file in files:
+            if not ".git" in base:
+                fn = os.path.join(base, file)
+                zipobj.write(fn, os.path.join(foldername[:-4],fn[rootlen:]))
+    zipobj.close()
+                     
 if ( __name__ == "__main__" ):
     # start
     Generator()
+    #rezip files an move
+    print 'Removing all pyo files from addons...'
+    rootdir = sys.path[0]
+    zipsdir = rootdir + '\zips'
+    #remove all pyo file from addons.
+    for root, dirs, files in os.walk(rootdir):            
+        rem_folder = ['_MACOSX']
+        rem_files  = ['.pyo','DS_Store']    
+        for f in files:
+            try:
+                if any(x in f for x in rem_files):
+                    os.unlink(os.path.join(root, f))
+                    print 'Removing: ' + os.path.join(root, f)
+                else: continue
+            except: pass
+        for d in dirs:
+            try:
+                if any(x in d for x in rem_folder):
+                    shutil.rmtree(os.path.join(root, d))
+                    print 'Removing: ' + os.path.join(root, d)
+                else: continue
+            except: pass
+    print 'Starting zip file creation...'
+    filesinrootdir = os.listdir(rootdir)
+    for x in filesinrootdir:
+        if re.search("plugin|repository|script|skin|network|program" , x):#|repository
+            foldertozip = rootdir+'\\'+x
+            zipfilename = x + '.zip'
+            zipfilenamefirstpart = zipfilename[:-4]
+            zipfilenamelastpart = zipfilename[len(zipfilename)-4:]
+            zipsfolder = '_repo'
+            zipsfolder = os.path.join(zipsfolder,x)
+            zipsfolder = os.path.normpath(zipsfolder) + os.sep
+            if not os.path.exists(zipsfolder):
+                os.mkdir(zipsfolder)
+                print 'Directory doesn\'t exist, creating: ' + zipsfolder
+            #check if and move changelog, fanart and icon to zipdir
+            filesinfoldertozip = os.listdir(foldertozip)
+            for y in filesinfoldertozip:
+                print 'processing file: ' + os.path.join(rootdir,x,y)
+                if re.search("addon.xml", y): # get version number of plugin
+                    tree = ET.parse(os.path.join(rootdir,x,y))
+                    root = tree.getroot()
+                    for elem in root.iter('addon'):
+                        print elem.tag + ': ' + elem.attrib['version']
+                        version = '-'+elem.attrib['version']
+                if re.search("changelog", y):
+                    firstpart = y[:-4]
+                    lastpart = y[len(y)-4:]
+                    shutil.copyfile(os.path.join(rootdir,x,y),os.path.join(zipsfolder,firstpart+version+lastpart))
+                    print 'Copying ' + y + ' to ' + zipsfolder
+                if re.search("icon|fanart", y):
+                    shutil.copyfile(os.path.join(rootdir,x,y),os.path.join(zipsfolder,y))
+                    print 'Copying ' + y + ' to ' + zipsfolder
+            zipfolder(zipfilenamefirstpart+zipfilenamelastpart, foldertozip, zipsfolder)
+            print 'Zipping ' + zipfilename + ' and moving to ' + zipfilenamefirstpart+version
+            print 'zipfolder',zipsfolder
+            print 'foldertozip',foldertozip
+            print 'Old dir',os.path.join(os.path.join(os.getcwd(),zipsfolder),zipfilenamefirstpart+zipfilenamelastpart)
+            print 'New Name',zipfilenamefirstpart+version+zipfilenamelastpart
+            shutil.move( os.path.join(os.path.join(os.getcwd(),zipsfolder),zipfilenamefirstpart+zipfilenamelastpart),os.path.join(os.path.join(os.getcwd(),zipsfolder),zipfilenamefirstpart+version+zipfilenamelastpart))
+            #,zipfilenamefirstpart+version+zipfilenamelastpart);
+            print 'Zipping ' + zipfilename + ' and moving to ' + zipfilenamefirstpart+version

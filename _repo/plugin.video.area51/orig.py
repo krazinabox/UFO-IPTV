@@ -9,8 +9,8 @@ ADDON = xbmcaddon.Addon(id='plugin.video.area51')
 fanart = "ZmFuYXJ0LmpwZw=="
 Username=xbmcplugin.getSetting(int(sys.argv[1]), 'Username')
 Password=xbmcplugin.getSetting(int(sys.argv[1]), 'Password')
-ServerURL = "http://server.iptv-area-51.tv:2095/get.php?username=%s&password=%s&type=m3u&output=hls"%(Username,Password,)
-AccLink = "http://server.iptv-area-51.tv:2095/panel_api.php?username=%s&password=%s"%(Username,Password,)
+ServerURL = "http://iptv-area-51.tv:2095/get.php?username=%s&password=%s&type=m3u&output=hls"%(Username,Password,)
+AccLink = "http://iptv-area-51.tv:2095/panel_api.php?username=%s&password=%s"%(Username,Password,)
 addonDir = Addon.getAddonInfo('path').decode("utf-8")
 Images=xbmc.translatePath(os.path.join('special://home','addons',AddonID,'resources/'));
 addon_data_dir = os.path.join(xbmc.translatePath("special://userdata/addon_data" ).decode("utf-8"), AddonID)
