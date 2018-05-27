@@ -156,7 +156,7 @@ if ( __name__ == "__main__" ):
             zipfilename = x + '.zip'
             zipfilenamefirstpart = zipfilename[:-4]
             zipfilenamelastpart = zipfilename[len(zipfilename)-4:]
-            zipsfolder = '_repo'
+            zipsfolder = 'zips'
             zipsfolder = os.path.join(zipsfolder,x)
             zipsfolder = os.path.normpath(zipsfolder) + os.sep
             if not os.path.exists(zipsfolder):
