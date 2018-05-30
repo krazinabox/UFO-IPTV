@@ -105,7 +105,7 @@ This is a Non-profit resource, organized solely for educational purposes which i
 	</extension>
 </addon>
 
-    <addon id="repository.ufo-repo" name="[COLOR lightgreen]UFO[/COLOR] Repository" version="2.00.000" provider-name="krAZ">
+    <addon id="repository.ufo-repo" name="[COLOR lightgreen]UFO[/COLOR] Repository" version="2.1" provider-name="krAZ">
         <requires>
             <import addon="xbmc.addon" version="12.0.0"/>
         </requires>
