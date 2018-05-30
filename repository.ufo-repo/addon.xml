@@ -1,5 +1,4 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addons>
+<?xml version="1.0" encoding="UTF-8"?>
     <addon id="repository.ufo-repo" name="[COLOR lightgreen]UFO[/COLOR] Repository" version="2.4" provider-name="krAZ">
         <requires>
             <import addon="xbmc.addon" version="12.0.0"/>
@@ -16,4 +15,3 @@
             <platform>all</platform>
     </extension>
 </addon>
-</addons>
