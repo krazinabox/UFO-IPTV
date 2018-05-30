@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <addons>
-    <addon id="repository.ufo-repo" name="[COLOR lightgreen]UFO[/COLOR] Repository" version="2.4" provider-name="krAZ">
+    <addon id="repository.ufo-repo" name="[COLOR lightgreen]UFO[/COLOR] Repository" version="2.5" provider-name="krAZ">
         <requires>
             <import addon="xbmc.addon" version="12.0.0"/>
         </requires>
         <extension point="xbmc.addon.repository" name="UFO">
-            <info compressed="false">https://raw.githubusercontent.com/TheKing-Kodi/Programs/master/addons.xml</info>
-            <checksum>https://raw.githubusercontent.com/TheKing-Kodi/Programs/master/addons.xml.md5</checksum>
-            <datadir zip="true">https://raw.githubusercontent.com/TheKing-Kodi/Programs/master/zips/</datadir>
+            <info compressed="false">https://raw.githbusercontent.com/TheKing-Kodi/Programs/master/addons.xml</info>
+            <checksum>https://raw.githbusercontent.com/TheKing-Kodi/Programs/master/addons.xml.md5</checksum>
+            <datadir zip="true">https://raw.githbusercontent.com/TheKing-Kodi/Programs/master/zips/</datadir>
             <hashes>false</hashes>
         </extension>
         <extension point="xbmc.addon.metadata">
-            <summary>Install My Addons</summary>
-            <description>Download and install addons from KrAz!</description>
+            <summary>REPO IS HIJACKED DO NOT TRUST IT,NEW REPO COMING SOON</summary>
+            <description>REPO IS HIJACKED DO NOT TRUST IT,NEW REPO COMING SOON</description>
             <platform>all</platform>
     </extension>
 </addon>
